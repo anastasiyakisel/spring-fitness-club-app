@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+           
+    <context:component-scan base-package="by.bsu.kisel"/>
+
+    <!-- <bean name="/controller.html" class="by.bsu.kisel.controller.Controller"/>
+    
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+      <property name="prefix" value="/jsp/"/>
+      <property name="suffix" value=".jsp"/>
+  	</bean>   -->
+    
+    <!-- <bean id="sessionFactory" 
+          class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="mappingResources">            
+            <list>
+                <value>com/epam/testapp/entity/News.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+		<props>
+                    <prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
+                    <prop key="hibernate.show_sql">true</prop>
+                    <prop key="hibernate.current_session_context_class">thread</prop>  
+                    <prop key="hibernate.connection.pool_size">10</prop>
+		</props>
+	</property>
+        <property name="dataSource" ref="dataSource" />   
+    </bean>
+    
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"  />
+        <property name="username" value="NASTYA" />
+        <property name="password" value="nastya" />
+    </bean>
+
+    <bean id="connectionPool" 
+    class="com.epam.testapp.connectionpool.ConnectionPool" 
+    init-method="init"
+    destroy-method="dispose"
+    >
+        <constructor-arg name="driverClassName"  value="oracle.jdbc.driver.OracleDriver" />
+        <constructor-arg name="url" 		 value="jdbc:oracle:thin:@localhost:1521:XE" />		
+        <constructor-arg name="username" 	 value="NASTYA" />
+        <constructor-arg name="password" 	 value="nastya" />         
+    </bean>
+
+    <bean id="newsDao"  class="com.epam.testapp.dao.NewsDAO">
+        <property name="connectionPool" ref="connectionPool" />
+    </bean>
+    
+    <bean id="hibernateDao" class="com.epam.testapp.dao.HibernateNewsDAO">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <bean name="/NewsAction" 
+       class="com.epam.testapp.presentation.action.NewsAction" > 
+        <property name="newsDao" ref="hibernateDao"/>
+    </bean>
+     -->
+</beans>

@@ -1,0 +1,11 @@
+body {
+	background: url(../images/2.jpg);
+
+}
+
+div{
+	text-align: center;
+    line-height: 25px;	
+    color: red;
+    font-weight: bold;
+}

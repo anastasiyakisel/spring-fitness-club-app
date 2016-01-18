@@ -1,0 +1,90 @@
+body {
+	background: url(../images/1.jpg);
+	font-weight: bold;
+	font-style: italic;
+}
+
+.loginForm {
+	float: right;
+	margin-right: 100px;
+	margin-top: 70px;
+}
+
+input.login {
+	margin-top: 5px;
+	display: block;
+}
+
+.localeMenu {
+	float: center;
+	text-align: center;
+}
+
+TABLE.main {
+	border-collapse: collapse;	
+	width: 1100px;
+	margin-bottom: 17px;
+	float: center;
+}
+
+TABLE.rightTable {
+	float: right;		
+}
+
+TH,TD {
+	border: 1px solid #0000cc;
+	text-align: center;
+	padding: 4px;
+}
+
+TH {
+	background: #fc0;
+	height: 40px;
+	vertical-align: bottom;
+	padding: 0;
+}
+
+TD {
+	background: #fff;
+}
+
+.peoplebtn {
+	background: #fc0;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+#secondTablePerPage{
+	margin-top :7px;
+	margin-bottom: 7px;
+}
+
+p.mainGreeting{
+	float: center;
+	font-size: 16pt;
+	color: #191970;
+}
+
+p.workTime{
+	float: center;
+	font-size: 14pt;
+	color: #191970;
+}
+
+p.emptyGroup{
+	float: center;
+	font-size: 14pt;
+	color: #191970;
+}
+
+textarea{
+	float: right;
+	width: 400px;
+	height: 100px;
+	background-color: #fc0; 
+	font-size:17px;
+	text-align: left;
+    white-space: normal;
+    vertical-align:middle	
+}
+
