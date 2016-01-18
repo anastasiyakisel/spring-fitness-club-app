@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import by.bsu.kisel.constants.LoggerConstants;
 import by.bsu.kisel.constants.PageConstants;
@@ -13,8 +16,6 @@ import by.bsu.kisel.constants.ParameterConstants;
 import by.bsu.kisel.controller.Controller;
 import by.bsu.kisel.dao.IDAODiscount;
 import by.bsu.kisel.dao.IDAOUser;
-import by.bsu.kisel.dao.jdbc.DAOJdbcDiscount;
-import by.bsu.kisel.dao.jdbc.DAOJdbcUser;
 import by.bsu.kisel.entity.Discount;
 import by.bsu.kisel.entity.User;
 import by.bsu.kisel.enums.Post;
@@ -28,13 +29,18 @@ import by.bsu.kisel.manager.MessageManager;
  *
  * @author Kisel Anastasia
  */
+@Component("LoginCommand")
 public class LoginCommand implements Command{
     
     private Logger log = Logger.getLogger(LoginCommand.class);
+    @Autowired
+    @Qualifier("DAOJdbcUser")
+    private IDAOUser userDAO ;
+    @Autowired
+    @Qualifier("DAOJdbcDiscount")
+    private IDAODiscount discountDAO ;
     
-    private IDAOUser userDAO = (IDAOUser) Controller.webContext.getBean("DAOJdbcUser");
-    
-    private IDAODiscount discountDAO = (IDAODiscount) Controller.webContext.getBean("DAOJdbcDiscount");
+    public LoginCommand(){}
     /**
      * log in
      * @param request
@@ -59,15 +65,9 @@ public class LoginCommand implements Command{
             		Controller.MSG_MANAGER.getProperty(MessageManager.LOGIN_ERROR_MESSAGE));
             page = PageConstants.ERROR_PAGE_PATH;
         } catch (DAOSQLException ex) {
-            request.setAttribute(ParameterConstants.PARAMETER_ERROR,
-            		Controller.MSG_MANAGER.getProperty(MessageManager.LOGIN_ERROR_MESSAGE));
-            log.error(LoggerConstants.LOGGER_DAO_EXC);
             page = PageConstants.ERROR_PAGE_PATH;
             return page;
         } catch (MyLogicalInvalidParameterException ex) {
-            request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
-            		Controller.MSG_MANAGER.getProperty(MessageManager.INCORRECT_PARAMETER_ERROR_MESSAGE));
-            log.error(LoggerConstants.LOGGER_INCORRECT_INPUT);
             page = PageConstants.ERROR_PAGE_PATH;
             return page;
         }
@@ -82,7 +82,7 @@ public class LoginCommand implements Command{
                 log.info(LoggerConstants.LOGGER_USER+user.getId()+LoggerConstants.LOGGER_LOGIN);
                 page=PageConstants.MAIN_PAGE_PATH;
                 }
-        return page;
-    }
+                return page;
+    	}
 
 }

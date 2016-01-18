@@ -26,6 +26,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  *
  * @author Kisel Anastasia
  */
+@org.springframework.stereotype.Controller
 @WebServlet(name="Controller", urlPatterns={"/Controller"})
 public class Controller extends HttpServlet {
     private static Logger log = Logger.getLogger(Controller.class);
@@ -57,7 +58,6 @@ public class Controller extends HttpServlet {
         
      }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
      * <code>GET</code> method.
@@ -104,7 +104,7 @@ public class Controller extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
     
     @Override
     public void init() throws ServletException {

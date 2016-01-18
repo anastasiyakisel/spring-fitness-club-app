@@ -4,13 +4,15 @@
  */
 package by.bsu.kisel.entity;
 
+import java.io.Serializable;
+
 import by.bsu.kisel.exception.MyLogicalInvalidParameterException;
 
 /**
  *
  * @author Anastasia Kisel
  */
-public class UserStatement {
+public class UserStatement implements Serializable{
     private User user;
     private Statement statement;
     /**

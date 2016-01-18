@@ -77,6 +77,12 @@ p.emptyGroup{
 	color: #191970;
 }
 
+p.orderQuest{
+	float: center;
+    font-size: 18pt;
+    color : #191970;
+}
+
 textarea{
 	float: right;
 	width: 400px;
@@ -85,6 +91,23 @@ textarea{
 	font-size:17px;
 	text-align: left;
     white-space: normal;
-    vertical-align:middle	
+    vertical-align:middle;	
+    margin-bottom : 15px;
+}
+
+blockquote{
+	color : #A80000;
+}
+
+.orderBtn{
+	float:center;	
+	display: block;
+}
+
+input.radioLine{
+	float: center;
+	display: block;
+	clear: both;
+	color: #A80000;
 }
 

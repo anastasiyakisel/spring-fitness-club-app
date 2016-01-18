@@ -12,11 +12,13 @@ import by.bsu.kisel.enums.Post;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Kisel Anastasia
  */
+@Component("LogOutCommand")
 public class LogOutCommand implements Command {
 
     private Logger log = Logger.getLogger(LogOutCommand.class);

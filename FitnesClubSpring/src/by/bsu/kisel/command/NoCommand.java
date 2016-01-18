@@ -7,10 +7,13 @@ package by.bsu.kisel.command;
 import by.bsu.kisel.constants.PageConstants;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author Kisel Anastasia
  */
+@Component("NoCommand")
 public class NoCommand implements Command{
     /**
      * no command

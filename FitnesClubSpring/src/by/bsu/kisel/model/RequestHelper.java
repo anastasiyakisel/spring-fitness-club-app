@@ -7,6 +7,8 @@ package by.bsu.kisel.model;
 import by.bsu.kisel.command.*;
 import by.bsu.kisel.constants.CommandConstants;
 import by.bsu.kisel.constants.ParameterConstants;
+import by.bsu.kisel.controller.Controller;
+
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 
@@ -27,12 +29,12 @@ public class RequestHelper {
      * constructor
      */
     private RequestHelper() {        
-        commands.put(CommandConstants.COMMAND_LOGIN, new LoginCommand());
-        commands.put(CommandConstants.COMMAND_VIEW, new ViewCommand());
-        commands.put(CommandConstants.COMMAND_LOGOUT, new LogOutCommand());
-        commands.put(CommandConstants.COMMAND_SIGNUP, new SignUpCommand());
-        commands.put(CommandConstants.COMMAND_DELETE, new DeleteCommand());
-        commands.put(CommandConstants.COMMAND_LOCALE, new LocaleCommand());
+        commands.put(CommandConstants.COMMAND_LOGIN, (Command) Controller.webContext.getBean("LoginCommand"));
+        commands.put(CommandConstants.COMMAND_VIEW, (Command) Controller.webContext.getBean("ViewCommand"));
+        commands.put(CommandConstants.COMMAND_LOGOUT, (Command) Controller.webContext.getBean("LogOutCommand"));
+        commands.put(CommandConstants.COMMAND_SIGNUP, (Command) Controller.webContext.getBean("SignUpCommand"));
+        commands.put(CommandConstants.COMMAND_DELETE, (Command) Controller.webContext.getBean("DeleteCommand"));
+        commands.put(CommandConstants.COMMAND_LOCALE, (Command) Controller.webContext.getBean("LocaleCommand"));
     }
     /**
      * gets command from the container
@@ -45,8 +47,8 @@ public class RequestHelper {
         //get object appropriate to the command
         Command command = commands.get(action);
         if (command == null) {
-        //if connamd doesn't exist in the current object
-            command = new NoCommand();
+        //if command doesn't exist in the current object
+            command = (Command) Controller.webContext.getBean("NoCommand");
         }
         return command;
     }

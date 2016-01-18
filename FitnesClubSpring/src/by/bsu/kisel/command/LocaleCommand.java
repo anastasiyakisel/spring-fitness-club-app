@@ -12,11 +12,13 @@ import by.bsu.kisel.entity.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Anastasia Kisel
  */
+@Component("LocaleCommand")
 public class LocaleCommand implements Command {
     
     private Logger log = Logger.getLogger(LocaleCommand.class);
@@ -26,7 +28,7 @@ public class LocaleCommand implements Command {
      */
     @Override
     public String execute(HttpServletRequest request) {
-        String page=null;
+        String page=PageConstants.INDEX_PAGE_PATH;
         HttpSession session = request.getSession();
         if (LocaleConstants.LOCALE_RU.equals(request.getParameter(ParameterConstants.LOCALE))) {
             session.setAttribute(ParameterConstants.BUNDLE_NAME_PARAMETER, LocaleConstants.LOCALE_RU);
@@ -40,9 +42,7 @@ public class LocaleCommand implements Command {
         		page=PageConstants.MAIN_PAGE_PATH;
         		log.info(LoggerConstants.LOGGER_USER+ user.getId()+LoggerConstants.LOGGER_LOCALE_CHANGE);
             }
-        } else {
-            page=PageConstants.INDEX_PAGE_PATH;
-        }        
+        }       
         return page;
     }
     

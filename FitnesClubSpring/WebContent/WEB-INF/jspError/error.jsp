@@ -16,7 +16,7 @@
 	                <a href="Controller"><fmt:message key="reference.tologin"/></a>
 	            </c:when>
 	            <c:otherwise>
-	                <a href="main.jspx"><fmt:message key="reference.tologin"/></a>
+	                <a href="main.jsp"><fmt:message key="reference.tologin"/></a>
 	            </c:otherwise>
 	        </c:choose>
     	</div>

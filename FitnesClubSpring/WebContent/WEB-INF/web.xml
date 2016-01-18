@@ -10,22 +10,12 @@
         <url-pattern>/Controller</url-pattern>
     </servlet-mapping>  
     
-    <!-- <servlet>
-    	<servlet-name>springmvc</servlet-name>
-    	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-   		<load-on-startup>1</load-on-startup>
-    </servlet>
- 
-    <servlet-mapping>
-    	<servlet-name>springmvc</servlet-name>
-    	<url-pattern>*.html</url-pattern>
-    </servlet-mapping> -->
-    
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    
     <welcome-file-list>
         <welcome-file>
         index.jsp

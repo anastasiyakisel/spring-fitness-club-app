@@ -21,11 +21,11 @@
         <c:set var="login" value="${login}"/>
         <c:set var="userstatement" value="${userstatement}"/>
            
-        <textarea>
-	        <fmt:message key="textarea.login"/> ${login}
+        <textarea >
+	        <fmt:message key="textarea.login" /> ${login}
 	        <fmt:message key="textarea.number_of_abonements"/>  ${userstatement.numberOfAbonements}
-	        <fmt:message key="textarea.discount"/>  ${userstatement.discountPercent} %
-	        <fmt:message key="textarea.cost"/>  $ ${userstatement.generalCost} 
+	        <fmt:message key="textarea.discount" />  ${userstatement.discountPercent} %
+	        <fmt:message key="textarea.cost" />  $ ${userstatement.generalCost} 
         </textarea>
             
         <c:set var="group_sporttypes" value="${group_sporttypes}"/>

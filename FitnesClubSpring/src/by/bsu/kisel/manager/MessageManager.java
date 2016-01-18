@@ -25,15 +25,10 @@ public class MessageManager {
     } 
  
     public static final String LOGIN_ERROR_MESSAGE = "LOGIN_ERROR_MESSAGE";
-    public static final String SERVLET_EXCEPTION_ERROR_MESSAGE ="SERVLET_EXCEPTION_ERROR_MESSAGE";
     public static final String IO_EXCEPTION_ERROR_MESSAGE= "IO_EXCEPTION_ERROR_MESSAGE";
-    public static final String CLASS_NOT_FOUND_ERROR_MESSAGE= "CLASS_NOT_FOUND_ERROR_MESSAGE";
-    public static final String SQL_ERROR_MESSAGE= "SQL_ERROR_MESSAGE";
     public static final String PARSE_ERROR_MESSAGE= "PARSE_ERROR_MESSAGE";
     public static final String SAX_ERROR_MESSAGE= "SAX_ERROR_MESSAGE";
     public static final String RADIOBUTTON_ERROR_MESSAGE="RADIOBUTTON_ERROR_MESSAGE";
-    public static final String INCORRECT_PARAMETER_ERROR_MESSAGE="INCORRECT_PARAMETER_ERROR_MESSAGE";
-    public static final String DAO_EXCEPTION="DAO_EXCEPTION";
     public static final String NO_SUCH_ENUM_VALUE="NO_SUCH_ENUM_VALUE";
     public static final String DAO_ERROR_MESSAGE="DAO_ERROR_MESSAGE";
     public static final String ERROR_MESSAGE_POOL_IS_EMPTY="ERROR_MESSAGE_POOL_IS_EMPTY";

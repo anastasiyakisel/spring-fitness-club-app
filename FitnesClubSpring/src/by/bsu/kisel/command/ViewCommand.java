@@ -1,5 +1,14 @@
 package by.bsu.kisel.command;
 
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
 import by.bsu.kisel.constants.CommandConstants;
 import by.bsu.kisel.constants.LoggerConstants;
 import by.bsu.kisel.constants.PageConstants;
@@ -7,30 +16,35 @@ import by.bsu.kisel.constants.ParameterConstants;
 import by.bsu.kisel.controller.Controller;
 import by.bsu.kisel.dao.IDAOGroup;
 import by.bsu.kisel.dao.IDAOUser;
-import by.bsu.kisel.dao.jdbc.DAOJdbcGroup;
-import by.bsu.kisel.dao.jdbc.DAOJdbcUser;
-import by.bsu.kisel.entity.*;
+import by.bsu.kisel.entity.Group;
+import by.bsu.kisel.entity.GroupSporttype;
+import by.bsu.kisel.entity.Statement;
+import by.bsu.kisel.entity.User;
+import by.bsu.kisel.entity.UserStatement;
 import by.bsu.kisel.enums.Entities;
 import by.bsu.kisel.exception.DAOSQLException;
 import by.bsu.kisel.exception.MyLogicalInvalidParameterException;
 import by.bsu.kisel.exception.ResourceCreationException;
-import by.bsu.kisel.logic.*;
+import by.bsu.kisel.logic.AdminLogic;
+import by.bsu.kisel.logic.GroupLogic;
+import by.bsu.kisel.logic.StatementLogic;
+import by.bsu.kisel.logic.ViewLogic;
 import by.bsu.kisel.manager.MessageManager;
-import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.log4j.Logger;
 
 /**
  *
  * @author Anastasia Kisel
  */
+@Component("ViewCommand")
 public class ViewCommand implements Command{
 
     private Logger log = Logger.getLogger(ViewCommand.class);
-    
-    private IDAOGroup groupDAO = (IDAOGroup) Controller.webContext.getBean("DAOJdbcGroup");
-    
-    private IDAOUser userDAO = (IDAOUser) Controller.webContext.getBean("DAOJdbcUser");
+    @Autowired
+    @Qualifier("DAOJdbcGroup")
+    private IDAOGroup groupDAO ;
+    @Autowired
+    @Qualifier("DAOJdbcUser")
+    private IDAOUser userDAO ; 
     
     @Override
     public String execute(HttpServletRequest request) throws ResourceCreationException {
@@ -74,15 +88,9 @@ public class ViewCommand implements Command{
                 sportGroups=GroupLogic.updatePeopleRegistered(sportGroups);                
                 request.setAttribute(ParameterConstants.PARAMETER_SPORTGROUPS, sportGroups);
             } catch (MyLogicalInvalidParameterException ex) {
-                request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
-                		Controller.MSG_MANAGER.getProperty(MessageManager.INCORRECT_PARAMETER_ERROR_MESSAGE));
-                log.error(LoggerConstants.LOGGER_INCORRECT_INPUT);
                 page=PageConstants.ERROR_PAGE_PATH;
                 return page;
             } catch (DAOSQLException ex) {
-                request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
-                		Controller.MSG_MANAGER.getProperty(MessageManager.DAO_EXCEPTION));
-                log.error(LoggerConstants.LOGGER_DAO_EXC);
                 page=PageConstants.ERROR_PAGE_PATH;
                 return page;
             }
@@ -113,15 +121,9 @@ public class ViewCommand implements Command{
             GroupLogic.groupSporttypesShow(userGroups, request);
             
         } catch (MyLogicalInvalidParameterException ex) {
-            request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
-            		Controller.MSG_MANAGER.getProperty(MessageManager.INCORRECT_PARAMETER_ERROR_MESSAGE));
-            log.error(LoggerConstants.LOGGER_INCORRECT_INPUT);
             page=PageConstants.ERROR_PAGE_PATH;
             return page;
         } catch (DAOSQLException ex) {
-            request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
-            		Controller.MSG_MANAGER.getProperty(MessageManager.DAO_EXCEPTION));
-            log.error(LoggerConstants.LOGGER_DAO_EXC);
             page=PageConstants.ERROR_PAGE_PATH;
             return page;
         }
@@ -144,15 +146,9 @@ public class ViewCommand implements Command{
             allGroups=GroupLogic.updatePeopleRegistered(allGroups);
             GroupLogic.groupSporttypesShow(allGroups, request);
         } catch (DAOSQLException ex) {
-                request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
-                		Controller.MSG_MANAGER.getProperty(MessageManager.DAO_EXCEPTION));
-                log.error(LoggerConstants.LOGGER_DAO_EXC);
                 page=PageConstants.ERROR_PAGE_PATH;
                 return page;
         } catch (MyLogicalInvalidParameterException ex) {
-                request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
-                		Controller.MSG_MANAGER.getProperty(MessageManager.INCORRECT_PARAMETER_ERROR_MESSAGE));
-                log.error(LoggerConstants.LOGGER_INCORRECT_INPUT);
                 page=PageConstants.ERROR_PAGE_PATH;
                 return page;
         }
@@ -180,15 +176,9 @@ public class ViewCommand implements Command{
                 ViewLogic.showUserStatements(usersOfGroup, request);
                 log.info(LoggerConstants.LOGGER_ADMIN_VIEW_USERS+number);
             } catch (DAOSQLException ex) {
-                request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
-                		Controller.MSG_MANAGER.getProperty(MessageManager.DAO_EXCEPTION));
-                log.error(LoggerConstants.LOGGER_DAO_EXC);
                 page=PageConstants.ERROR_PAGE_PATH;
                 return page;
             } catch (MyLogicalInvalidParameterException ex) {                
-                request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
-                		Controller.MSG_MANAGER.getProperty(MessageManager.INCORRECT_PARAMETER_ERROR_MESSAGE));
-                log.error(LoggerConstants.LOGGER_INCORRECT_INPUT);
                 page=PageConstants.ERROR_PAGE_PATH;
                 return page;
             }        
@@ -212,15 +202,9 @@ public class ViewCommand implements Command{
             allUserStatements=userDAO.getAllUserStatements();
             
         } catch (DAOSQLException ex) {
-                request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
-                		Controller.MSG_MANAGER.getProperty(MessageManager.DAO_EXCEPTION));
-                log.error(LoggerConstants.LOGGER_DAO_EXC);
                 page=PageConstants.ERROR_PAGE_PATH;
                 return page;
         } catch (MyLogicalInvalidParameterException ex) {                
-                request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
-                		Controller.MSG_MANAGER.getProperty(MessageManager.INCORRECT_PARAMETER_ERROR_MESSAGE));
-                log.error(LoggerConstants.LOGGER_INCORRECT_INPUT);
                 page=PageConstants.ERROR_PAGE_PATH;
                 return page;
         }
@@ -245,15 +229,9 @@ public class ViewCommand implements Command{
             try {
                 AdminLogic.showToAdminUserGroups(request);
             } catch (DAOSQLException ex) {
-                request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
-                		Controller.MSG_MANAGER.getProperty(MessageManager.DAO_EXCEPTION));
-                log.error(LoggerConstants.LOGGER_DAO_EXC);
                 page=PageConstants.ERROR_PAGE_PATH;
                 return page;
             } catch (MyLogicalInvalidParameterException ex) {                
-                request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
-                		Controller.MSG_MANAGER.getProperty(MessageManager.INCORRECT_PARAMETER_ERROR_MESSAGE));
-                log.error(LoggerConstants.LOGGER_INCORRECT_INPUT);
                 page=PageConstants.ERROR_PAGE_PATH;
                 return page;
             }

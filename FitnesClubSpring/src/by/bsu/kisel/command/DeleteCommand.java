@@ -29,17 +29,24 @@ import by.bsu.kisel.logic.StatementLogic;
 import by.bsu.kisel.logic.ViewLogic;
 import by.bsu.kisel.manager.MessageManager;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author Anastasia Kisel
  */
+@Component("DeleteCommand")
 public class DeleteCommand implements Command {
 
     private Logger log = Logger.getLogger(DeleteCommand.class);
-    
-    private IDAOGroup groupDAO = (IDAOGroup) Controller.webContext.getBean("DAOJdbcGroup");
-    
-    private IDAOUser userDAO = (IDAOUser) Controller.webContext.getBean("DAOJdbcUser");
+    @Autowired
+    @Qualifier("DAOJdbcGroup")
+    private IDAOGroup groupDAO ;
+    @Autowired
+    @Qualifier("DAOJdbcUser")
+    private IDAOUser userDAO ; 
     
     @Override
     public String execute(HttpServletRequest request) throws ResourceCreationException {
@@ -54,7 +61,7 @@ public class DeleteCommand implements Command {
             default:
 		request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
                         Controller.MSG_MANAGER.getProperty(MessageManager.NO_SUCH_ENUM_VALUE));
-                log.error(LoggerConstants.LOGGER_ENUM_EXC);
+        log.error(LoggerConstants.LOGGER_ENUM_EXC);
 		return PageConstants.ERROR_PAGE_PATH;
         }
     }
@@ -87,15 +94,9 @@ public class DeleteCommand implements Command {
                 ViewLogic.showUserStatements(usersOfGroup, request);                
                 log.info(LoggerConstants.LOGGER_ADMIN_DELETE_USERS+ userIdsStr +LoggerConstants.LOGGER_FROM_GROUP+numberGroup);
             } catch (MyLogicalInvalidParameterException ex) {
-                    request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
-                    		Controller.MSG_MANAGER.getProperty(MessageManager.INCORRECT_PARAMETER_ERROR_MESSAGE));
-                    log.error(LoggerConstants.LOGGER_INCORRECT_INPUT);
                     page=PageConstants.ERROR_PAGE_PATH;
                     return page;
             } catch (DAOSQLException ex) {
-                    request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
-                    		Controller.MSG_MANAGER.getProperty(MessageManager.DAO_EXCEPTION));
-                    log.error(LoggerConstants.LOGGER_DAO_EXC);
                     page=PageConstants.ERROR_PAGE_PATH;
                     return page;}
         }
@@ -119,7 +120,6 @@ public class DeleteCommand implements Command {
             for (int idx=0; idx< deleteIds.length; idx++){
                 deleteIds[idx]=Integer.parseInt(deleteIdsString[idx].trim());
             }
-            //for (Integer deleteId:deleteIds){
                 try {
                     groupDAO.deleteUserFromGroups(user, deleteIds);
                     StatementLogic.updateUserStatement(request, deleteIds);
@@ -129,19 +129,13 @@ public class DeleteCommand implements Command {
                             LoggerConstants.LOGGER_USER_DELETE_FROM_GROUP+
                             deleteIds.length+LoggerConstants.LOGGER_GROUPS);
                 } catch (MyLogicalInvalidParameterException ex) {
-                    request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
-                    		Controller.MSG_MANAGER.getProperty(MessageManager.INCORRECT_PARAMETER_ERROR_MESSAGE));
-                    log.error(LoggerConstants.LOGGER_INCORRECT_INPUT);
                     page=PageConstants.ERROR_PAGE_PATH;
                     return page;
                 } catch (DAOSQLException ex) {
-                    request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
-                    		Controller.MSG_MANAGER.getProperty(MessageManager.DAO_EXCEPTION));
-                    log.error(LoggerConstants.LOGGER_DAO_EXC);
                     page=PageConstants.ERROR_PAGE_PATH;
                     return page;
                 }
-            //}
+            
             page=PageConstants.USERCABINET_PAGE_PATH;
         }
         else {
@@ -178,15 +172,9 @@ public class DeleteCommand implements Command {
                         LoggerConstants.LOGGER_USER_DELETE_FROM_GROUP
                         +deleteIds.length+LoggerConstants.LOGGER_GROUPS);
             } catch (DAOSQLException ex) {
-                    request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
-                    		Controller.MSG_MANAGER.getProperty(MessageManager.DAO_EXCEPTION));
-                    log.error(LoggerConstants.LOGGER_DAO_EXC);
                     page=PageConstants.ERROR_PAGE_PATH;
                     return page;
             } catch (MyLogicalInvalidParameterException ex) {
-                    request.setAttribute(ParameterConstants.PARAMETER_ERROR, 
-                    		Controller.MSG_MANAGER.getProperty(MessageManager.INCORRECT_PARAMETER_ERROR_MESSAGE));
-                    log.error(LoggerConstants.LOGGER_INCORRECT_INPUT);
                     page=PageConstants.ERROR_PAGE_PATH;
                     return page;
             }            
