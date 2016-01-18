@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package by.bsu.kisel.enums;
 
 /**
- *
+ * Enum for entities types in application.
  * @author Anastasia Kisel
  */
 public enum Entities {

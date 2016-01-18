@@ -9,22 +9,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 import by.bsu.kisel.constants.DBConstants;
-import by.bsu.kisel.constants.LoggerConstants;
+import by.bsu.kisel.constants.ErrorConstants;
 import by.bsu.kisel.dao.IDAODiscount;
-import by.bsu.kisel.entity.Discount;
 import by.bsu.kisel.exception.DAOSQLException;
 import by.bsu.kisel.exception.MyLogicalInvalidParameterException;
 import by.bsu.kisel.exception.ResourceCreationException;
+import by.bsu.kisel.model.Discount;
 import by.bsu.kisel.util.JdbcUtil;
-
-
 /**
- *
- * @author Anastasia Kisel
+ * This class implements DAO Discount logic with the help of JDBC.
+ * @author Anastasiya Kisel
  */
 @Component("DAOJdbcDiscount")
 public class DAOJdbcDiscount extends DAOJdbc implements IDAODiscount{
@@ -34,14 +33,16 @@ public class DAOJdbcDiscount extends DAOJdbc implements IDAODiscount{
     private static final String CHOOSE_DISCOUNT_PERCENT=
             "SELECT MAX(discount_percent) FROM `discount` WHERE number_of_abonements <= (?) ";
 
-    /**
-     *get information about discounts in the fitness-club
-     * @return discounts
-     * @throws ResourceCreationException 
-     */
-    public ArrayList<Discount> getInformationDiscount() throws DAOSQLException, 
+	/**
+	 * Provides the information about all available discounts of the fitness club.
+	 * @return the list of all available discounts 
+	 * @throws DAOSQLException
+	 * @throws MyLogicalInvalidParameterException
+	 * @throws ResourceCreationException
+	 */
+    public List<Discount> getInformationDiscount() throws DAOSQLException, 
             MyLogicalInvalidParameterException, ResourceCreationException{
-        ArrayList<Discount> discounts=new ArrayList<Discount>();
+        List<Discount> discounts=new ArrayList<Discount>();
         Connection connection = null;
         PreparedStatement st = null;
         connection = connectionPool.getConnection(MAX_CONNECTION_WAIT);
@@ -56,7 +57,7 @@ public class DAOJdbcDiscount extends DAOJdbc implements IDAODiscount{
                 discounts.add(discount);
             }
         } catch (SQLException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         } finally{
             JdbcUtil.closeStatement(st);
             connectionPool.releaseConnection(connection);
@@ -65,11 +66,13 @@ public class DAOJdbcDiscount extends DAOJdbc implements IDAODiscount{
     }
     
 	/**
-     * counts discount percent of the concrete user
-     * @param entity 
-     * @return discountPercent
-     * @throws ResourceCreationException 
-     */
+	 * Calculates the discount percent for the user based on the number of abonements this user owns.
+	 * @param numberOfAbonements - number of the abonements the user owns
+	 * @return the discount percent for the user
+	 * @throws DAOSQLException
+	 * @throws MyLogicalInvalidParameterException
+	 * @throws ResourceCreationException
+	 */
 	@Override
 	public int countDiscountPercentForUser(int numberOfAbonements)
 			throws DAOSQLException, MyLogicalInvalidParameterException,
@@ -85,7 +88,7 @@ public class DAOJdbcDiscount extends DAOJdbc implements IDAODiscount{
 	            rs.next();
 	            discountPercent = rs.getInt(1);	                       
 	        }  catch (SQLException ex) {
-	            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+	            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
 	        }finally{
 	        	JdbcUtil.closeStatement(st);
 	        	connectionPool.releaseConnection(connection);

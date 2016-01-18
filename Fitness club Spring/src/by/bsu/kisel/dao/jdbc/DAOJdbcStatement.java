@@ -1,13 +1,13 @@
 package by.bsu.kisel.dao.jdbc;
 
 import by.bsu.kisel.constants.DBConstants;
-import by.bsu.kisel.constants.LoggerConstants;
+import by.bsu.kisel.constants.ErrorConstants;
 import by.bsu.kisel.dao.IDAOStatement;
-import by.bsu.kisel.entity.Statement;
-import by.bsu.kisel.entity.User;
 import by.bsu.kisel.exception.DAOSQLException;
 import by.bsu.kisel.exception.MyLogicalInvalidParameterException;
 import by.bsu.kisel.exception.ResourceCreationException;
+import by.bsu.kisel.model.Statement;
+import by.bsu.kisel.model.User;
 import by.bsu.kisel.util.JdbcUtil;
 
 import java.sql.Connection;
@@ -15,12 +15,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 /**
- *
- * @author Anastasia Kisel
+ * This class implements DAO Statement logic with the help of JDBC.
+ * @author Anastasiya Kisel
  */
 @Component("DAOJdbcStatement")
 public class DAOJdbcStatement extends DAOJdbc implements IDAOStatement{
@@ -37,12 +38,13 @@ public class DAOJdbcStatement extends DAOJdbc implements IDAOStatement{
             + "INNER JOIN `statement` ON person.person_id=statement.person_id "
             + "ORDER BY statement.number_of_abonements";
     
-     /**
-     * check if user exist in the table 'statement'
-     * @param personId
-     * @return
-     * @throws ResourceCreationException 
-     */
+	/**
+	 * Indicates if user's statement exists in the database.
+	 * @param personId - id of the person
+	 * @return boolean flag which indicates if the statement for the user already exists in the database.
+	 * @throws DAOSQLException
+	 * @throws ResourceCreationException
+	 */
     public boolean isUserExistInStatement(int personId) throws DAOSQLException, ResourceCreationException{
         Connection connection = null;
         PreparedStatement st = null;
@@ -55,7 +57,7 @@ public class DAOJdbcStatement extends DAOJdbc implements IDAOStatement{
             resultSet.next();
             columnCount=resultSet.getInt(1);
         } catch (SQLException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         }
         finally{
         	JdbcUtil.closeStatement(st);
@@ -63,12 +65,14 @@ public class DAOJdbcStatement extends DAOJdbc implements IDAOStatement{
         }
         return (columnCount==0) ? false : true;
     }
-    /**
-     * get all information about the user from table 'statement'
-     * @param personId
-     * @return userStatement
-     * @throws ResourceCreationException 
-     */
+	/**
+	 * Provides all the information about user's statement.
+	 * @param personId - id of the user
+	 * @return user's statement 
+	 * @throws DAOSQLException
+	 * @throws MyLogicalInvalidParameterException
+	 * @throws ResourceCreationException
+	 */
     public Statement getAllFromStatement (int personId) throws DAOSQLException,
             MyLogicalInvalidParameterException, ResourceCreationException{
         Connection connection = null;
@@ -97,19 +101,19 @@ public class DAOJdbcStatement extends DAOJdbc implements IDAOStatement{
                 userStatement.getUser().setPassword(resultSet.getString(DBConstants.PERSON_PASSWORD));
             }
         } catch (SQLException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         }finally{
         	JdbcUtil.closeStatement(st);
         	connectionPool.releaseConnection(connection);
         } 
         return userStatement;
     }
-    /**
-     * add information about the concrete user to table 'statement'
-     * @param entity 
-     * @return
-     * NOTE ! Please note that in DB all other columns in statement table should have default value in order this method works fine.
-     */
+	/**
+	 * Adds the statement to the database.
+	 * @param statement - statement 
+	 * @return boolean flag which indicates if the addition of the user was successful
+	 * @throws DAOSQLException
+	 */
     public boolean add(Statement entity) throws DAOSQLException{
         Connection connection = null;
         PreparedStatement st = null;
@@ -119,7 +123,7 @@ public class DAOJdbcStatement extends DAOJdbc implements IDAOStatement{
             st.setInt(1, entity.getUser().getId());
             st.executeUpdate();
         }  catch (SQLException |ResourceCreationException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         } 
         finally{
         	JdbcUtil.closeStatement(st);
@@ -127,13 +131,17 @@ public class DAOJdbcStatement extends DAOJdbc implements IDAOStatement{
         }
         return true;
     }
-    /**
-     * updates user statement in the table 'statement'
-     * @param entity
-     * @param recIds
-     * @return 
-     * @throws ResourceCreationException 
-     */
+	/**
+	 * Updates the statement in the database with the values of the specified method's parameters
+	 * @param stat - statement
+	 * @param numberOfAbonements - number of abonements
+	 * @param discountPercent - discount percent
+	 * @param summCost - total cost
+	 * @return boolean flag which indicates if the update of the statement was successful
+	 * @throws DAOSQLException
+	 * @throws MyLogicalInvalidParameterException
+	 * @throws ResourceCreationException
+	 */
     public boolean update(Statement entity, int numberOfAbonements, int discountPercent, int summCost) throws DAOSQLException, 
             MyLogicalInvalidParameterException, ResourceCreationException{
         Connection connection = null;
@@ -149,7 +157,7 @@ public class DAOJdbcStatement extends DAOJdbc implements IDAOStatement{
             st.setInt(4, entity.getUser().getId());
             st.executeUpdate();
         } catch (SQLException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex); 
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex); 
         }finally{
         	JdbcUtil.closeStatement(st);
         	connectionPool.releaseConnection(connection);
@@ -158,15 +166,16 @@ public class DAOJdbcStatement extends DAOJdbc implements IDAOStatement{
     }
     
     
-   /**
-     * get information about all users and their statements
-     * @param number 
-     * @return userStatements
- * @throws ResourceCreationException 
-     */
-   public ArrayList<Statement> getAllUserStatements() throws DAOSQLException, 
+	/**
+	 * Provides all statements.
+	 * @return the list of all the statements 
+	 * @throws DAOSQLException
+	 * @throws MyLogicalInvalidParameterException
+	 * @throws ResourceCreationException
+	 */
+   public List<Statement> getAllUserStatements() throws DAOSQLException, 
            MyLogicalInvalidParameterException, ResourceCreationException{
-        ArrayList<Statement> statements=new ArrayList<Statement>();
+        List<Statement> statements=new ArrayList<Statement>();
         Connection connection = null;
         PreparedStatement statement=null;
         connection=connectionPool.getConnection(MAX_CONNECTION_WAIT);
@@ -190,7 +199,7 @@ public class DAOJdbcStatement extends DAOJdbc implements IDAOStatement{
                 statements.add(userStatement);
             }
         } catch (SQLException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         } finally {
         	JdbcUtil.closeStatement(statement);
         	connectionPool.releaseConnection(connection);

@@ -1,0 +1,422 @@
+2015-04-01 16:07:26 INFO  Version:37 - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+2015-04-01 16:07:26 INFO  Version:41 - HHH000412: Hibernate Core {4.1.12.Final}
+2015-04-01 16:07:26 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2015-04-01 16:07:26 INFO  Environment:342 - HHH000021: Bytecode provider name : javassist
+2015-04-01 16:07:26 INFO  Ejb3Configuration:527 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2015-04-01 16:07:26 INFO  ConnectionProviderInitiator:188 - HHH000130: Instantiating explicit connection provider: org.hibernate.ejb.connection.InjectedDataSourceConnectionProvider
+2015-04-01 16:07:26 INFO  Dialect:123 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2015-04-01 16:07:26 INFO  TransactionFactoryInitiator:73 - HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+2015-04-01 16:07:26 INFO  ASTQueryTranslatorFactory:48 - HHH000397: Using ASTQueryTranslatorFactory
+2015-04-01 16:07:26 INFO  SchemaValidator:137 - HHH000229: Running schema validator
+2015-04-01 16:07:26 INFO  SchemaValidator:145 - HHH000102: Fetching database metadata
+2015-04-01 16:07:27 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.statement
+2015-04-01 16:07:27 INFO  TableMetadata:66 - HHH000037: Columns: [general_cost, person_id, number_of_abonements, discount_percent, statement_id]
+2015-04-01 16:07:27 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.discount
+2015-04-01 16:07:27 INFO  TableMetadata:66 - HHH000037: Columns: [number_of_abonements, discount_id, discount_percent]
+2015-04-01 16:07:27 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.groups
+2015-04-01 16:07:27 INFO  TableMetadata:66 - HHH000037: Columns: [people_registered, day_of_week, duration, sporttype_id, group_id, start_time, capacity, cost]
+2015-04-01 16:07:27 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.person
+2015-04-01 16:07:27 INFO  TableMetadata:66 - HHH000037: Columns: [post, person_id, address, description, lastname, login, firstname, password, telephone]
+2015-04-01 16:07:27 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.registration
+2015-04-01 16:07:27 INFO  TableMetadata:66 - HHH000037: Columns: [registration_id, person_id, group_id]
+2015-04-01 16:07:27 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.sporttype
+2015-04-01 16:07:27 INFO  TableMetadata:66 - HHH000037: Columns: [sporttype_id, sport_type, calories_burned]
+2015-04-01 16:07:27 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 66.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:07:27 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 97.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:07:27 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 66.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:07:27 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 72.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:07:27 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 72.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:07:27 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:07:27 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 68.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:07:27 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 71.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:07:27 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 67.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:07:27 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 73.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:07:27 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 61.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:07:27 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 77.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:07:27 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 76.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:07:27 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 82.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:07:27 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 64.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:07:27 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 83.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:07:28 INFO  LoginController:55 - User opens login page
+2015-04-01 16:07:38 INFO  LogoutController:59 - User has logged out.
+2015-04-01 16:07:39 INFO  LoginController:55 - User opens login page
+2015-04-01 16:13:10 INFO  Version:37 - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+2015-04-01 16:13:10 INFO  Version:41 - HHH000412: Hibernate Core {4.1.12.Final}
+2015-04-01 16:13:10 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2015-04-01 16:13:10 INFO  Environment:342 - HHH000021: Bytecode provider name : javassist
+2015-04-01 16:13:10 INFO  Ejb3Configuration:527 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2015-04-01 16:13:10 INFO  ConnectionProviderInitiator:188 - HHH000130: Instantiating explicit connection provider: org.hibernate.ejb.connection.InjectedDataSourceConnectionProvider
+2015-04-01 16:13:11 INFO  Dialect:123 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2015-04-01 16:13:11 INFO  TransactionFactoryInitiator:73 - HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+2015-04-01 16:13:11 INFO  ASTQueryTranslatorFactory:48 - HHH000397: Using ASTQueryTranslatorFactory
+2015-04-01 16:13:11 INFO  SchemaValidator:137 - HHH000229: Running schema validator
+2015-04-01 16:13:11 INFO  SchemaValidator:145 - HHH000102: Fetching database metadata
+2015-04-01 16:13:11 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.statement
+2015-04-01 16:13:11 INFO  TableMetadata:66 - HHH000037: Columns: [general_cost, person_id, number_of_abonements, discount_percent, statement_id]
+2015-04-01 16:13:11 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.discount
+2015-04-01 16:13:11 INFO  TableMetadata:66 - HHH000037: Columns: [number_of_abonements, discount_id, discount_percent]
+2015-04-01 16:13:11 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.groups
+2015-04-01 16:13:11 INFO  TableMetadata:66 - HHH000037: Columns: [people_registered, day_of_week, duration, sporttype_id, group_id, start_time, capacity, cost]
+2015-04-01 16:13:11 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.person
+2015-04-01 16:13:11 INFO  TableMetadata:66 - HHH000037: Columns: [post, person_id, address, description, lastname, login, firstname, password, telephone]
+2015-04-01 16:13:11 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.registration
+2015-04-01 16:13:11 INFO  TableMetadata:66 - HHH000037: Columns: [registration_id, person_id, group_id]
+2015-04-01 16:13:11 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.sporttype
+2015-04-01 16:13:11 INFO  TableMetadata:66 - HHH000037: Columns: [sporttype_id, sport_type, calories_burned]
+2015-04-01 16:13:11 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 66.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:13:11 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 97.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:13:11 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 66.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:13:11 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 72.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:13:11 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 72.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:13:11 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:13:11 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 68.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:13:11 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 71.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:13:11 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 67.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:13:11 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 73.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:13:11 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 61.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:13:11 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 77.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:13:11 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 76.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:13:11 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 82.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:13:11 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 64.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:13:11 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 83.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 16:13:13 INFO  LoginController:55 - User opens login page
+2015-04-01 16:13:44 INFO  LogoutController:59 - User has logged out.
+2015-04-01 16:13:44 INFO  LoginController:55 - User opens login page
+2015-04-01 16:21:32 INFO  LoginController:97 - User № 1 had logged in.
+2015-04-01 17:12:42 INFO  LogoutController:59 - User has logged out.
+2015-04-01 17:12:42 INFO  LoginController:55 - User opens login page
+2015-04-01 17:12:47 INFO  LoginController:97 - User № 1 had logged in.
+2015-04-01 17:12:49 INFO  ViewController:148 - User № 1 had been viewing his user cabinet.
+2015-04-01 17:12:54 INFO  LogoutController:59 - User has logged out.
+2015-04-01 17:12:54 INFO  LoginController:55 - User opens login page
+2015-04-01 17:13:14 INFO  LogoutController:59 - User has logged out.
+2015-04-01 17:13:14 INFO  LoginController:55 - User opens login page
+2015-04-01 17:13:19 INFO  LoginController:97 - User № 1 had logged in.
+2015-04-01 17:13:21 INFO  ViewController:148 - User № 1 had been viewing his user cabinet.
+2015-04-01 17:13:34 INFO  DeleteController:193 - User № 1 has left from 11 groups.
+2015-04-01 17:13:38 INFO  ViewController:118 - Admin had been viewing all users of the fitness club.
+2015-04-01 17:13:39 INFO  ViewController:148 - User № 1 had been viewing his user cabinet.
+2015-04-01 17:13:53 INFO  SignUpController:105 - User № 1 has signed up for 2 training groups.
+2015-04-01 17:14:00 INFO  SignUpController:105 - User № 1 has signed up for 2 training groups.
+2015-04-01 17:22:34 INFO  Version:37 - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+2015-04-01 17:22:34 INFO  Version:41 - HHH000412: Hibernate Core {4.1.12.Final}
+2015-04-01 17:22:34 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2015-04-01 17:22:34 INFO  Environment:342 - HHH000021: Bytecode provider name : javassist
+2015-04-01 17:22:34 INFO  Ejb3Configuration:527 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2015-04-01 17:22:35 INFO  ConnectionProviderInitiator:188 - HHH000130: Instantiating explicit connection provider: org.hibernate.ejb.connection.InjectedDataSourceConnectionProvider
+2015-04-01 17:22:35 INFO  Dialect:123 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2015-04-01 17:22:35 INFO  TransactionFactoryInitiator:73 - HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+2015-04-01 17:22:35 INFO  ASTQueryTranslatorFactory:48 - HHH000397: Using ASTQueryTranslatorFactory
+2015-04-01 17:22:35 INFO  SchemaValidator:137 - HHH000229: Running schema validator
+2015-04-01 17:22:35 INFO  SchemaValidator:145 - HHH000102: Fetching database metadata
+2015-04-01 17:22:35 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.statement
+2015-04-01 17:22:35 INFO  TableMetadata:66 - HHH000037: Columns: [general_cost, person_id, number_of_abonements, discount_percent, statement_id]
+2015-04-01 17:22:35 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.discount
+2015-04-01 17:22:35 INFO  TableMetadata:66 - HHH000037: Columns: [number_of_abonements, discount_id, discount_percent]
+2015-04-01 17:22:35 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.groups
+2015-04-01 17:22:35 INFO  TableMetadata:66 - HHH000037: Columns: [people_registered, day_of_week, duration, sporttype_id, group_id, start_time, capacity, cost]
+2015-04-01 17:22:35 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.person
+2015-04-01 17:22:35 INFO  TableMetadata:66 - HHH000037: Columns: [post, person_id, address, description, lastname, login, firstname, password, telephone]
+2015-04-01 17:22:35 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.registration
+2015-04-01 17:22:35 INFO  TableMetadata:66 - HHH000037: Columns: [registration_id, person_id, group_id]
+2015-04-01 17:22:35 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.sporttype
+2015-04-01 17:22:35 INFO  TableMetadata:66 - HHH000037: Columns: [sporttype_id, sport_type, calories_burned]
+2015-04-01 17:22:35 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 66.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:22:35 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 97.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:22:35 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 66.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:22:35 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 72.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:22:35 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 72.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:22:35 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:22:35 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 68.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:22:35 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 71.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:22:35 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 67.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:22:35 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 73.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:22:35 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 61.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:22:35 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 77.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:22:35 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 76.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:22:35 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 82.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:22:35 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 64.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:22:35 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 83.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:23:59 INFO  Version:37 - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+2015-04-01 17:23:59 INFO  Version:41 - HHH000412: Hibernate Core {4.1.12.Final}
+2015-04-01 17:23:59 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2015-04-01 17:23:59 INFO  Environment:342 - HHH000021: Bytecode provider name : javassist
+2015-04-01 17:23:59 INFO  Ejb3Configuration:527 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2015-04-01 17:23:59 INFO  ConnectionProviderInitiator:188 - HHH000130: Instantiating explicit connection provider: org.hibernate.ejb.connection.InjectedDataSourceConnectionProvider
+2015-04-01 17:24:00 INFO  Dialect:123 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2015-04-01 17:24:00 INFO  TransactionFactoryInitiator:73 - HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+2015-04-01 17:24:00 INFO  ASTQueryTranslatorFactory:48 - HHH000397: Using ASTQueryTranslatorFactory
+2015-04-01 17:24:00 INFO  SchemaValidator:137 - HHH000229: Running schema validator
+2015-04-01 17:24:00 INFO  SchemaValidator:145 - HHH000102: Fetching database metadata
+2015-04-01 17:24:00 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.statement
+2015-04-01 17:24:00 INFO  TableMetadata:66 - HHH000037: Columns: [general_cost, person_id, number_of_abonements, discount_percent, statement_id]
+2015-04-01 17:24:00 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.discount
+2015-04-01 17:24:00 INFO  TableMetadata:66 - HHH000037: Columns: [number_of_abonements, discount_id, discount_percent]
+2015-04-01 17:24:00 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.groups
+2015-04-01 17:24:00 INFO  TableMetadata:66 - HHH000037: Columns: [people_registered, day_of_week, duration, sporttype_id, group_id, start_time, capacity, cost]
+2015-04-01 17:24:00 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.person
+2015-04-01 17:24:00 INFO  TableMetadata:66 - HHH000037: Columns: [post, person_id, address, description, lastname, login, firstname, password, telephone]
+2015-04-01 17:24:00 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.registration
+2015-04-01 17:24:00 INFO  TableMetadata:66 - HHH000037: Columns: [registration_id, person_id, group_id]
+2015-04-01 17:24:00 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.sporttype
+2015-04-01 17:24:00 INFO  TableMetadata:66 - HHH000037: Columns: [sporttype_id, sport_type, calories_burned]
+2015-04-01 17:24:00 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 66.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:24:00 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 97.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:24:00 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 66.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:24:00 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 72.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:24:00 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 72.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:24:00 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:24:00 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 68.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:24:00 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 71.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:24:00 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 67.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:24:00 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 73.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:24:00 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 61.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:24:00 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 77.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:24:00 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 76.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:24:00 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 82.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:24:00 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 64.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:24:00 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 83.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:24:03 INFO  LoginController:55 - User opens login page
+2015-04-01 17:25:14 INFO  LoginController:97 - User № 1 had logged in.
+2015-04-01 17:25:18 INFO  ViewController:148 - User № 1 had been viewing his user cabinet.
+2015-04-01 17:25:33 INFO  ViewController:148 - User № 1 had been viewing his user cabinet.
+2015-04-01 17:25:35 INFO  ViewController:148 - User № 1 had been viewing his user cabinet.
+2015-04-01 17:25:38 INFO  ViewController:148 - User № 1 had been viewing his user cabinet.
+2015-04-01 17:25:46 INFO  LoginController:55 - User opens login page
+2015-04-01 17:25:48 INFO  LoginController:97 - User № 1 had logged in.
+2015-04-01 17:25:50 INFO  ViewController:118 - Admin had been viewing all users of the fitness club.
+2015-04-01 17:25:51 INFO  ViewController:148 - User № 1 had been viewing his user cabinet.
+2015-04-01 17:27:54 INFO  Version:37 - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+2015-04-01 17:27:54 INFO  Version:41 - HHH000412: Hibernate Core {4.1.12.Final}
+2015-04-01 17:27:54 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2015-04-01 17:27:54 INFO  Environment:342 - HHH000021: Bytecode provider name : javassist
+2015-04-01 17:27:54 INFO  Ejb3Configuration:527 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2015-04-01 17:27:54 INFO  ConnectionProviderInitiator:188 - HHH000130: Instantiating explicit connection provider: org.hibernate.ejb.connection.InjectedDataSourceConnectionProvider
+2015-04-01 17:27:54 INFO  Dialect:123 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2015-04-01 17:27:54 INFO  TransactionFactoryInitiator:73 - HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+2015-04-01 17:27:54 INFO  ASTQueryTranslatorFactory:48 - HHH000397: Using ASTQueryTranslatorFactory
+2015-04-01 17:27:54 INFO  SchemaValidator:137 - HHH000229: Running schema validator
+2015-04-01 17:27:54 INFO  SchemaValidator:145 - HHH000102: Fetching database metadata
+2015-04-01 17:27:54 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.statement
+2015-04-01 17:27:54 INFO  TableMetadata:66 - HHH000037: Columns: [general_cost, person_id, number_of_abonements, discount_percent, statement_id]
+2015-04-01 17:27:54 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.discount
+2015-04-01 17:27:54 INFO  TableMetadata:66 - HHH000037: Columns: [number_of_abonements, discount_id, discount_percent]
+2015-04-01 17:27:54 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.groups
+2015-04-01 17:27:54 INFO  TableMetadata:66 - HHH000037: Columns: [people_registered, day_of_week, duration, sporttype_id, group_id, start_time, capacity, cost]
+2015-04-01 17:27:54 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.person
+2015-04-01 17:27:54 INFO  TableMetadata:66 - HHH000037: Columns: [post, person_id, address, description, lastname, login, firstname, password, telephone]
+2015-04-01 17:27:54 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.registration
+2015-04-01 17:27:54 INFO  TableMetadata:66 - HHH000037: Columns: [registration_id, person_id, group_id]
+2015-04-01 17:27:54 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.sporttype
+2015-04-01 17:27:54 INFO  TableMetadata:66 - HHH000037: Columns: [sporttype_id, sport_type, calories_burned]
+2015-04-01 17:27:55 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 66.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:27:55 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 97.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:27:55 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 66.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:27:55 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 72.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:27:55 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 72.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:27:55 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:27:55 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 68.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:27:55 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 71.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:27:55 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 67.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:27:55 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 73.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:27:55 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 61.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:27:55 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 77.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:27:55 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 76.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:27:55 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 82.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:27:55 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 64.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:27:55 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 83.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:28:27 INFO  Version:37 - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+2015-04-01 17:28:27 INFO  Version:41 - HHH000412: Hibernate Core {4.1.12.Final}
+2015-04-01 17:28:27 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2015-04-01 17:28:27 INFO  Environment:342 - HHH000021: Bytecode provider name : javassist
+2015-04-01 17:28:27 INFO  Ejb3Configuration:527 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2015-04-01 17:28:27 INFO  ConnectionProviderInitiator:188 - HHH000130: Instantiating explicit connection provider: org.hibernate.ejb.connection.InjectedDataSourceConnectionProvider
+2015-04-01 17:28:28 INFO  Dialect:123 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2015-04-01 17:28:28 INFO  TransactionFactoryInitiator:73 - HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+2015-04-01 17:28:28 INFO  ASTQueryTranslatorFactory:48 - HHH000397: Using ASTQueryTranslatorFactory
+2015-04-01 17:28:28 INFO  SchemaValidator:137 - HHH000229: Running schema validator
+2015-04-01 17:28:28 INFO  SchemaValidator:145 - HHH000102: Fetching database metadata
+2015-04-01 17:28:28 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.statement
+2015-04-01 17:28:28 INFO  TableMetadata:66 - HHH000037: Columns: [general_cost, person_id, number_of_abonements, discount_percent, statement_id]
+2015-04-01 17:28:28 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.discount
+2015-04-01 17:28:28 INFO  TableMetadata:66 - HHH000037: Columns: [number_of_abonements, discount_id, discount_percent]
+2015-04-01 17:28:28 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.groups
+2015-04-01 17:28:28 INFO  TableMetadata:66 - HHH000037: Columns: [people_registered, day_of_week, duration, sporttype_id, group_id, start_time, capacity, cost]
+2015-04-01 17:28:28 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.person
+2015-04-01 17:28:28 INFO  TableMetadata:66 - HHH000037: Columns: [post, person_id, address, description, lastname, login, firstname, password, telephone]
+2015-04-01 17:28:28 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.registration
+2015-04-01 17:28:28 INFO  TableMetadata:66 - HHH000037: Columns: [registration_id, person_id, group_id]
+2015-04-01 17:28:28 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.sporttype
+2015-04-01 17:28:28 INFO  TableMetadata:66 - HHH000037: Columns: [sporttype_id, sport_type, calories_burned]
+2015-04-01 17:28:28 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 66.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:28:28 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 97.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:28:28 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 66.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:28:28 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 72.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:28:28 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 72.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:28:28 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:28:28 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 68.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:28:28 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 71.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:28:28 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 67.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:28:28 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 73.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:28:28 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 61.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:28:28 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 77.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:28:28 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 76.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:28:28 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 82.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:28:28 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 64.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:28:28 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 83.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:28:30 INFO  LoginController:55 - User opens login page
+2015-04-01 17:29:19 INFO  LoginController:55 - User opens login page
+2015-04-01 17:29:21 INFO  LoginController:97 - User № 1 had logged in.
+2015-04-01 17:29:24 INFO  ViewController:148 - User № 1 had been viewing his user cabinet.
+2015-04-01 17:29:34 INFO  SignUpController:105 - User № 1 has signed up for 2 training groups.
+2015-04-01 17:29:44 INFO  SignUpController:105 - User № 1 has signed up for 2 training groups.
+2015-04-01 17:32:32 INFO  Version:37 - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+2015-04-01 17:32:32 INFO  Version:41 - HHH000412: Hibernate Core {4.1.12.Final}
+2015-04-01 17:32:32 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2015-04-01 17:32:32 INFO  Environment:342 - HHH000021: Bytecode provider name : javassist
+2015-04-01 17:32:32 INFO  Ejb3Configuration:527 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2015-04-01 17:32:32 INFO  ConnectionProviderInitiator:188 - HHH000130: Instantiating explicit connection provider: org.hibernate.ejb.connection.InjectedDataSourceConnectionProvider
+2015-04-01 17:32:32 INFO  Dialect:123 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2015-04-01 17:32:33 INFO  TransactionFactoryInitiator:73 - HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+2015-04-01 17:32:33 INFO  ASTQueryTranslatorFactory:48 - HHH000397: Using ASTQueryTranslatorFactory
+2015-04-01 17:32:33 INFO  SchemaValidator:137 - HHH000229: Running schema validator
+2015-04-01 17:32:33 INFO  SchemaValidator:145 - HHH000102: Fetching database metadata
+2015-04-01 17:32:33 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.statement
+2015-04-01 17:32:33 INFO  TableMetadata:66 - HHH000037: Columns: [general_cost, person_id, number_of_abonements, discount_percent, statement_id]
+2015-04-01 17:32:33 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.discount
+2015-04-01 17:32:33 INFO  TableMetadata:66 - HHH000037: Columns: [number_of_abonements, discount_id, discount_percent]
+2015-04-01 17:32:33 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.groups
+2015-04-01 17:32:33 INFO  TableMetadata:66 - HHH000037: Columns: [people_registered, day_of_week, duration, sporttype_id, group_id, start_time, capacity, cost]
+2015-04-01 17:32:33 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.person
+2015-04-01 17:32:33 INFO  TableMetadata:66 - HHH000037: Columns: [post, person_id, address, description, lastname, login, firstname, password, telephone]
+2015-04-01 17:32:33 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.registration
+2015-04-01 17:32:33 INFO  TableMetadata:66 - HHH000037: Columns: [registration_id, person_id, group_id]
+2015-04-01 17:32:33 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.sporttype
+2015-04-01 17:32:33 INFO  TableMetadata:66 - HHH000037: Columns: [sporttype_id, sport_type, calories_burned]
+2015-04-01 17:32:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 66.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:32:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 97.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:32:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 66.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:32:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 72.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:32:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 72.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:32:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:32:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 68.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:32:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 71.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:32:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 67.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:32:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 73.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:32:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 61.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:32:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 77.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:32:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 76.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:32:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 82.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:32:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 64.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:32:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 83.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:38:32 INFO  Version:37 - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+2015-04-01 17:38:32 INFO  Version:41 - HHH000412: Hibernate Core {4.1.12.Final}
+2015-04-01 17:38:32 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2015-04-01 17:38:32 INFO  Environment:342 - HHH000021: Bytecode provider name : javassist
+2015-04-01 17:38:32 INFO  Ejb3Configuration:527 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2015-04-01 17:38:32 INFO  ConnectionProviderInitiator:188 - HHH000130: Instantiating explicit connection provider: org.hibernate.ejb.connection.InjectedDataSourceConnectionProvider
+2015-04-01 17:38:32 INFO  Dialect:123 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2015-04-01 17:38:32 INFO  TransactionFactoryInitiator:73 - HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+2015-04-01 17:38:32 INFO  ASTQueryTranslatorFactory:48 - HHH000397: Using ASTQueryTranslatorFactory
+2015-04-01 17:38:33 INFO  SchemaValidator:137 - HHH000229: Running schema validator
+2015-04-01 17:38:33 INFO  SchemaValidator:145 - HHH000102: Fetching database metadata
+2015-04-01 17:38:33 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.statement
+2015-04-01 17:38:33 INFO  TableMetadata:66 - HHH000037: Columns: [general_cost, person_id, number_of_abonements, discount_percent, statement_id]
+2015-04-01 17:38:33 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.discount
+2015-04-01 17:38:33 INFO  TableMetadata:66 - HHH000037: Columns: [number_of_abonements, discount_id, discount_percent]
+2015-04-01 17:38:33 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.groups
+2015-04-01 17:38:33 INFO  TableMetadata:66 - HHH000037: Columns: [people_registered, day_of_week, duration, sporttype_id, group_id, start_time, capacity, cost]
+2015-04-01 17:38:33 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.person
+2015-04-01 17:38:33 INFO  TableMetadata:66 - HHH000037: Columns: [post, person_id, address, description, lastname, login, firstname, password, telephone]
+2015-04-01 17:38:33 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.registration
+2015-04-01 17:38:33 INFO  TableMetadata:66 - HHH000037: Columns: [registration_id, person_id, group_id]
+2015-04-01 17:38:33 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.sporttype
+2015-04-01 17:38:33 INFO  TableMetadata:66 - HHH000037: Columns: [sporttype_id, sport_type, calories_burned]
+2015-04-01 17:38:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 66.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:38:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 97.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:38:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 66.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:38:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 72.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:38:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 72.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:38:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:38:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 68.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:38:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 71.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:38:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 67.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:38:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 73.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:38:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 61.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:38:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 77.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:38:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 76.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:38:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 82.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:38:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 64.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:38:33 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 83.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-01 17:38:34 INFO  LoginController:55 - User opens login page
+2015-04-01 17:38:43 INFO  LoginController:97 - User № 1 had logged in.
+2015-04-01 17:38:45 INFO  ViewController:148 - User № 1 had been viewing his user cabinet.
+2015-04-01 17:38:51 INFO  DeleteController:193 - User № 1 has left from 4 groups.
+2015-04-01 17:38:52 INFO  ViewController:118 - Admin had been viewing all users of the fitness club.
+2015-04-01 17:38:53 INFO  ViewController:118 - Admin had been viewing all users of the fitness club.
+2015-04-01 17:38:54 INFO  ViewController:118 - Admin had been viewing all users of the fitness club.
+2015-04-02 10:22:35 INFO  Version:37 - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+2015-04-02 10:22:35 INFO  Version:41 - HHH000412: Hibernate Core {4.1.12.Final}
+2015-04-02 10:22:35 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2015-04-02 10:22:35 INFO  Environment:342 - HHH000021: Bytecode provider name : javassist
+2015-04-02 10:22:35 INFO  Ejb3Configuration:527 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2015-04-02 10:22:35 INFO  ConnectionProviderInitiator:188 - HHH000130: Instantiating explicit connection provider: org.hibernate.ejb.connection.InjectedDataSourceConnectionProvider
+2015-04-02 10:22:35 INFO  Dialect:123 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2015-04-02 10:22:35 INFO  TransactionFactoryInitiator:73 - HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+2015-04-02 10:22:35 INFO  ASTQueryTranslatorFactory:48 - HHH000397: Using ASTQueryTranslatorFactory
+2015-04-02 10:22:36 INFO  SchemaValidator:137 - HHH000229: Running schema validator
+2015-04-02 10:22:36 INFO  SchemaValidator:145 - HHH000102: Fetching database metadata
+2015-04-02 10:22:36 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.statement
+2015-04-02 10:22:36 INFO  TableMetadata:66 - HHH000037: Columns: [general_cost, person_id, number_of_abonements, discount_percent, statement_id]
+2015-04-02 10:22:36 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.discount
+2015-04-02 10:22:36 INFO  TableMetadata:66 - HHH000037: Columns: [number_of_abonements, discount_id, discount_percent]
+2015-04-02 10:22:36 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.groups
+2015-04-02 10:22:36 INFO  TableMetadata:66 - HHH000037: Columns: [people_registered, day_of_week, duration, sporttype_id, group_id, start_time, capacity, cost]
+2015-04-02 10:22:36 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.person
+2015-04-02 10:22:36 INFO  TableMetadata:66 - HHH000037: Columns: [post, person_id, address, description, lastname, login, firstname, password, telephone]
+2015-04-02 10:22:36 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.registration
+2015-04-02 10:22:36 INFO  TableMetadata:66 - HHH000037: Columns: [registration_id, person_id, group_id]
+2015-04-02 10:22:36 INFO  TableMetadata:65 - HHH000261: Table found: fitness-club.sporttype
+2015-04-02 10:22:36 INFO  TableMetadata:66 - HHH000037: Columns: [sporttype_id, sport_type, calories_burned]
+2015-04-02 10:22:36 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 66.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-02 10:22:36 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 97.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-02 10:22:36 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 66.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-02 10:22:36 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 72.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-02 10:22:36 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 72.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-02 10:22:36 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-02 10:22:36 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 68.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-02 10:22:36 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 71.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-02 10:22:36 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 67.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-02 10:22:36 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 73.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-02 10:22:36 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 61.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-02 10:22:36 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 77.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-02 10:22:36 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 76.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-02 10:22:36 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 82.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-02 10:22:36 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 64.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-02 10:22:36 WARN  HqlSqlWalker:929 - [DEPRECATION] Encountered positional parameter near line 1, column 83.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2015-04-02 10:22:38 INFO  LoginController:55 - User opens login page
+2015-04-02 10:22:43 INFO  LoginController:97 - User № 1 had logged in.
+2015-04-02 10:22:47 INFO  ViewController:148 - User № 1 had been viewing his user cabinet.
+2015-04-02 10:22:50 INFO  ViewController:118 - Admin had been viewing all users of the fitness club.
+2015-04-02 10:22:52 INFO  ViewController:96 - Admin had been viewing all groups of the fitness club.
+2015-04-02 10:22:55 INFO  ViewController:96 - Admin had been viewing all groups of the fitness club.
+2015-04-02 10:22:56 INFO  LogoutController:59 - User has logged out.
+2015-04-02 10:22:56 INFO  LoginController:55 - User opens login page

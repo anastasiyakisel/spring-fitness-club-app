@@ -1,0 +1,15 @@
+by.bsu.kisel.aspect
+by.bsu.kisel.connectionpool
+by.bsu.kisel.constants
+by.bsu.kisel.dao
+by.bsu.kisel.dao.jdbc
+by.bsu.kisel.dao.jpa
+by.bsu.kisel.enums
+by.bsu.kisel.exception
+by.bsu.kisel.filter
+by.bsu.kisel.logic
+by.bsu.kisel.manager
+by.bsu.kisel.model
+by.bsu.kisel.parser
+by.bsu.kisel.springmvc.controller
+by.bsu.kisel.util

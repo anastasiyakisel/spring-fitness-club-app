@@ -14,18 +14,18 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import by.bsu.kisel.constants.DBConstants;
-import by.bsu.kisel.constants.LoggerConstants;
+import by.bsu.kisel.constants.ErrorConstants;
 import by.bsu.kisel.dao.IDAOUser;
-import by.bsu.kisel.entity.User;
 import by.bsu.kisel.exception.DAOSQLException;
 import by.bsu.kisel.exception.MyLogicalInvalidParameterException;
 import by.bsu.kisel.exception.ResourceCreationException;
 import by.bsu.kisel.logic.StatementLogic;
+import by.bsu.kisel.model.User;
 import by.bsu.kisel.util.JdbcUtil;
 
 /**
- *
- * @author Kisel Anastasia
+ * This class implements DAO User logic with the help of JDBC.
+ * @author Anastasiya Kisel
  */
 @Component("DAOJdbcUser")
 public class DAOJdbcUser extends DAOJdbc implements IDAOUser{
@@ -37,13 +37,15 @@ public class DAOJdbcUser extends DAOJdbc implements IDAOUser{
     @Qualifier("StatementLogic")
     private StatementLogic statementLogic ;
     
-    /**
-     * check if user exist in table 'person'
-     * @param login 
-     * @param password 
-     * @return user
-     * @throws ResourceCreationException 
-     */
+	/**
+	 * Checks if the user with specified login and password exists in the database.
+	 * @param login - login 
+	 * @param password - password
+	 * @return User object if login was successful or null if login failed
+	 * @throws DAOSQLException
+	 * @throws MyLogicalInvalidParameterException
+	 * @throws ResourceCreationException
+	 */
     public User checkLogin (String login , String password) throws DAOSQLException, MyLogicalInvalidParameterException, ResourceCreationException{
     	User user = new User();
         Connection connection = null;
@@ -66,7 +68,7 @@ public class DAOJdbcUser extends DAOJdbc implements IDAOUser{
                 user.setPassword(resultSet.getString(DBConstants.PERSON_PASSWORD));                
             }
         }  catch (SQLException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         }  finally{
         	JdbcUtil.closeStatement(statement);
         	connectionPool.releaseConnection(connection);

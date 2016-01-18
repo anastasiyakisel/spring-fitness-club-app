@@ -5,25 +5,28 @@ import java.sql.Statement;
 
 import org.apache.log4j.Logger;
 
-import by.bsu.kisel.controller.Controller;
-import by.bsu.kisel.exception.DAOSQLException;
-import by.bsu.kisel.manager.MessageManager;
+import by.bsu.kisel.constants.MessageConstants;
 
+import by.bsu.kisel.exception.DAOSQLException;
+/**
+ * Util class for JDBC related operations.
+ * @author Anastasiya Kisel
+ *
+ */
 public class JdbcUtil {
 	private final static Logger log = Logger.getLogger(JdbcUtil.class);
 
 	/**
-	 * close PreparedStement
-	 * 
-	 * @param st
+	 * Closes the SQL statement.
+	 * @param st - statement
+	 * @throws DAOSQLException
 	 */
 	public static void closeStatement(Statement st) throws DAOSQLException {
 		if (st != null) {
 			try {
 				st.close();
 			} catch (SQLException ex) {
-				throw new DAOSQLException(
-						Controller.MSG_MANAGER.getProperty(MessageManager.DAO_ERROR_MESSAGE), ex);
+				throw new DAOSQLException( MessageConstants.DAO_ERROR_MESSAGE, ex);
 			}
 		}
 	}

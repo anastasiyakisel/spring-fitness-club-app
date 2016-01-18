@@ -6,23 +6,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.persistence.Query;
-
 import org.springframework.stereotype.Component;
 
 import by.bsu.kisel.constants.DBConstants;
-import by.bsu.kisel.constants.LoggerConstants;
+import by.bsu.kisel.constants.ErrorConstants;
 import by.bsu.kisel.dao.IDAORegistration;
-import by.bsu.kisel.entity.Group;
-import by.bsu.kisel.entity.Sporttype;
-import by.bsu.kisel.entity.Statement;
-import by.bsu.kisel.entity.User;
 import by.bsu.kisel.enums.SportType;
 import by.bsu.kisel.exception.DAOSQLException;
 import by.bsu.kisel.exception.MyLogicalInvalidParameterException;
 import by.bsu.kisel.exception.ResourceCreationException;
+import by.bsu.kisel.model.Group;
+import by.bsu.kisel.model.Sporttype;
+import by.bsu.kisel.model.User;
 import by.bsu.kisel.util.JdbcUtil;
-
+/**
+ * This class implements DAO Registration logic with the help of JDBC.
+ * @author Anastasiya Kisel
+ *
+ */
 @Component("DAOJdbcRegistration")
 public class DAOJdbcRegistration extends DAOJdbc implements IDAORegistration{
 	
@@ -40,13 +41,14 @@ public class DAOJdbcRegistration extends DAOJdbc implements IDAORegistration{
             "INSERT INTO `registration`(person_id, group_id) VALUES (?, ?) ";
     private static final String SELECT_USERS_FROM_GROUPS = "SELECT * FROM person p JOIN registration r ON"
     		+ " r.person_id = p.person_id WHERE r.group_id = (?)";
-    /**
-     * delete user from groups
-     * @param user
-     * @param recIds
-     * @return
-     * @throws ResourceCreationException 
-     */
+	/**
+	 * Deletes the user from specified groups.
+	 * @param user - user
+	 * @param recIds - ids of the groups from which user should be deleted
+	 * @return boolean flag which indicates if the deletion was successful
+	 * @throws DAOSQLException
+	 * @throws ResourceCreationException
+	 */
     public boolean deleteUserFromGroups(User user, Integer... recIds) throws DAOSQLException, ResourceCreationException{
         Connection connection = null;
 	PreparedStatement statement = null;
@@ -59,21 +61,21 @@ public class DAOJdbcRegistration extends DAOJdbc implements IDAORegistration{
 				statement.executeUpdate();
             }
         } catch (SQLException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         }finally{
         	JdbcUtil.closeStatement(statement);   
         	connectionPool.releaseConnection(connection);
         }
         return true;
     }
-
-    /**
-     * delete users from group
-     * @param groupId
-     * @param userIds
-     * @return
-     * @throws ResourceCreationException 
-     */
+	/**
+	 * Deletes users from specified group.
+	 * @param groupId - id of the group
+	 * @param userIds - ids of users
+	 * @return boolean flag which indicates if the deletion was successful
+	 * @throws DAOSQLException
+	 * @throws ResourceCreationException
+	 */
     public boolean deleteUsersFromGroup(Integer groupId, Integer... userIds) throws DAOSQLException, ResourceCreationException{
         Connection connection = null;
 	PreparedStatement statement = null;
@@ -86,19 +88,20 @@ public class DAOJdbcRegistration extends DAOJdbc implements IDAORegistration{
 		statement.executeUpdate();
             }
         } catch (SQLException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         } finally{
         	JdbcUtil.closeStatement(statement);   
         	connectionPool.releaseConnection(connection);
         }            
         return true;
     }
-    /**
-     * count people registered in the concrete group
-     * @param groupNumber
-     * @return count
-     * @throws ResourceCreationException 
-     */
+	/**
+	 * Provides the number of attendees of the specified group.
+	 * @param groupNumber - number of the group
+	 * @return number of attendees in the group
+	 * @throws DAOSQLException
+	 * @throws ResourceCreationException
+	 */
     public int countPeopleRegisteredInGroup(int groupNumber) throws DAOSQLException, ResourceCreationException{
         Connection connection = null;
 	PreparedStatement statement =null;
@@ -111,7 +114,7 @@ public class DAOJdbcRegistration extends DAOJdbc implements IDAORegistration{
             rs.next();
             count=rs.getInt(1);            
         } catch (SQLException ex) {
-           throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+           throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         } finally{
         	JdbcUtil.closeStatement(statement);   
         	connectionPool.releaseConnection(connection);
@@ -119,12 +122,14 @@ public class DAOJdbcRegistration extends DAOJdbc implements IDAORegistration{
         return count;
     }
 
-    /**
-     * get all information about the group and sporttype where user signed up
-     * @param userId
-     * @return userGroupSporttypes
-     * @throws ResourceCreationException 
-     */
+	/**
+	 * Provides the set of group unique ids for  the user.
+	 * @param userId - id of the user
+	 * @return list of user's groups
+	 * @throws DAOSQLException
+	 * @throws MyLogicalInvalidParameterException
+	 * @throws ResourceCreationException
+	 */
     public ArrayList<Integer> showUserGroupIds(int userId) 
             throws DAOSQLException, MyLogicalInvalidParameterException, ResourceCreationException{
         ArrayList<Integer> userGroupIds = new ArrayList<Integer>();
@@ -139,7 +144,7 @@ public class DAOJdbcRegistration extends DAOJdbc implements IDAORegistration{
                 userGroupIds.add(rs.getInt(DBConstants.GROUP_ID));
             }
         } catch (SQLException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         } finally{
         	JdbcUtil.closeStatement(st);
         	connectionPool.releaseConnection(connection);
@@ -147,12 +152,14 @@ public class DAOJdbcRegistration extends DAOJdbc implements IDAORegistration{
         return userGroupIds;
     }
     
-    /**
-     * get all grooups of the concrete user
-     * @param personId
-     * @return groups
-     * @throws ResourceCreationException 
-     */
+	/**
+	 * Provides the groups of the specified user.
+	 * @param userId - unique id of the user
+	 * @return list of user's groups
+	 * @throws DAOSQLException
+	 * @throws MyLogicalInvalidParameterException
+	 * @throws ResourceCreationException
+	 */
     public ArrayList<Group> showUserGroups(int personId) throws DAOSQLException, 
             MyLogicalInvalidParameterException, ResourceCreationException{
         ArrayList<Group> groups=new ArrayList<Group>();
@@ -188,7 +195,7 @@ public class DAOJdbcRegistration extends DAOJdbc implements IDAORegistration{
                 groups.add(group);
             }
         } catch (SQLException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         } finally{
         	JdbcUtil.closeStatement(statement);   
         	connectionPool.releaseConnection(connection);
@@ -196,12 +203,13 @@ public class DAOJdbcRegistration extends DAOJdbc implements IDAORegistration{
         return groups;
     }
     
-    /**
-     * get number of abonements of the concrete user
-     * @param entity 
-     * @return numberOfAbonements
-     * @throws DAOSQLException, ResourceCreationException 
-     */
+	/**
+	 * Calculates the number of user's abonements.
+	 * @param personId - id of the user
+	 * @return the number of user's abonements
+	 * @throws DAOSQLException
+	 * @throws ResourceCreationException
+	 */
 	@Override
 	public int countNumberOfAbonementsForUser(int personId)
 			throws DAOSQLException, ResourceCreationException {
@@ -217,7 +225,7 @@ public class DAOJdbcRegistration extends DAOJdbc implements IDAORegistration{
             int count = rs.getInt(1);
             numberOfAbonements=count;
         } catch (SQLException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         }finally{
         	JdbcUtil.closeStatement(st);
         	connectionPool.releaseConnection(connection);
@@ -225,14 +233,14 @@ public class DAOJdbcRegistration extends DAOJdbc implements IDAORegistration{
         return numberOfAbonements;
 	}
 
-    /**
-     *insert user into table 'registration'
-     * @param entity 
-     * @param recIds 
-     * @return
-     * @throws ResourceCreationException 
-     */
-	@Override
+	/**
+	 * Adds user to the specified groups.
+	 * @param user - user 
+	 * @param recIds - unique ids of the group to which user should be added
+	 * @return boolean flag which indicates if the addition was successful.
+	 * @throws DAOSQLException
+	 * @throws ResourceCreationException
+	 */
 	public boolean addUserToGroups(User entity, Integer... recIds)
 			throws DAOSQLException, ResourceCreationException {
 		Connection connection = null;
@@ -247,7 +255,7 @@ public class DAOJdbcRegistration extends DAOJdbc implements IDAORegistration{
             }
             
         } catch (SQLException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         } finally {
         	JdbcUtil.closeStatement(statement);
         	connectionPool.releaseConnection(connection);
@@ -256,11 +264,13 @@ public class DAOJdbcRegistration extends DAOJdbc implements IDAORegistration{
     }
 
 	/**
-     * get users of the concrete groups
-     * @param number 
-     * @return users
-     * @throws ResourceCreationException 
-     */
+	 * Provides the list of group's attendees.
+	 * @param groupNumber - number of the group
+	 * @return list of the group's attendees
+	 * @throws DAOSQLException
+	 * @throws MyLogicalInvalidParameterException
+	 * @throws ResourceCreationException
+	 */
 	@Override
 	public ArrayList<User> getUsersFromGroup(int groupNumber)
 			throws DAOSQLException, MyLogicalInvalidParameterException,
@@ -287,7 +297,7 @@ public class DAOJdbcRegistration extends DAOJdbc implements IDAORegistration{
                 users.add(user);
             }
         } catch (SQLException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         } finally {
         	JdbcUtil.closeStatement(statement);
         	connectionPool.releaseConnection(connection);

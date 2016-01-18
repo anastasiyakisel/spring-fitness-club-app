@@ -1,16 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package by.bsu.kisel.constants;
 
 /**
- *
- * @author Anastasia Kisel
+ * This class provides the String constants for available locales in the
+ * application.
+ * 
+ * @author Anastasiya Kisel
  */
 public class LocaleConstants {
-    public static final String LOCALE_RU="ru_RU";
-    public static final String LOCALE_USA="en_US";
-    
-    private LocaleConstants(){}
+	public static final String LOCALE_RU = "ru_RU";
+	public static final String LOCALE_USA = "en_US";
+
+	/**
+	 * Empty constructor.
+	 */
+	private LocaleConstants() {
+	}
 }

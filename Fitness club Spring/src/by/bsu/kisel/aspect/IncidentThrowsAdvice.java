@@ -1,38 +1,33 @@
 package by.bsu.kisel.aspect;
 
-import java.util.Arrays;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.log4j.Logger;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import by.bsu.kisel.constants.PageConstants;
 
-import by.bsu.kisel.constants.ParameterConstants;
-
-
+/**
+ * This class implements the AOP aspect.
+ * 
+ * @author Anastasiya Kisel
+ * 
+ */
 @Aspect
-@Component("IncidentThrowsAdvice")
+@Controller
 public class IncidentThrowsAdvice {
-	
+
 	private static Logger logger = Logger.getLogger(IncidentThrowsAdvice.class);
-	
-	@Pointcut("execution(* by.bsu.kisel.command.Command.execute(..))")
-	public void throwException(){}
-	
-	@AfterThrowing(pointcut="throwException()", throwing="e")
-	public void handleException(JoinPoint joinPoint, Throwable e){
-		
-	    String arguments = Arrays.toString(joinPoint.getArgs());
-	    	    
-	    HttpServletRequest request = (HttpServletRequest)joinPoint.getArgs()[0];
-	    request.setAttribute(ParameterConstants.PARAMETER_ERROR, e.getMessage());
-	    logger.error(e.getMessage());
-	    System.out.println(e.getMessage());
-	   
+
+	/**
+	 * Provides AOP aspect logic in case controller class throws an exception.	 * 
+	 * @param e - exception object
+	 * @return String page
+	 */
+	@AfterThrowing(pointcut = "within(by.bsu.kisel.springmvc.controller.*)", throwing = "e")
+	public String handleException(Throwable e) {
+
+		System.out.print("Aspect for exceptions is working - " + e.getMessage());
+		return PageConstants.ERROR_PAGE_PATH;
 	}
-	
+
 }

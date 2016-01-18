@@ -1,31 +1,28 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package by.bsu.kisel.dao.jdbc;
 
 import by.bsu.kisel.constants.DBConstants;
-import by.bsu.kisel.constants.LoggerConstants;
+import by.bsu.kisel.constants.ErrorConstants;
 import by.bsu.kisel.dao.IDAOGroup;
-import by.bsu.kisel.entity.Group;
-import by.bsu.kisel.entity.Sporttype;
 import by.bsu.kisel.exception.DAOSQLException;
 import by.bsu.kisel.exception.MyLogicalInvalidParameterException;
 import by.bsu.kisel.exception.ResourceCreationException;
 import by.bsu.kisel.util.JdbcUtil;
 import by.bsu.kisel.enums.SportType;
+import by.bsu.kisel.model.Group;
+import by.bsu.kisel.model.Sporttype;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 /**
- *
- * @author Anastasia Kisel
+ * This class implements DAO Group logic with the help of JDBC.
+ * @author Anastasiya Kisel
  */
 @Component("DAOJdbcGroup")
 public class DAOJdbcGroup extends DAOJdbc implements IDAOGroup{
@@ -42,17 +39,19 @@ public class DAOJdbcGroup extends DAOJdbc implements IDAOGroup{
     private static final String GET_CONCRETE_GROUP="SELECT * FROM groups gr INNER JOIN sporttype sp ON gr.sporttype_id=sp.sporttype_id "
     		+ "WHERE group_id=(?)";
     
-    /**
-     * get all groups of the concrete sporttype
-     * @param sporttypeId
-     * @return groups
-     * @throws ResourceCreationException 
-     */
-    public ArrayList<Group> showAllGroups(int sporttypeId) throws DAOSQLException,
+	/**
+	 * Provides the groups of the concrete sport type.
+	 * @param sporttypeId - id of the sport type
+	 * @return the list of the groups for the specified sport type
+	 * @throws DAOSQLException
+	 * @throws MyLogicalInvalidParameterException
+	 * @throws ResourceCreationException
+	 */
+    public List<Group> showAllGroups(int sporttypeId) throws DAOSQLException,
             MyLogicalInvalidParameterException, ResourceCreationException{
-        ArrayList<Group> groups=new ArrayList<Group>();
+        List<Group> groups=new ArrayList<Group>();
         Connection connection = null;
-	PreparedStatement statement =null;
+        PreparedStatement statement =null;
         connection = connectionPool.getConnection(MAX_CONNECTION_WAIT);
         try {
             statement = connection.prepareStatement(GET_GROUPS_BY_SPORTTYPE);
@@ -74,7 +73,7 @@ public class DAOJdbcGroup extends DAOJdbc implements IDAOGroup{
                 groups.add(group);
             }         
         } catch (SQLException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         } finally{
         	JdbcUtil.closeStatement(statement);   
             connectionPool.releaseConnection(connection);
@@ -82,15 +81,17 @@ public class DAOJdbcGroup extends DAOJdbc implements IDAOGroup{
         return groups;
     }
     
-    /**
-     * get all groups of the fitness-club
-     * @return groups
-     * @throws ResourceCreationException 
-     */
-    public ArrayList<Group> adminShowAllGroups() throws DAOSQLException, MyLogicalInvalidParameterException, ResourceCreationException{
-        ArrayList<Group> groups=new ArrayList<Group>();
+	/**
+	 * Provides the information about all the groups in the fitness club.
+	 * @return the list of all the groups in the fitness club
+	 * @throws DAOSQLException
+	 * @throws MyLogicalInvalidParameterException
+	 * @throws ResourceCreationException
+	 */
+    public List<Group> adminShowAllGroups() throws DAOSQLException, MyLogicalInvalidParameterException, ResourceCreationException{
+        List<Group> groups=new ArrayList<Group>();
         Connection connection = null;
-	PreparedStatement statement =null;
+        PreparedStatement statement =null;
         connection = connectionPool.getConnection(MAX_CONNECTION_WAIT);
         try {
             statement = connection.prepareStatement(ADMIN_SELECT_ALL_GROUPS);
@@ -112,23 +113,25 @@ public class DAOJdbcGroup extends DAOJdbc implements IDAOGroup{
                 groups.add(group);
             }
         } catch (SQLException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         } finally{
         	JdbcUtil.closeStatement(statement);   
         	connectionPool.releaseConnection(connection);
         }
         return groups;
     }
-    /**
-     * update people registered in the concrete group
-     * @param groupNumber
-     * @param numberOfUsers 
-     * @return
-     * @throws ResourceCreationException 
-     */
+	/**
+	 * Updates the number of attendees for the specified group. 
+	 * @param groupNumber - unique id of the group
+	 * @param numberOfUsers - number of attendees of the group
+	 * @return boolean flag indicated if the group information was updated successfully
+	 * @throws DAOSQLException
+	 * @throws ResourceCreationException
+	 * @throws MyLogicalInvalidParameterException
+	 */
     public boolean updatePeopleRegistered(int groupNumber, int numberOfUsers) throws DAOSQLException, ResourceCreationException{
         Connection connection = null;
-	PreparedStatement statement =null;
+        PreparedStatement statement =null;
         connection = connectionPool.getConnection(MAX_CONNECTION_WAIT);
         try {
             statement = connection.prepareStatement(UPDATE_PEOPLE_REGISTERED_IN_GROUP);
@@ -136,7 +139,7 @@ public class DAOJdbcGroup extends DAOJdbc implements IDAOGroup{
             statement.setInt(2, groupNumber);
             statement.executeUpdate();
         } catch (SQLException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         }
         finally{
         	JdbcUtil.closeStatement(statement);   
@@ -144,23 +147,25 @@ public class DAOJdbcGroup extends DAOJdbc implements IDAOGroup{
         }
         return true;
     }
-    /**
-     * get groups where abonements still exist
-     * @param ids 
-     * @return groups
-     * @throws ResourceCreationException 
-     */
-    public ArrayList<Group> getFreeGroups(Integer... ids) 
+	/**
+	 * Provides the groups (among specified set of group ids) which still have free spaces for sign up .
+	 * @param ids - set of unique ids of random groups
+	 * @return the list of available groups for sign up
+	 * @throws MyLogicalInvalidParameterException
+	 * @throws DAOSQLException
+	 * @throws ResourceCreationException
+	 */
+    public List<Group> getFreeGroups(Integer... ids) 
             throws MyLogicalInvalidParameterException, DAOSQLException, ResourceCreationException{
-        ArrayList<Group> groups=new ArrayList<Group>();
-        ArrayList<Group> resultGroups= new ArrayList<Group>();
+        List<Group> groups=new ArrayList<Group>();
+        List<Group> resultGroups= new ArrayList<Group>();
         for (int i=0; i<ids.length; ++i){
             Group group = new Group();
             group.setId(ids[i]);
             groups.add(group);
         }
         Connection connection = null;
-	PreparedStatement statement =null;
+        PreparedStatement statement =null;
         connection = connectionPool.getConnection(MAX_CONNECTION_WAIT);
         try {
             for (int i=0; i<ids.length; ++i){
@@ -177,7 +182,7 @@ public class DAOJdbcGroup extends DAOJdbc implements IDAOGroup{
                 }
             }
         } catch (SQLException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         } finally{
         	JdbcUtil.closeStatement(statement);   
         	connectionPool.releaseConnection(connection);
@@ -186,12 +191,13 @@ public class DAOJdbcGroup extends DAOJdbc implements IDAOGroup{
     }
     
 	/**
-     * counts cost of user statement without discount 
-     * @param entity 
-     * @param recIds
-     * @return generalCost
-     * @throws ResourceCreationException, MyLogicalInvalidParameterException, DAOSQLException
-     */
+	 * Count cost that user should pay for his abonements.
+	 * @param groupIds - unique ids of user's groups
+	 * @return cost that user should pay for fitness club service / trainings
+	 * @throws MyLogicalInvalidParameterException
+	 * @throws DAOSQLException
+	 * @throws ResourceCreationException
+	 */
 	@Override
 	public int countCostOfAllUsersGroups(int [] groupIds)
 			throws MyLogicalInvalidParameterException, DAOSQLException,
@@ -211,14 +217,21 @@ public class DAOJdbcGroup extends DAOJdbc implements IDAOGroup{
             }
             generalCost=existSumm;
         } catch (SQLException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         } finally{
         	JdbcUtil.closeStatement(st);
         	connectionPool.releaseConnection(connection);
         }
         return generalCost;
 	}
-
+	/**
+	 * Provides the group based on its' unique id.
+	 * @param groupId - specified group unique id
+	 * @return group
+	 * @throws MyLogicalInvalidParameterException
+	 * @throws DAOSQLException
+	 * @throws ResourceCreationException
+	 */
 	@Override
 	public Group getConcreteGroup(int groupId)
 			throws MyLogicalInvalidParameterException, DAOSQLException, ResourceCreationException {
@@ -246,7 +259,7 @@ public class DAOJdbcGroup extends DAOJdbc implements IDAOGroup{
                 group.getSporttype().setSportType(SportType.valueOf(resultSet.getString(DBConstants.SPORTTYPE_TYPE)));
             }
 	    }catch (SQLException ex) {
-            throw new DAOSQLException(LoggerConstants.DAO_SQL_EXCEPTION, ex);
+            throw new DAOSQLException(ErrorConstants.DAO_SQL_EXCEPTION, ex);
         } finally{
         	JdbcUtil.closeStatement(statement);
         	connectionPool.releaseConnection(connection);

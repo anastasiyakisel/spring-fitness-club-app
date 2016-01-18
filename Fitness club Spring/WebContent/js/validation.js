@@ -1,13 +1,18 @@
 var localizedMessages;
 
-function check() {
+function check(formName) {
 	
-	var buttons = document.getElementsByName("view");
+	var buttons = document.getElementById(formName);
+	var isChecked = false;
 	
 	for ( var i = 0; i < buttons.length; i++) {
-		if (buttons[i].checked === true)
+		if (buttons[i].checked === true){
+			isChecked = true;
 			return true;
+		}			
 	}
-	alert('Please select at least one training');
+	if (isChecked==false) {
+		alert('Please select at least one item');
+	}			
 	return false;
 }

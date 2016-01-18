@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package by.bsu.kisel.enums;
 
 /**
- *
+ * Enum for days of week.
  * @author Kisel Anastasia
  */
 public enum DaysOfWeek {

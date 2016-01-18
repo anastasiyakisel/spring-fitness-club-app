@@ -1,8 +1,8 @@
 package by.bsu.kisel.enums;
 
 /**
- *
- * @author Kisel Anastasia
+ * Enum for sport types.
+ * @author Anastaisiya Kisel
  */
 public enum SportType {
     EXERCISE_ROOM,
