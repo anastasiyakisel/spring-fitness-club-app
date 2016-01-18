@@ -1,0 +1,146 @@
+<html xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sf="http://www.springframework.org/tags/form"
+	xmlns:spring="http://www.springframework.org/tags">
+<jsp:output omit-xml-declaration="yes" />
+<jsp:directive.page contentType="text/html;charset=UTF-8" />
+
+    <head>
+        <title><spring:message code="tittle.usercabinet"/></title>
+    	<script type="text/javascript" src="js/jquery-1.11.3.min.js"><jsp:text/></script>
+		<script type="text/javascript" src="js/validation.js"><jsp:text/></script>
+		<c:url var="pageCssUrl" value="/css/pageStyle.css" />
+		<c:url var="headerCssUrl" value="/css/logoStyle.css" />	
+		<c:url var="mainCssUrl" value="/css/mainStyle.css" />
+		<c:url var="menuCssUrl" value="/css/menuStyle.css" />
+		
+		<link href="${pageCssUrl}" rel="stylesheet" type="text/css" />
+		<link href="${headerCssUrl}" rel="stylesheet" type="text/css" />
+		<link href="${cssUrl}" rel="stylesheet" type="text/css" />
+		<link href="${menuCssUrl}" rel="stylesheet" type="text/css" />
+		<link href="${mainCssUrl}" rel="stylesheet" type="text/css" />    	
+    </head>
+    <body>  
+    	<div id="pageOrder">  	    
+        <div id="sticky-footer-wrap">
+			<header class="site-header">
+					<div id="headerWrapper">
+						<div id="logoWrapper">
+							<p id="stars">
+								<span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+							</p>
+	
+							<p id="title" contenteditable="true" spellcheck="false">
+								<span>100</span> <span><spring:message code="letter.1" /></span>
+								<span><spring:message code="letter.2" /></span> <span><spring:message
+										code="letter.3" /></span> <span><spring:message
+										code="letter.4" /></span> <span><spring:message
+										code="letter.5" /></span>
+							</p>
+							<p id="slogan">
+								<a href="home.html">
+									Fitness Club Home Page
+								</a>
+							</p>
+						</div>
+	
+						<div id="localeMenu">
+							<a href="?locale=en_US"><img alt="usa" src="images/usa.png" width="32" height="32" /></a> 
+							<a href="?locale=ru_RU"><img alt="ru" src="images/ru.png" width="32" height="32" /></a>
+						</div>
+	
+					</div>
+				</header>
+				<div class="site-main">
+					<div id="primary">
+						<c:if test="${not empty greeting}">
+           					<p class="mainGreeting">
+			                	<spring:message code="message.greeting"/> 
+			            	</p>
+			        	</c:if>.
+			        	
+			        	<c:set var="login" value="${login}"/>
+        				<c:set var="userstatement" value="${userstatement}"/>
+        				
+        				<c:set var="group_sporttypes" value="${group_sporttypes}"/>
+				        <c:if test="${not empty group_sporttypes}">
+				        <sf:form id="Delete" method="POST" action="userWantsToDeleteFromGroup.html" commandName="group">
+				                   
+			            <div id="UserGroups" align="center">
+			                <table class="main">
+			                    <tr>
+						<th/>
+			            <th><spring:message code="table.sporttype"/></th>
+						<th><spring:message code="table.group.id"/></th>
+						<th><spring:message code="table.calories_burned"/></th>
+						<th><spring:message code="table.group.days_of_week"/></th>
+						<th><spring:message code="table.group.starttime"/></th>
+						<th><spring:message code="table.group.duration" /></th>
+			            <th><spring:message code="table.group.cost"/></th>
+			                    </tr>
+			                    <c:forEach var="group_sporttype" items="${group_sporttypes}">
+			                        <tr>
+							<td><sf:checkbox path="selectedIds"				
+											 id="${group_sporttype.id}"                                   
+			                                 value=" ${group_sporttype.id}"/></td>
+			                                <td>
+			            <c:set var="sporttype" value="${group_sporttype.sporttype.sportType}"/>
+			            <c:if test="${sporttype eq 'FITBALL'}"><spring:message code="sport.fitball"/></c:if>
+			            <c:if test="${sporttype eq 'EXERCISE_ROOM'}"><spring:message code="sport.exerciseroom"/></c:if>
+			            <c:if test="${sporttype eq 'AEROBICS'}"><spring:message code="sport.aerobics"/></c:if>
+			            <c:if test="${sporttype eq 'PILATES'}"><spring:message code="sport.pilates"/></c:if>
+			            <c:if test="${sporttype eq 'BELLY_DANCE'}"><spring:message code="sport.bellydance"/></c:if>
+			            <c:if test="${sporttype eq 'DANCE_MIX'}"><spring:message code="sport.dance_mix"/></c:if>
+			            <c:if test="${sporttype eq 'STRATCHING'}"><spring:message code="sport.straching"/></c:if>
+			            <c:if test="${sporttype eq 'YOGA'}"><spring:message code="sport.yoga"/></c:if>
+			                                </td>
+							<td>${group_sporttype.id}</td>
+			                <td>${group_sporttype.sporttype.caloriesburned}</td>
+			                <td>${group_sporttype.daysOfWeek}</td>
+							<td>${group_sporttype.timeStart}</td>
+							<td>${group_sporttype.duration}</td>
+							<td>${group_sporttype.costAbonement}</td>
+			                        </tr>
+			                    </c:forEach>
+			                </table>
+			                               
+			               <spring:message code="label.delete" var="deletebtn"/>
+			               <input type="submit" class="signupbtn" value="${deletebtn}" onclick="return check('Delete')"/>
+			               
+			            </div>
+			        </sf:form>
+			        </c:if>
+
+        				
+					</div>
+					<div id="secondary">
+						<textarea >
+					        <spring:message code="textarea.login"  /> ${login}
+					        <spring:message code="textarea.number_of_abonements" />  ${userstatement.numberOfAbonements} 
+					        <spring:message code="textarea.discount" />  ${userstatement.discountPercent} % 
+					        <spring:message code="textarea.cost" />  $ ${userstatement.generalCost} 
+				        </textarea>
+					</div>
+					<div id="tertiary">
+						<c:set var="login" value="${login}"/>
+						<c:if test="${login!=null}">
+							<nav>
+								<ul>
+									<li><a href="home.html"><span><spring:message code="menu.main"/></span></a></li>
+								    <li><a href="order.html"><span><spring:message code="menu.order"/></span></a></li>
+								    <c:if test="${userrole==1}">   
+									    <li><a href="viewAllTrainings.html"><span><spring:message code="menu.alltrainings"/></span></a></li>             
+									    <li><a href="viewAllUserStatements.html"><span><spring:message code="menu.allusers"/></span></a></li>
+									</c:if>     
+								    <li><a href="usercabinet.html"><span><spring:message code="menu.usercabinet"/></span></a></li>
+								    <li><a href="logout.html"><span><spring:message code="menu.logout"/></span></a></li>
+								</ul>
+							</nav>
+						</c:if>	
+					</div>
+				</div>
+				</div>
+			</div>                
+    </body>
+</html>

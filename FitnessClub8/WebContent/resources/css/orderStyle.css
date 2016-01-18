@@ -1,0 +1,163 @@
+/* -----------Pricing Table -------*/
+#pricing-table {
+	text-align: center;
+	width: 222px; /* total computed width = 222 x 3 + 226 */
+	position: relative;
+	float: right;
+	top: 10%;
+}
+
+.clear:before, .clear:after {
+  content:""; /*Свойство content позволяет вставлять генерируемое содержание в текст веб-страницы, которое первоначально в тексте отсутствует.*/
+  display:table; /*Определяет, что элемент является блочной таблицей подобно использованию тега <table>*/
+}
+
+.clear:after {
+  clear:both /*Отменяет обтекание элемента одновременно с правого и левого края. Это значение рекомендуется устанавливать, 
+  			   когда требуется снять обтекание элемента, но неизвестно точно с какой стороны.*/
+}
+
+.clear {
+  zoom:1; /*Изменяет масштаб объекта согласно заданному значению. Значение 1.0 соответствует normal. */
+}
+
+#pricing-table .plan {
+	font: 12px 'Lucida Sans', 'trebuchet MS', Arial, Helvetica;
+	text-shadow: 0 1px rgba(255,255,255,.8);        
+	background: #fff;      
+	border: 1px solid #ddd;
+	color: #333;
+	padding: 20px;
+	width: 180px; /* plan width = 180 + 20 + 20 + 1 + 1 = 222px */      
+}
+
+#pricing-table h3 {
+	font-size: 20px;
+	font-weight: normal;
+	padding: 20px;
+	margin: -20px -20px 50px -20px;
+	background-color: #eee;
+	background-image: -moz-linear-gradient(#fff,#eee);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));    
+	background-image: -webkit-linear-gradient(#fff, #eee);
+	background-image: -o-linear-gradient(#fff, #eee);
+	background-image: -ms-linear-gradient(#fff, #eee);
+	background-image: linear-gradient(#fff, #eee);
+}
+
+#pricing-table h3 span {
+	display: block;
+	font: bold 25px/100px Georgia, Serif;
+	color: #777;
+	background: #fff;
+	border: 5px solid #fff;
+	height: 100px;
+	width: 100px;
+	margin: 10px auto -65px;
+	-moz-border-radius: 100px;
+	-webkit-border-radius: 100px;
+	border-radius: 100px;
+	-moz-box-shadow: 0 5px 20px #ddd inset, 0 3px 0 #999 inset;
+	-webkit-box-shadow: 0 5px 20px #ddd inset, 0 3px 0 #999 inset;
+	box-shadow: 0 5px 20px #ddd inset, 0 3px 0 #999 inset;
+}
+
+#pricing-table .signup {
+	position: relative; /*Положение элемента устанавливается относительно его исходного места. Добавление свойств left, top, 
+						right и bottom изменяет позицию элемента и сдвигает его в ту или иную сторону от первоначального расположения.*/
+	padding: 8px 20px;
+	margin: 20px 0 0 0;  
+	color: #fff;
+	font: bold 14px Arial, Helvetica;
+	text-transform: uppercase;
+	text-decoration: none;
+	display: inline-block;    /*внутренняя часть элемента форматируется как блочный элемент, а сам элемент — как встроенный.*/    
+	background-color: #72ce3f;
+	background-image: -moz-linear-gradient(#72ce3f, #62bc30);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#72ce3f), to(#62bc30));    
+	background-image: -webkit-linear-gradient(#72ce3f, #62bc30);
+	background-image: -o-linear-gradient(#72ce3f, #62bc30);
+	background-image: -ms-linear-gradient(#72ce3f, #62bc30);
+	background-image: linear-gradient(#72ce3f, #62bc30);
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;     
+	text-shadow: 0 1px 0 rgba(0,0,0,.3);        
+	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, .5), 0 2px 0 rgba(0, 0, 0, .7);
+	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, .5), 0 2px 0 rgba(0, 0, 0, .7);
+	box-shadow: 0 1px 0 rgba(255, 255, 255, .5), 0 2px 0 rgba(0, 0, 0, .7);
+}
+
+#pricing-table .signup:hover {
+	background-color: #62bc30;
+	background-image: -moz-linear-gradient(#62bc30, #72ce3f);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#62bc30), to(#72ce3f));      
+	background-image: -webkit-linear-gradient(#62bc30, #72ce3f);
+	background-image: -o-linear-gradient(#62bc30, #72ce3f);
+	background-image: -ms-linear-gradient(#62bc30, #72ce3f);
+	background-image: linear-gradient(#62bc30, #72ce3f); 
+}
+
+#pricing-table .signup:active, #pricing-table .signup:focus {
+	background: #62bc30;       
+	top: 2px; /*Для позиционированного элемента определяет расстояние от верхнего края родительского элемента до верхнего края дочернего элемента. */
+	-moz-box-shadow: 0 0 3px rgba(0, 0, 0, .7) inset; /*inset - чтобы «перевернуть» тень внутрь объекта*/
+	-webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .7) inset;
+	box-shadow: 0 0 3px rgba(0, 0, 0, .7) inset; 
+}
+
+#pricing-table ul {
+	margin: 20px 0 0 0;
+	padding: 0;
+	list-style: none; /*Отменяет маркеры для списка.*/
+}
+
+#pricing-table li {
+	border-top: 1px solid #ddd;
+	padding: 10px 0;
+}
+/*---------------------------Order List------------------------*/
+#mergeOrderList{
+	margin-left : 30px;
+	margin-top: 30px;
+}
+
+#orderList {
+	position : relative;
+	top : 7%;
+}
+
+#orderList ul {
+	list-style: none;	/*Универсальное свойство, позволяющее одновременно задать стиль маркера, его положение, 
+						а также изображение, которое будет использоваться в качестве маркера. */
+	display : block;
+}
+
+#orderList ul li {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	display: block; /*как блок - происходит перенос строк в начале и в конце содержимого.*/
+	width: 240px;
+	height: 34px;
+	background-color: #585858;
+	border-left: 5px solid #CCCCCC;
+	border-right: 5px solid #CCCCCC;
+	padding-left: 10px; /*Устанавливает значение поля от левого края содержимого элемента.*/
+	text-decoration: none;/*Отменяет все эффекты, в том числе и подчеркивания у ссылок, которое задано по умолчанию.*/
+	color: #F3F781;	
+}
+
+#orderList ul li:hover {
+	-moz-transform: rotate(-5deg);
+	-moz-box-shadow: 10px 10px 20px #000000;
+	-webkit-transform: rotate(-5deg);
+	-webkit-box-shadow: 10px 10px 20px #000000;
+	transform: rotate(-5deg);
+	box-shadow: 10px 10px 20px #000000;	
+}
+
+a{
+	text-decoration: none;/*Отменяет все эффекты, в том числе и подчеркивания у ссылок, которое задано по умолчанию.*/
+	color: #F3F781;	
+}
+

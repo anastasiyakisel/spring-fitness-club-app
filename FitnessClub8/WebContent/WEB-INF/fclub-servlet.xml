@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:flow="http://www.springframework.org/schema/webflow-config"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	   http://www.springframework.org/schema/context 
+	   http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+	   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+	   http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+       http://www.springframework.org/schema/webflow-config 
+       http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.0.xsd
+       ">
+
+	<mvc:annotation-driven />  
+	<context:annotation-config />
+
+	<!-- Ensures that any resource requests not handled by your Spring MVC mappings 
+		will be delegated back to the Servlet container. -->
+	<mvc:default-servlet-handler />
+
+	<context:component-scan base-package="by.bsu.kisel.springmvc.*" />
+	<context:component-scan base-package="by.bsu.kisel.connectionpool.*" />
+
+<!-- SPRING WEB FLOW START -->
+
+	<flow:flow-executor id="flowExecutor" flow-registry="flowRegistry" />
+
+	<flow:flow-registry id="flowRegistry"
+		flow-builder-services="flowBuilderServices" base-path="/WEB-INF/flows">
+		<flow:flow-location-pattern value="/**/*-flow.xml" />
+	</flow:flow-registry>
+
+	<flow:flow-builder-services id="flowBuilderServices"
+		view-factory-creator="mvcViewFactoryCreator" />
+
+    <bean id="mvcViewFactoryCreator" 
+              class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
+        <property name="defaultViewSuffix" value=".jspx" />   
+    </bean>
+	<!--Define FlowHandlerMapping to tell DispatcherServlet (in web.xml) to 
+		send flow requests to Spring Web Flow -->
+	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
+		<property name="flowRegistry" ref="flowRegistry" />
+		<property name="order" value="0" />
+	</bean>
+
+	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
+		<property name="flowExecutor" ref="flowExecutor" />
+	</bean>
+	
+	<!-- SPRING WEB FLOW END -->
+
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<mvc:resources mapping="/css/**" location="/resources/css/" />
+	<mvc:resources mapping="/images/**" location="/resources/images/" />
+
+	<!-- Register the messages.properties -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:messages" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="ru_RU" />
+		<property name="cookieName" value="myAppLocaleCookie" />
+		<property name="cookieMaxAge" value="3600" />
+	</bean>
+
+	<mvc:interceptors>
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="locale" />
+		</bean>
+	</mvc:interceptors>
+	
+	<!-- <bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">jspError/error</prop>
+			</props>
+		</property>
+	</bean>  --> 
+
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jspx</value>
+		</property>
+	</bean> 
+
+</beans>
+
+	

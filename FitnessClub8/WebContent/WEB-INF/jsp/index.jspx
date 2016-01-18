@@ -1,0 +1,117 @@
+<html xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sf="http://www.springframework.org/tags/form"
+	xmlns:spring="http://www.springframework.org/tags">
+<jsp:output omit-xml-declaration="yes" />
+<jsp:directive.page contentType="text/html;charset=UTF-8" />
+
+<head>
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"><jsp:text/></script>
+	<script type="text/javascript" src="js/order.js"><jsp:text/></script>
+	<c:url var="pageCssUrl" value="/css/pageStyle.css" />
+	<c:url var="headerCssUrl" value="/css/logoStyle.css" />
+	<c:url var="orderCssUrl" value="/css/orderStyle.css" />	
+	
+	<link href="${pageCssUrl}" rel="stylesheet" type="text/css" />
+	<link href="${orderCssUrl}" rel="stylesheet" type="text/css" />
+	<link href="${headerCssUrl}" rel="stylesheet" type="text/css" />
+	<title><spring:message code="tittle.order" /></title>
+</head>
+<body>
+	<div id="pageOrder">
+		<div id="sticky-footer-wrap">
+			<header class="site-header">
+				<div id="headerWrapper">
+					<div id="logoWrapper">
+						<p id="stars">
+							<span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+						</p>
+
+						<p id="title" contenteditable="true" spellcheck="false">
+							<span>100</span> <span><spring:message code="letter.1" /></span>
+							<span><spring:message code="letter.2" /></span> <span><spring:message
+									code="letter.3" /></span> <span><spring:message
+									code="letter.4" /></span> <span><spring:message
+									code="letter.5" /></span>
+						</p>
+						<p id="slogan">
+							<span>
+								<a href="${flowExecutionUrl}&amp;_eventId=returnHome">
+								Fitness Club Home Page
+								</a>
+							</span>
+						</p>
+					</div>
+
+					<div id="localeMenu">
+						<a href="?locale=en_US"><img alt="usa" src="images/usa.png" width="32" height="32" /></a> 
+						<a href="?locale=ru_RU"><img alt="ru" src="images/ru.png" width="32" height="32" /></a>
+					</div>
+
+				</div>
+			</header>
+			<div class="site-main">
+				<div id="primary">
+					<h2></h2> 
+				</div>
+				<div id="secondary">
+
+					<div id="pricing-table" class="clear">
+						<div class="plan">
+							<h3>
+								<spring:message code="message.sale" />
+								<span><spring:message code="message.saleprocent" /></span>
+							</h3>
+							<a href="${flowExecutionUrl}&amp;_eventId=index" class="signup">Sign in</a>
+							<ul class="plan-features">
+								<li>
+									<strong>
+										<spring:message code="pricing.more" />
+									</strong>
+									<spring:message code="pricing.trainings" />
+								</li>
+								<li>
+									<strong>
+										<spring:message code="pricing.less" />
+									</strong>
+									<spring:message code="pricing.moneyspent" />
+								</li>
+								<li>
+									<strong>
+										<spring:message code="pricing.free" />
+									</strong> 
+									<spring:message code="pricing.spa" />
+									</li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+				<div id="tertiary">
+					
+					<div id="orderList">
+						<ul>
+								<li><a href="${flowExecutionUrl}&amp;_eventId=index"><spring:message code="sport.exerciseroom" /></a></li>								
+								<li><a href="${flowExecutionUrl}&amp;_eventId=index"><spring:message code="sport.aerobics" /></a></li>
+								<li><a href="${flowExecutionUrl}&amp;_eventId=index"><spring:message code="sport.pilates" /></a></li>
+								<li><a href="${flowExecutionUrl}&amp;_eventId=index"><spring:message code="sport.yoga" /></a></li>
+								<li><a href="${flowExecutionUrl}&amp;_eventId=index"><spring:message code="sport.fitball" /></a></li>
+								<li><a href="${flowExecutionUrl}&amp;_eventId=index"><spring:message code="sport.bellydance" /></a></li>
+								<li><a href="${flowExecutionUrl}&amp;_eventId=index"><spring:message code="sport.dance_hiphop" /></a></li>
+								<li><a href="${flowExecutionUrl}&amp;_eventId=index"><spring:message code="sport.straching" /></a></li>
+							</ul>
+					</div>				
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer class="site-footer">
+		<p class="footer">
+			&#169; 2015 KISEL 
+		</p>
+	</footer>
+</body>
+</html>
+

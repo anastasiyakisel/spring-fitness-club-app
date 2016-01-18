@@ -1,0 +1,112 @@
+<html xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:form="http://www.springframework.org/tags/form" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:sf="http://www.springframework.org/tags/form" 
+	xmlns:spring="http://www.springframework.org/tags">
+<jsp:output omit-xml-declaration="yes" />
+<jsp:directive.page contentType="text/html;charset=UTF-8" />
+
+<head>
+	<title><spring:message code="tittle.main" /></title>
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"><jsp:text/></script>
+	<script type="text/javascript" src="js/validation.js"><jsp:text/></script>
+	<c:url var="pageCssUrl" value="/css/pageStyle.css" />
+	<c:url var="headerCssUrl" value="/css/logoStyle.css" />	
+	<c:url var="mainCssUrl" value="/css/mainStyle.css" />
+	<c:url var="menuCssUrl" value="/css/menuStyle.css" />
+	
+	<link href="${pageCssUrl}" rel="stylesheet" type="text/css" />
+	<link href="${headerCssUrl}" rel="stylesheet" type="text/css" />
+	<link href="${cssUrl}" rel="stylesheet" type="text/css" />
+	<link href="${menuCssUrl}" rel="stylesheet" type="text/css" />
+	<link href="${mainCssUrl}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div id="pageOrder">
+		<div id="sticky-footer-wrap">
+			<header class="site-header">
+					<div id="headerWrapper">
+						<div id="logoWrapper">
+							<p id="stars">
+								<span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+							</p>
+	
+							<p id="title" contenteditable="true" spellcheck="false">
+								<span>100</span> <span><spring:message code="letter.1" /></span>
+								<span><spring:message code="letter.2" /></span> <span><spring:message
+										code="letter.3" /></span> <span><spring:message
+										code="letter.4" /></span> <span><spring:message
+										code="letter.5" /></span>
+							</p>
+							<p id="slogan">
+								<a href="home.html">
+									Fitness Club Home Page
+								</a>
+							</p>
+						</div>
+	
+						<div id="localeMenu">
+							<a href="?locale=en_US"><img alt="usa" src="images/usa.png" width="32" height="32" /></a> 
+							<a href="?locale=ru_RU"><img alt="ru" src="images/ru.png" width="32" height="32" /></a>
+						</div>
+	
+					</div>
+				</header>
+				<div class="site-main">
+					<div id="primary">
+						<c:set var="login" value="${login}" />
+						<p class="mainGreeting">
+							<spring:message code="message.welcome" />
+							, ${login} !
+						</p>
+						<p class="workTime">
+							<spring:message code="message.timetable" />
+						</p>						
+					</div>
+					<div id="secondary">						
+						<c:set var="alldiscounts" value="${alldiscounts}" />
+						<c:if test="${not empty alldiscounts}">
+							<table class="rightTable">
+								<caption>
+									<spring:message code="caption.discount" />
+								</caption>
+								<tr>
+									<th><spring:message code="table.user.abonement" /></th>
+									<th><spring:message code="table.user.discount" /> %</th>
+								</tr>
+								<c:forEach var="discount" items="${alldiscounts}">
+									<tr>
+										<td>${discount.numberOfAbonements}</td>
+										<td>${discount.discountPercent}</td>
+									</tr>
+								</c:forEach>
+							</table>
+						</c:if>
+					</div>
+					<div id="tertiary">
+						<c:set var="login" value="${login}"/>
+						<c:if test="${login!=null}">
+							<nav>
+								<ul>
+									<li><a href="home.html"><span><spring:message code="menu.main"/></span></a></li>
+								    <li><a href="order.html"><span><spring:message code="menu.order"/></span></a></li>
+								    <c:if test="${userrole==1}">   
+									    <li><a href="viewAllTrainings.html"><span><spring:message code="menu.alltrainings"/></span></a></li>             
+									    <li><a href="viewAllUserStatements.html"><span><spring:message code="menu.allusers"/></span></a></li>
+									</c:if>     
+								    <li><a href="usercabinet.html"><span><spring:message code="menu.usercabinet"/></span></a></li>
+								    <li><a href="logout.html"><span><spring:message code="menu.logout"/></span></a></li>
+								</ul>
+							</nav>
+						</c:if>	
+					</div>	
+				</div>
+		</div>	
+	</div>
+	<footer class="site-footer">
+		<p class="footer">
+			&#169; 2015 KISEL 
+		</p>
+	</footer>
+</body>
+</html>
