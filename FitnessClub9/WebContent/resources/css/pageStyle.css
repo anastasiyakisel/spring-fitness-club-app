@@ -1,0 +1,102 @@
+.errorblock {
+	color: red;
+}
+
+{ 
+    margin: 0;
+    padding: 0;
+}
+
+/* Sticky footer */
+html, body {
+    height: 100%;
+    width: 100%;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+	overflow: scroll;
+}
+
+#pageIndex {
+    height: 100%;
+    height: auto !important;
+    min-height: 100%;
+    background-image : url(../images/BG_index.jpg) no-repeat;
+    background-size: 100% ;
+}
+
+#pageOrder {
+    height: 100%;
+    height: auto !important;
+    min-height: 100%;
+    background-image : url(../images/BG_order.jpg);
+    background-size: 85% ;
+    overflow: scroll;
+}
+
+#pageReg {
+    height: 100%;
+    height: auto !important;
+    min-height: 100%;
+    background-image : url(../images/BG_registration.jpg) ;
+    background-position: bottom right;
+    background-size: 100% ;
+}
+
+#pageUserCabinet {
+    height: 100%;
+    height: auto !important;
+    min-height: 100%;
+    background-image : url(../images/BG_registration.jpg) ;
+    background-position: bottom right;
+    background-size: 100% ;
+}
+
+.site-main {
+    overflow: scroll;
+    height: 75%;
+    display : block;
+}
+
+/* Header  */
+.site-header {
+    height: 150px;
+    width:100%;
+    top:0px;
+}
+
+#sticky-footer-wrap {
+    overflow: scroll;
+    padding-bottom: 100px;
+}
+
+.site-footer {
+    height: 70px;
+    clear: both;
+}
+
+.footer {
+	position : relative;
+	font-weight: bold;
+	color: #D8D8D8;
+	left : 90%;
+}
+
+/* 3 columns */
+#primary {
+    float: left;
+    width: 50%;  
+    margin-left: 25%;
+	position : relative;
+}
+#secondary {
+    float: left;
+    width: 25%;
+    margin-left:-75%;
+    position : relative;
+}
+#tertiary{
+    float: left;
+    width: 25%;
+    position : relative;
+}

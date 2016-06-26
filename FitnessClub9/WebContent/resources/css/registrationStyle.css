@@ -1,0 +1,64 @@
+.errorblock {
+	color: red;
+}
+
+.main>div {
+	display: inline-block;
+	width: 80%;
+	margin-top: 10px;
+}
+
+.register {
+	width: 500px;
+	margin: 10px auto;
+	padding: 10px;
+	border: 7px solid;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #444;
+}
+
+label {
+	display: inline-block;
+	width: 25%;
+	text-align: right;
+	margin: 10px;
+}
+
+.required:after {
+	content: " *";
+	color: #e32;
+	position: absolute;
+	margin: 0 0 0 -20px;
+	font-size: xx-large;
+	padding: 0 5px 0 0;
+}
+
+input[type="text"],input[type="password"] {
+	width: 65%;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
+	padding: 5px;
+	font-size: 0.9em;
+}
+
+input[type="text"]:focus,input[type="password"]:focus {
+	background: #ffffff;
+}
+
+h3 {
+	margin: 0 15px 20px;
+	border-bottom: 2px solid;
+	padding: 5px 10px 5px 0;
+	font-size: 1.3em;
+}
+
+.button {
+	font-size: 1em;
+	padding: 10px;
+	border: 1px solid #df7401;
+}
+
+.sep {
+	border: 1px solid;
+	position: relative;
+	margin: 35px 20px;
+}
