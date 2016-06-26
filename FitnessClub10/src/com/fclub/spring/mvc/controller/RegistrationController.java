@@ -60,8 +60,7 @@ public class RegistrationController {
 			result.rejectValue("", ErrorConstants.USER_ALREADY_EXISTS);
 		}		
 		if (!result.hasErrors()){
-			doAutoLogin(user);
-			return new ModelAndView(PageConstants.MAIN_PAGE_PATH, "user", user);
+			return new ModelAndView(PageConstants.LOGIN_PAGE_PATH);
 		}  else {
 			return new ModelAndView(PageConstants.REGISTRATION_PAGE_PATH, "user", user);
 		}		
