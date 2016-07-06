@@ -64,6 +64,10 @@
 								<div id="password_inputright"/>
 							</div>
 							
+							<div id="checkbox_input"> 
+								<input type="checkbox" id="rememberme" name="remember-me"/> Remember Me
+							</div>
+							
 							<spring:message code="label.login" var="submit" />
 							<input type="submit" id="gobutton"  value="${submit}"/>
 													

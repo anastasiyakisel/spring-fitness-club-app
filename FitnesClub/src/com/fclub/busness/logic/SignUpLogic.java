@@ -37,10 +37,10 @@ public class SignUpLogic {
 	 */
     public final Integer[] getIndexesOfFreeGroups(Integer... ids) 
             throws MyLogicalInvalidParameterException, DAOSQLException, ResourceCreationException{
-        List<Group> groups=groupDAO.getFreeGroups(ids);
+        final List<Group> groups=groupDAO.getFreeGroups(ids);
         ids=new Integer[groups.size()];
         int i=0;
-        for(Group group:groups){
+        for(final Group group:groups){
             ids[i]=group.getId();
             ++i;
         }

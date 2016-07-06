@@ -45,15 +45,15 @@ public class GroupLogic {
 	 * @throws MyLogicalInvalidParameterException
 	 * @throws ResourceCreationException
 	 */
-    public final List<Group> updatePeopleRegistered(List<Group> groups) 
+    public final List<Group> updatePeopleRegistered(final List<Group> groups) 
             throws DAOSQLException, MyLogicalInvalidParameterException, ResourceCreationException{
-        List<Integer> numbers=new ArrayList<Integer>();
-        for (Group group:groups){
-            int number=registrationDAO.countPeopleRegisteredInGroup(group.getId());
+        final List<Integer> numbers=new ArrayList<Integer>();
+        for (final Group group:groups){
+            final int number=registrationDAO.countPeopleRegisteredInGroup(group.getId());
             numbers.add(number);
         }
         int i=0;
-        for(Group group:groups){
+        for(final Group group:groups){
             group.setPeopleRegistered(numbers.get(i));
             groupDAO.updatePeopleRegistered(group.getId(), group.getPeopleRegistered());
             ++i;

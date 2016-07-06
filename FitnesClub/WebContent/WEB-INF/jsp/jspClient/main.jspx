@@ -76,7 +76,6 @@
 									<li><a href="http://localhost:8080${pageContext.request.contextPath}/admin/viewAllUserStatements.html"><span><spring:message code="menu.allusers"/></span></a></li>
 								</sec:authorize>    
 								<li><a href="usercabinet.html"><span><spring:message code="menu.usercabinet"/></span></a></li>
-								<c:url value="/logout" var="logoutUrl" />
 								<li>
 									<form id="logoutForm" action="${pageContext.request.contextPath}/logout" method="POST">
 									 	<spring:message var = "logout" code="menu.logout"/>

@@ -2,6 +2,8 @@ package com.fclub.spring.mvc.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,10 +30,12 @@ import com.fclub.constants.URLConstants;
 import com.fclub.exception.DAOSQLException;
 import com.fclub.exception.MyLogicalInvalidParameterException;
 import com.fclub.exception.ResourceCreationException;
+import com.fclub.persistence.dao.IDAODiscount;
 import com.fclub.persistence.dao.IDAOGroup;
 import com.fclub.persistence.dao.IDAORegistration;
 import com.fclub.persistence.dao.IDAOStatement;
 import com.fclub.persistence.dao.IDAOUser;
+import com.fclub.persistence.model.Discount;
 import com.fclub.persistence.model.Group;
 import com.fclub.persistence.model.Sporttype;
 import com.fclub.persistence.model.Statement;
@@ -83,6 +88,10 @@ public class ViewController {
     @Autowired
     @Qualifier("AdminLogic")
     private AdminLogic adminLogic ;
+    
+    @Autowired
+	@Qualifier("DAOJpaDiscount")
+	private IDAODiscount discountDAO;
     /**
      * This method is used when admin wants to see all the training groups in the fitness clubs.
      * @param group - group
@@ -238,7 +247,13 @@ public class ViewController {
 	 */
 	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value = {URLConstants.USER_HOME, URLConstants.ADMIN_HOME}, method = RequestMethod.GET)  
-	public String showMainPage(){
+	public String showMainPage(ModelMap map, HttpServletRequest request){
+		try {
+			List<Discount> discounts =  discountDAO.getInformationDiscount();
+			request.getSession().setAttribute(ParameterConstants.ALL_DISCOUNTS, discounts);			
+		} catch (DAOSQLException | MyLogicalInvalidParameterException | ResourceCreationException ex){
+			throw new RuntimeException("Error occured during the retrieval of discounts", ex);
+		} 
 		return  PageConstants.MAIN_PAGE_PATH;
 	}
 	

@@ -40,6 +40,11 @@ public class AdminLogic {
     @Autowired
     @Qualifier("DAOJpaSporttype")
     private IDAOSporttype sporttypeDAO ;
+    
+    public AdminLogic(){
+    	
+    }
+    
 	/**
 	 * Shows to admin groups of the specified user.
 	 * @param userId - user's id
@@ -48,7 +53,7 @@ public class AdminLogic {
 	 * @throws MyLogicalInvalidParameterException
 	 * @throws ResourceCreationException
 	 */
-    public final void showToAdminUserGroups(Integer userId, Model model) 
+    public final void showToAdminUserGroups(final Integer userId, final Model model) 
             throws DAOSQLException, MyLogicalInvalidParameterException, ResourceCreationException{
         List<Group> userGroups = new ArrayList<Group>();
         userGroups=showUserGroups(userId);
@@ -66,11 +71,11 @@ public class AdminLogic {
 	 * @throws MyLogicalInvalidParameterException
 	 * @throws ResourceCreationException
 	 */
-    private List<Group> showUserGroups(int userId) throws DAOSQLException, MyLogicalInvalidParameterException, ResourceCreationException{
-    	List<Integer> groupIds=registrationDAO.showUserGroupIds(userId);
-    	List<Group> groupList = new ArrayList<Group>();
-    	for (int groupId : groupIds){
-    		Group currentGroup = groupDAO.getConcreteGroup(groupId);
+    private List<Group> showUserGroups(final int userId) throws DAOSQLException, MyLogicalInvalidParameterException, ResourceCreationException{
+    	final List<Integer> groupIds=registrationDAO.showUserGroupIds(userId);
+    	final List<Group> groupList = new ArrayList<Group>();
+    	for (final int groupId : groupIds){
+    		final Group currentGroup = groupDAO.getConcreteGroup(groupId);
    			groupList.add(currentGroup);  
     	}
    		return groupList;

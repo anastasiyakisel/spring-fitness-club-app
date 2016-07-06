@@ -61,16 +61,16 @@ public class StatementLogic {
 	 * @throws MyLogicalInvalidParameterException
 	 * @throws ResourceCreationException
 	 */
-    public final void updateOrAddUserStatement(User user, Model model) 
+    public final void updateOrAddUserStatement(final User user, final Model model) 
             throws DAOSQLException, MyLogicalInvalidParameterException, ResourceCreationException{
         Statement statement = new Statement();
         statement.setUser(user);
-        boolean isExist=statementDAO.isUserExistInStatement(user.getId());
-        int numberAbonementsOfuser = registrationDAO.countNumberOfAbonementsForUser(user.getId());
+        final boolean isExist=statementDAO.isUserExistInStatement(user.getId());
+        final int numberAbonementsOfuser = registrationDAO.countNumberOfAbonementsForUser(user.getId());
         statement.setNumberOfAbonements(numberAbonementsOfuser);
-        int [] userGroupIds = getGroupsOfUser(user.getId());
-        int discountPercent = discountDAO.countDiscountPercentForUser(statement.getNumberOfAbonements()); 
-        int generalCost = groupDAO.countCostOfAllUsersGroups(userGroupIds);
+        final int [] userGroupIds = getGroupsOfUser(user.getId());
+        final int discountPercent = discountDAO.countDiscountPercentForUser(statement.getNumberOfAbonements()); 
+        final int generalCost = groupDAO.countCostOfAllUsersGroups(userGroupIds);
         if (isExist==true){                
             statementDAO.update(statement, numberAbonementsOfuser, discountPercent, generalCost);
         }else{
@@ -88,15 +88,15 @@ public class StatementLogic {
 	 * @throws MyLogicalInvalidParameterException
 	 * @throws ResourceCreationException
 	 */
-    public final Statement getStatementOfUser(Integer userId) throws DAOSQLException, 
+    public final Statement getStatementOfUser(final Integer userId) throws DAOSQLException, 
             MyLogicalInvalidParameterException, ResourceCreationException{
         Statement statement=new Statement();
         statement.setUser(userDAO.findById(userId));
-        boolean isExist = statementDAO.isUserExistInStatement(userId);
-        int numberAbonementsOfUser = registrationDAO.countNumberOfAbonementsForUser(userId);
-        int [] userGroupIds = getGroupsOfUser(userId);
-        int discountPercent = discountDAO.countDiscountPercentForUser(numberAbonementsOfUser); 
-        int generalCost = groupDAO.countCostOfAllUsersGroups(userGroupIds);
+        final boolean isExist = statementDAO.isUserExistInStatement(userId);
+        final int numberAbonementsOfUser = registrationDAO.countNumberOfAbonementsForUser(userId);
+        final int [] userGroupIds = getGroupsOfUser(userId);
+        final int discountPercent = discountDAO.countDiscountPercentForUser(numberAbonementsOfUser); 
+        final int generalCost = groupDAO.countCostOfAllUsersGroups(userGroupIds);
         if (isExist==true){  
             statementDAO.update(statement, numberAbonementsOfUser, discountPercent, generalCost);                
         } else {
@@ -114,9 +114,9 @@ public class StatementLogic {
      * @throws MyLogicalInvalidParameterException
      * @throws ResourceCreationException
      */
-    private int [] getGroupsOfUser(int userId) throws DAOSQLException, MyLogicalInvalidParameterException, ResourceCreationException{
-	    List<Group> userGroupsList =registrationDAO.showUserGroups(userId);
-	    int [] userGroupIds = new int [userGroupsList.size()];
+    private int [] getGroupsOfUser(final int userId) throws DAOSQLException, MyLogicalInvalidParameterException, ResourceCreationException{
+	    final List<Group> userGroupsList =registrationDAO.showUserGroups(userId);
+	    final int [] userGroupIds = new int [userGroupsList.size()];
 		for (int i=0; i<userGroupIds.length; i++){
 			userGroupIds[i] = userGroupsList.get(i).getId();
 		}
@@ -131,7 +131,7 @@ public class StatementLogic {
      * @throws MyLogicalInvalidParameterException
      * @throws DAOSQLException
      */
-    private boolean addUserStatement (Statement st, int discountPercent, int generalCost) throws MyLogicalInvalidParameterException, DAOSQLException{
+    private boolean addUserStatement (final Statement st, final int discountPercent, final int generalCost) throws MyLogicalInvalidParameterException, DAOSQLException{
     	st.setDiscountPercent(discountPercent);
     	st.setGeneralCost(generalCost);
     	statementDAO.add(st);

@@ -39,13 +39,13 @@ public class ViewLogic {
 	 * @throws MyLogicalInvalidParameterException
 	 * @throws ResourceCreationException
 	 */
-    public final void showUserStatements(List<User> users, Model model) throws DAOSQLException, 
+    public final void showUserStatements(final List<User> users, final Model model) throws DAOSQLException, 
             MyLogicalInvalidParameterException, ResourceCreationException{
-		ArrayList<Statement> userStatements = new ArrayList<Statement>();
+		final ArrayList<Statement> userStatements = new ArrayList<Statement>();
 
 		if (users.size() != 0) {
-			for (User user : users) {
-				Statement statement = statementLogic.getStatementOfUser(user.getId());
+			for (final User user : users) {
+				final Statement statement = statementLogic.getStatementOfUser(user.getId());
 				userStatements.add(statement);
 			}
 		} else {
