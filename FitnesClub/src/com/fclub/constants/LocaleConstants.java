@@ -6,13 +6,8 @@ package com.fclub.constants;
  * 
  * @author Anastasiya Kisel
  */
-public class LocaleConstants {
+public final class LocaleConstants {
 	public static final String LOCALE_RU = "ru_RU";
 	public static final String LOCALE_USA = "en_US";
 
-	/**
-	 * Empty constructor.
-	 */
-	private LocaleConstants() {
-	}
 }

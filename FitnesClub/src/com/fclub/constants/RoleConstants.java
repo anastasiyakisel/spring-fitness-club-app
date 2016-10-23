@@ -6,14 +6,9 @@ package com.fclub.constants;
  * 
  * @author Anastasiya Kisel
  */
-public class RoleConstants {
+public final class RoleConstants {
 
 	public static final String ADMIN = "ROLE_ADMIN";
 	public static final String CLIENT = "ROLE_USER";
 
-	/**
-	 * Empty constructor.
-	 */
-	private RoleConstants() {
-	};
 }

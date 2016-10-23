@@ -8,11 +8,11 @@ public class AccountExistsException extends Exception {
 		super();
 	}
 
-	public AccountExistsException(String message) {
+	public AccountExistsException(final String message) {
 		super(message);
 	}
 
-	public AccountExistsException(String message, Throwable cause) {
+	public AccountExistsException(final String message, final Throwable cause) {
 		super(message, cause);
 	}
 }

@@ -17,7 +17,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fclub.annotation.PasswordMatches;
 import com.fclub.constants.RoleConstants;
-import com.fclub.exception.MyLogicalInvalidParameterException;
+import com.fclub.exception.FClubInvalidParameterException;
 /**
  * Business Object for User. 
  * @author Anastasiya Kisel
@@ -32,7 +32,7 @@ public class User  implements Serializable{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
-	private int id;
+	private Long id;
 	
 	@Column(name = "firstname")
     @NotNull
@@ -94,7 +94,7 @@ public class User  implements Serializable{
      * Sets the address.
      * @param address - address
      */
-    public void setAddress(String address) {
+    public void setAddress(final String address) {
         this.address = address;
     }
     /**
@@ -108,7 +108,7 @@ public class User  implements Serializable{
      * Sets the description.
      * @param description - description
      */
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
     /**
@@ -121,11 +121,11 @@ public class User  implements Serializable{
     /**
      * Sets first name.
      * @param firstName - first name
-     * @throws MyLogicalInvalidParameterException
+     * @throws FClubInvalidParameterException
      */
-    public void setFirstName(String firstName) throws MyLogicalInvalidParameterException {
+    public void setFirstName(final String firstName) throws FClubInvalidParameterException {
         if (firstName==null)
-            throw new MyLogicalInvalidParameterException("FirstName can't be null !");
+            throw new FClubInvalidParameterException("FirstName can't be null !");
         this.firstName = firstName;
     }
     /**
@@ -138,11 +138,11 @@ public class User  implements Serializable{
     /**
      * Sets last name.
      * @param lastName - last name
-     * @throws MyLogicalInvalidParameterException
+     * @throws FClubInvalidParameterException
      */
-    public void setLastName(String lastName) throws MyLogicalInvalidParameterException {
+    public void setLastName(final String lastName) throws FClubInvalidParameterException {
         if (lastName==null)
-            throw new MyLogicalInvalidParameterException("LastName can't be null !");
+            throw new FClubInvalidParameterException("LastName can't be null !");
         this.lastName = lastName;
     }
 
@@ -156,11 +156,11 @@ public class User  implements Serializable{
     /**
      * Sets the password.
      * @param password - password
-     * @throws MyLogicalInvalidParameterException
+     * @throws FClubInvalidParameterException
      */
-    public void setPassword(String password) throws MyLogicalInvalidParameterException {
+    public void setPassword(final String password) throws FClubInvalidParameterException {
         if (password==null)
-            throw new MyLogicalInvalidParameterException("Password can't be null !");
+            throw new FClubInvalidParameterException("Password can't be null !");
         this.password = password;
     }
     /**
@@ -173,11 +173,11 @@ public class User  implements Serializable{
     /**
      * Sets the matching password.
      * @param matchingPassword - matching password
-     * @throws MyLogicalInvalidParameterException
+     * @throws FClubInvalidParameterException
      */
-    public void setMatchingPassword(String matchingPassword) throws MyLogicalInvalidParameterException {
+    public void setMatchingPassword(final String matchingPassword) throws FClubInvalidParameterException {
         if (matchingPassword==null)
-            throw new MyLogicalInvalidParameterException("Password can't be null !");
+            throw new FClubInvalidParameterException("Password can't be null !");
         this.matchingPassword = matchingPassword;
     }
     /**
@@ -190,11 +190,11 @@ public class User  implements Serializable{
     /**
      * Sets the post.
      * @param post - post
-     * @throws MyLogicalInvalidParameterException
+     * @throws FClubInvalidParameterException
      */
-    public void setPost(String post) throws MyLogicalInvalidParameterException {
+    public void setPost(final String post) throws FClubInvalidParameterException {
         if (post==null)
-            throw new MyLogicalInvalidParameterException("Post can't be null !");
+            throw new FClubInvalidParameterException("Post can't be null !");
         this.role = post;
     }
     /**
@@ -207,25 +207,25 @@ public class User  implements Serializable{
     /**
      * Sets the specified telephone number.
      * @param telephone - telephone number
-     * @throws MyLogicalInvalidParameterException
+     * @throws FClubInvalidParameterException
      */
-    public void setTelephone(String telephone) throws MyLogicalInvalidParameterException {
+    public void setTelephone(final String telephone) throws FClubInvalidParameterException {
         if (telephone==null)
-            throw new MyLogicalInvalidParameterException("Telephone can't be null !");
+            throw new FClubInvalidParameterException("Telephone can't be null !");
         this.telephone = telephone;
     }
     /**
      * Gets the id.
      * @return id
      */
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	/**
 	 * Sets the id.
 	 * @param id - id
 	 */
-	public void setId(int id) {
+	public void setId(final Long id) {
 		this.id = id;
 	}
 	
@@ -240,13 +240,13 @@ public class User  implements Serializable{
     public String getUsername() {
 		return username;
 	}
-	public void setUsername(String username) {
+	public void setUsername(final String username) {
 		this.username = username;
 	}
 	public String getRole() {
 		return role;
 	}
-	public void setRole(String role) {
+	public void setRole(final String role) {
 		this.role = role;
 	}
 	/**

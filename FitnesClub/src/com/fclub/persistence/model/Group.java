@@ -5,47 +5,29 @@ import java.sql.Time;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.fclub.exception.MyLogicalInvalidParameterException;
+import com.fclub.exception.FClubInvalidParameterException;
 /**
  * Business Object for Group 
  * @author Anastasiya Kisel
  */
 @Entity
 @Table(name="groups")
-@NamedQueries({
-	@NamedQuery (name="getGroupsBySporttype",
-	        query="SELECT x FROM Group x WHERE x.sporttype.id = (?1)"),
-	@NamedQuery (name="getGroupsByPersonId",
-	        query="SELECT x FROM Group x WHERE x.sporttype.id = (?1)"),
-	@NamedQuery (name="selectCapacityAndPeopleInTheGroup",
-	        query="SELECT x.capacity, x.peopleRegistered FROM Group x WHERE x.id=(?1)"),
-	@NamedQuery (name="selectGroupById",
-	        query="SELECT gr FROM Group gr WHERE gr.id=(?1)"),
-	@NamedQuery (name="getCostOfGroup", query="SELECT x.costAbonement FROM Group x WHERE x.id=(?1)")
-})
 public class Group  implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "group_id")
-	private int id;	
+	private Long id;	
 	
-	//@Embedded
-	@ManyToOne//(fetch=FetchType.LAZY, optional=false)
+	@ManyToOne
     @JoinColumn(name="sporttype_id", referencedColumnName="sporttype_id")
 	private Sporttype sporttype;
 
@@ -73,14 +55,14 @@ public class Group  implements Serializable{
      * Gets id.
      * @return id
      */
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	/**
 	 * Sets id.
 	 * @param id - id
 	 */
-	public void setId(int id) {
+	public void setId(final Long id) {
 		this.id = id;
 	}
 	/**
@@ -93,11 +75,11 @@ public class Group  implements Serializable{
 	/**
 	 * Sets the number of registered people.
 	 * @param peopleRegistered - the number of registered people
-	 * @throws MyLogicalInvalidParameterException
+	 * @throws FClubInvalidParameterException
 	 */	 
-    public void setPeopleRegistered(int peopleRegistered) throws MyLogicalInvalidParameterException {
+    public void setPeopleRegistered(final int peopleRegistered) throws FClubInvalidParameterException {
         if (peopleRegistered<0)
-            throw new MyLogicalInvalidParameterException("People registered in group can't be less than null !");
+            throw new FClubInvalidParameterException("People registered in group can't be less than null !");
         this.peopleRegistered = peopleRegistered;
     }
 	/**
@@ -110,11 +92,11 @@ public class Group  implements Serializable{
     /**
      * Sets the capacity of the group.
      * @param capacity - group's capacity
-     * @throws MyLogicalInvalidParameterException
+     * @throws FClubInvalidParameterException
      */
-    public void setCapacity(int capacity) throws MyLogicalInvalidParameterException {
+    public void setCapacity(final int capacity) throws FClubInvalidParameterException {
         if (capacity<=0)
-            throw new MyLogicalInvalidParameterException("Capacity can't be less than null !");
+            throw new FClubInvalidParameterException("Capacity can't be less than null !");
         this.capacity = capacity;
     }
     /**
@@ -128,7 +110,7 @@ public class Group  implements Serializable{
 	 * Sets sport type.
 	 * @param sporttype - sport type
 	 */
-	public void setSporttype(Sporttype sporttype) {
+	public void setSporttype(final Sporttype sporttype) {
 		this.sporttype = sporttype;
 	}
 	/**
@@ -141,11 +123,11 @@ public class Group  implements Serializable{
 	/**
 	 * Sets the cost of abonement.
 	 * @param costAbonement- the cost of abonement
-	 * @throws MyLogicalInvalidParameterException
+	 * @throws FClubInvalidParameterException
 	 */
-    public void setCostAbonement(int costAbonement) throws MyLogicalInvalidParameterException {
+    public void setCostAbonement(final int costAbonement) throws FClubInvalidParameterException {
         if (costAbonement<=0)
-            throw new MyLogicalInvalidParameterException("Cost of abonement can't be less than null !");
+            throw new FClubInvalidParameterException("Cost of abonement can't be less than null !");
         this.costAbonement = costAbonement;
     }
     /**
@@ -159,7 +141,7 @@ public class Group  implements Serializable{
      * Sets days of week.
      * @param daysOfWeek - days of week
      */
-    public void setDaysOfWeek(String daysOfWeek) {
+    public void setDaysOfWeek(final String daysOfWeek) {
         this.daysOfWeek = daysOfWeek;
     }
     /**
@@ -172,11 +154,11 @@ public class Group  implements Serializable{
     /**
      * Sets the duration in hours.
      * @param duration - duration in hours.
-     * @throws MyLogicalInvalidParameterException
+     * @throws FClubInvalidParameterException
      */
-    public void setDuration(int duration) throws MyLogicalInvalidParameterException {
+    public void setDuration(final int duration) throws FClubInvalidParameterException {
         if (duration<=0)
-            throw new MyLogicalInvalidParameterException("Duration can't be less than null !");
+            throw new FClubInvalidParameterException("Duration can't be less than null !");
         this.duration = duration;
     }
     /**
@@ -190,7 +172,7 @@ public class Group  implements Serializable{
      * Sets start time.
      * @param timeStart - start time
      */
-    public void setTimeStart(Time timeStart) {
+    public void setTimeStart(final Time timeStart) {
         this.timeStart = timeStart;
     }
     /**
@@ -204,7 +186,7 @@ public class Group  implements Serializable{
 	 * Sets selected ids.
 	 * @param selectedIds - selected ids
 	 */
-	public void setSelectedIds(List<String> selectedIds) {
+	public void setSelectedIds(final List<String> selectedIds) {
 		this.selectedIds = selectedIds;
 	}
     /**

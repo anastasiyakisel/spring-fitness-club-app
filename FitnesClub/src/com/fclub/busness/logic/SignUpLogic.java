@@ -5,15 +5,13 @@
 package com.fclub.busness.logic;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.fclub.exception.DAOSQLException;
-import com.fclub.exception.MyLogicalInvalidParameterException;
-import com.fclub.exception.ResourceCreationException;
-import com.fclub.persistence.dao.IDAOGroup;
+import com.fclub.persistence.dao.GroupJpaRepository;
 import com.fclub.persistence.model.Group;
 
 /**
@@ -22,28 +20,18 @@ import com.fclub.persistence.model.Group;
  */
 @Component("SignUpLogic")
 public class SignUpLogic {
-	
+		
     @Autowired
     @Qualifier("DAOJpaGroup")
-    private IDAOGroup groupDAO ;
+    private GroupJpaRepository groupDAO ;
 	
 	/**
 	 * Provides the ids of groups where it is possible to signup among the specified group ids.
 	 * @param ids - array of random groups' ids
 	 * @return array of free groups
-	 * @throws MyLogicalInvalidParameterException
-	 * @throws DAOSQLException
-	 * @throws ResourceCreationException
 	 */
-    public final Integer[] getIndexesOfFreeGroups(Integer... ids) 
-            throws MyLogicalInvalidParameterException, DAOSQLException, ResourceCreationException{
-        final List<Group> groups=groupDAO.getFreeGroups(ids);
-        ids=new Integer[groups.size()];
-        int i=0;
-        for(final Group group:groups){
-            ids[i]=group.getId();
-            ++i;
-        }
-        return ids;
-    }    
+	public final List<Group> getAvailableGroups(final List<Integer> ids) {
+		return groupDAO.findByIdIn(ids).stream().filter(group -> group.getCapacity() - group.getPeopleRegistered() > 0)
+				.collect(Collectors.toList());
+	}  
 }

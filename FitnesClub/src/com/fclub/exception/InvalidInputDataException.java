@@ -8,11 +8,11 @@ public class InvalidInputDataException extends Exception{
 		super();
 	}
 	
-	public InvalidInputDataException(String message) {
+	public InvalidInputDataException(final String message) {
 		super(message);
 	}
 	
-	public InvalidInputDataException(String message, Throwable cause) {
+	public InvalidInputDataException(final String message, final Throwable cause) {
 		super(message, cause);
 	}
 	

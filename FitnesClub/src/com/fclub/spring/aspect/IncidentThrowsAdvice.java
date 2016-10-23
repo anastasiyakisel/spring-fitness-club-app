@@ -17,7 +17,7 @@ import com.fclub.constants.PageConstants;
 @Controller
 public class IncidentThrowsAdvice {
 
-	private static Logger logger = Logger.getLogger(IncidentThrowsAdvice.class);
+	private static final Logger logger = Logger.getLogger(IncidentThrowsAdvice.class);
 
 	/**
 	 * Provides AOP aspect logic in case controller class throws an exception.	 * 
@@ -25,9 +25,9 @@ public class IncidentThrowsAdvice {
 	 * @return String page
 	 */
 	@AfterThrowing(pointcut = "within(com.fclub.spring.mvc.controller.*)", throwing = "e")
-	public String handleException(Throwable e) {
+	public String handleException(final Throwable e) {
 
-		System.out.print("Aspect for exceptions is working - " + e.getMessage());
+		logger.info("Aspect for exceptions is working - " + e.getMessage());
 		return PageConstants.ERROR_PAGE_PATH;
 	}
 

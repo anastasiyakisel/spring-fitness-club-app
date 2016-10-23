@@ -4,9 +4,10 @@
  */
 package com.fclub.busness.logic;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -14,9 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.fclub.constants.ParameterConstants;
-import com.fclub.exception.DAOSQLException;
-import com.fclub.exception.MyLogicalInvalidParameterException;
-import com.fclub.exception.ResourceCreationException;
+import com.fclub.exception.FClubInvalidParameterException;
 import com.fclub.persistence.model.Statement;
 import com.fclub.persistence.model.User;
 /**
@@ -27,6 +26,8 @@ import com.fclub.persistence.model.User;
 @SessionAttributes({ParameterConstants.USER_STATEMENTS})
 public class ViewLogic {
 	
+	private static final Logger LOGGER = Logger.getLogger(ViewLogic.class);
+	
     @Autowired
     @Qualifier("StatementLogic")
     private StatementLogic statementLogic ;
@@ -35,22 +36,22 @@ public class ViewLogic {
 	 * Provides the statements for the specified users.
 	 * @param users - list of users
 	 * @param model - Spring Model object
-	 * @throws DAOSQLException
-	 * @throws MyLogicalInvalidParameterException
-	 * @throws ResourceCreationException
+	 * @throws FClubInvalidParameterException
 	 */
-    public final void showUserStatements(final List<User> users, final Model model) throws DAOSQLException, 
-            MyLogicalInvalidParameterException, ResourceCreationException{
-		final ArrayList<Statement> userStatements = new ArrayList<Statement>();
-
-		if (users.size() != 0) {
-			for (final User user : users) {
-				final Statement statement = statementLogic.getStatementOfUser(user.getId());
-				userStatements.add(statement);
-			}
+    public final void showUserStatements(final List<User> users, final Model model) throws FClubInvalidParameterException{
+		if (!users.isEmpty()) {
+			List<Statement> userStatements =users.stream().map(user -> {
+				try {
+					return statementLogic.getStatementOfUser(user.getId());
+				} catch (FClubInvalidParameterException e) {
+					LOGGER.error("Error retrieving user's statements"+e.getMessage());
+				}
+				return null;
+		}).collect(Collectors.toList());
+			model.addAttribute(ParameterConstants.USER_STATEMENTS, userStatements);
 		} else {
 			model.addAttribute(ParameterConstants.EMPTY_GROUP, ParameterConstants.EMPTY_GROUP);
 		}
-		model.addAttribute(ParameterConstants.USER_STATEMENTS, userStatements);
+		
 	}   
 }

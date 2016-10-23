@@ -7,11 +7,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 /**
  * Business Object for Discount 
@@ -19,18 +15,13 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="discount")
-@NamedQueries({
-	@NamedQuery (name="countDiscountForUser",
-	        query="SELECT MAX(x.discountPercent) FROM Discount x WHERE x.numberOfAbonements <= (?1)")	
-})
 public class Discount implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "discount_id")
-	private int id;	
+	private Long id;	
 	
     @Column(name="number_of_abonements")
     private int numberOfAbonements;
@@ -41,14 +32,14 @@ public class Discount implements Serializable{
      * Gets id.
      * @return id
      */
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	/**
 	 * Sets id.
 	 * @param id - id
 	 */
-	public void setId(int id) {
+	public void setId(final Long id) {
 		this.id = id;
 	}
     /**
@@ -62,7 +53,7 @@ public class Discount implements Serializable{
 	 * Sets discount percent.
 	 * @param discountPercent - discount percent
 	 */
-    public void setDiscountPercent(int discountPercent) {
+    public void setDiscountPercent(final int discountPercent) {
         this.discountPercent = discountPercent;
     }
 	/**
@@ -76,7 +67,7 @@ public class Discount implements Serializable{
      * Sets the number of abonements.
      * @param numberOfAbonements - the number of abonements
      */
-    public void setNumberOfAbonements(int numberOfAbonements) {
+    public void setNumberOfAbonements(final int numberOfAbonements) {
         this.numberOfAbonements = numberOfAbonements;
     }    
 }

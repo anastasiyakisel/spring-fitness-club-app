@@ -1,6 +1,7 @@
 package com.fclub.spring.mvc.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -27,14 +28,12 @@ import com.fclub.busness.logic.ViewLogic;
 import com.fclub.constants.PageConstants;
 import com.fclub.constants.ParameterConstants;
 import com.fclub.constants.URLConstants;
-import com.fclub.exception.DAOSQLException;
-import com.fclub.exception.MyLogicalInvalidParameterException;
-import com.fclub.exception.ResourceCreationException;
-import com.fclub.persistence.dao.IDAODiscount;
-import com.fclub.persistence.dao.IDAOGroup;
-import com.fclub.persistence.dao.IDAORegistration;
-import com.fclub.persistence.dao.IDAOStatement;
-import com.fclub.persistence.dao.IDAOUser;
+import com.fclub.exception.FClubInvalidParameterException;
+import com.fclub.persistence.dao.DiscountJpaRepository;
+import com.fclub.persistence.dao.GroupJpaRepository;
+import com.fclub.persistence.dao.RegistrationJpaRepository;
+import com.fclub.persistence.dao.StatementJpaRepository;
+import com.fclub.persistence.dao.UserJpaRepository;
 import com.fclub.persistence.model.Discount;
 import com.fclub.persistence.model.Group;
 import com.fclub.persistence.model.Sporttype;
@@ -54,23 +53,23 @@ import com.fclub.util.SecurityUtil;
 })
 public class ViewController {
 	
-	private Logger log = Logger.getLogger(ViewController.class);	
+	private final Logger log = Logger.getLogger(ViewController.class);	
 	
     @Autowired
     @Qualifier("DAOJpaUser")
-    private IDAOUser userDAO ;
+    private UserJpaRepository userDAO ;
     
     @Autowired
     @Qualifier("DAOJpaGroup")
-    private IDAOGroup groupDAO ;
+    private GroupJpaRepository groupDAO ;
     
     @Autowired
     @Qualifier("DAOJpaStatement")
-    private IDAOStatement statementDAO ;    
+    private StatementJpaRepository statementDAO ;    
     
     @Autowired
     @Qualifier("DAOJpaRegistration")
-    private IDAORegistration registrationDAO ;
+    private RegistrationJpaRepository registrationDAO ;
     
     //Autowiring Logic classes
     @Autowired
@@ -91,7 +90,7 @@ public class ViewController {
     
     @Autowired
 	@Qualifier("DAOJpaDiscount")
-	private IDAODiscount discountDAO;
+	private DiscountJpaRepository discountDAO;
     /**
      * This method is used when admin wants to see all the training groups in the fitness clubs.
      * @param group - group
@@ -100,18 +99,14 @@ public class ViewController {
      * @return admin page for all training groups
      */
 	@RequestMapping(value = URLConstants.ADMIN_VIEW_ALL_TRAININGS, method = RequestMethod.GET) 
-	public String showAllTrainingsToAdmin(@ModelAttribute(ParameterConstants.GROUP) Group group, BindingResult result, Model model){	
-		List<Group> allGroups=null;
-        try {
-            allGroups=groupDAO.adminShowAllGroups();
-            allGroups=groupLogic.updatePeopleRegistered(allGroups);
-            model.addAttribute(ParameterConstants.GR_SPORTTYPES, allGroups);
-        } catch (DAOSQLException | MyLogicalInvalidParameterException | ResourceCreationException ex) {
-            return PageConstants.ERROR_PAGE_PATH;
-        } 
-        log.info("Admin had been viewing all groups of the fitness club.");
-        model.addAttribute(ParameterConstants.ALLGROUPS, allGroups);
-        return PageConstants.ADMIN_PAGE_PATH;
+	public String showAllTrainingsToAdmin(@ModelAttribute(ParameterConstants.GROUP) final Group group, final BindingResult result, final Model model){	
+		List<Group> allGroups = groupDAO.findAll();
+		allGroups = groupLogic.updatePeopleRegistered(allGroups);
+		model.addAttribute(ParameterConstants.GR_SPORTTYPES, allGroups);
+
+		log.info("Admin had been viewing all groups of the fitness club.");
+		model.addAttribute(ParameterConstants.ALLGROUPS, allGroups);
+		return PageConstants.ADMIN_PAGE_PATH;
 	}
 	/**
 	 * This method is used when admin wants to see all the user's statements in the fitness clubs.
@@ -121,13 +116,9 @@ public class ViewController {
 	 * @return page
 	 */
 	@RequestMapping(value = URLConstants.ADMIN_VIEW_ALL_USER_STATEMENTS, method = RequestMethod.GET) 
-	public String showAllUserStatementsToAdmin(@ModelAttribute("statement") Statement statement, BindingResult result, Model model){	
+	public String showAllUserStatementsToAdmin(@ModelAttribute("statement") final Statement statement, final BindingResult result, final Model model){	
         List<Statement> allUserStatements=null;
-        try {
-            allUserStatements=statementDAO.getAllUserStatements();            
-        } catch (DAOSQLException | MyLogicalInvalidParameterException | ResourceCreationException ex) {
-            return PageConstants.ERROR_PAGE_PATH;
-        } 
+        allUserStatements=statementDAO.findAll();            
         log.info("Admin had been viewing all users of the fitness club.");
         model.addAttribute(ParameterConstants.ALL_STATEMENTS, allUserStatements);
         model.addAttribute(ParameterConstants.GROUP, new Group());   
@@ -143,19 +134,16 @@ public class ViewController {
 	 */
 	@RequestMapping(value = {URLConstants.USER_VIEW_GROUPS_OF_SPORTTYPE,
 			URLConstants.ADMIN_VIEW_GROUPS_OF_SPORTTYPE}, method = RequestMethod.POST) 
-	public String viewGroupsOfSporttype(@ModelAttribute (ParameterConstants.SPORTTYPE) Sporttype sporttype, 
-			@ModelAttribute (ParameterConstants.GROUP) Group group,
-			BindingResult result, Model model){
-		int sporttypeId=sporttype.getId();
-        List<Group> sportGroups=null;
-        try {
-            sportGroups=groupDAO.showAllGroups(sporttypeId);
-            sportGroups=groupLogic.updatePeopleRegistered(sportGroups);                
-            model.addAttribute(ParameterConstants.SPORTGROUPS, sportGroups);
-        } catch (MyLogicalInvalidParameterException | DAOSQLException | ResourceCreationException ex) {
-        	return PageConstants.ERROR_PAGE_PATH;
-        } 
-        return PageConstants.ORDER_PATH;
+	public String viewGroupsOfSporttype(@ModelAttribute (ParameterConstants.SPORTTYPE) final Sporttype sporttype, 
+			@ModelAttribute (ParameterConstants.GROUP) final Group group,
+			final BindingResult result, final Model model){
+		final Long sporttypeId = sporttype.getId();
+		List<Group> sportGroups = null;
+		sportGroups = groupDAO.findBySporttype(sporttypeId);
+		sportGroups = groupLogic.updatePeopleRegistered(sportGroups);
+		model.addAttribute(ParameterConstants.SPORTGROUPS, sportGroups);
+
+		return PageConstants.ORDER_PATH;
 	}
 	
 	@RequestMapping(value = {URLConstants.USER_VIEW_GROUPS_OF_SPORTTYPE,
@@ -173,19 +161,19 @@ public class ViewController {
 	 * @return user's cabinet page
 	 */
 	@RequestMapping(value = {URLConstants.USER_CABINET, URLConstants.ADMIN_CABINET}, method = RequestMethod.GET) 
-	public String viewStatement(@ModelAttribute(ParameterConstants.GROUP) Group group,
-								BindingResult result, Model model){
+	public String viewStatement(@ModelAttribute(ParameterConstants.GROUP) final Group group,
+								final BindingResult result, final Model model){
 		Statement userStatement=new Statement();
-        Authentication auth = SecurityUtil.getAuthentication();
+        final Authentication auth = SecurityUtil.getAuthentication();
         try {
-        	User user = userDAO.findByUsername(auth.getName());
+        	final User user = userDAO.findByUsername(auth.getName());
          	statementLogic.updateOrAddUserStatement(user, model);
             userStatement=statementLogic.getStatementOfUser(user.getId());
-            List <Group> userGroups= registrationDAO.showUserGroups(user.getId());
+            List <Group> userGroups= registrationDAO.findByUserId(user.getId()).stream().map(reg -> reg.getGroup()).collect(Collectors.toList());
             userGroups=groupLogic.updatePeopleRegistered(userGroups);
             model.addAttribute(ParameterConstants.GR_SPORTTYPES, userGroups);   
             log.info("User № "+user.getId()+" had been viewing his user cabinet.");
-        } catch (MyLogicalInvalidParameterException | DAOSQLException | ResourceCreationException  ex) {
+        } catch (FClubInvalidParameterException ex) {
             return PageConstants.ERROR_PAGE_PATH;
         }         
         model.addAttribute(ParameterConstants.USERSTATEMENT, userStatement);
@@ -201,23 +189,22 @@ public class ViewController {
 	 * @throws ResourceCreationException
 	 */
 	@RequestMapping(value = URLConstants.ADMIN_VIEW_USERS_OF_GROUP, method = RequestMethod.POST) 
-	public String viewUsersOfGroup(@ModelAttribute(ParameterConstants.GROUP) Group group, Model model, BindingResult res) throws ResourceCreationException{
-        int number=group.getId();
-        model.addAttribute(ParameterConstants.NUMBER, number);
+	public String viewUsersOfGroup(@ModelAttribute(ParameterConstants.GROUP) final Group group, final Model model, final BindingResult res) {
+        model.addAttribute(ParameterConstants.NUMBER, group.getId());
         model.addAttribute(ParameterConstants.STATEMENT, new Statement());
         try {
-        	List<User> usersOfGroup=registrationDAO.getUsersFromGroup(number);
+        	final List<User> usersOfGroup=registrationDAO.findByGroupId(group.getId()).stream().map(reg-> reg.getUser()).collect(Collectors.toList());
             viewLogic.showUserStatements(usersOfGroup, model);
-            log.info("Admin had been viewing users of group № "+number);
-        } catch (DAOSQLException |MyLogicalInvalidParameterException ex) {
+            log.info("Admin had been viewing users of group № "+group.getId());
+        } catch (FClubInvalidParameterException ex) {
         	return PageConstants.ERROR_PAGE_PATH;
         } 
         return PageConstants.ADMIN_PAGE_PATH;
 	}
 	
 	@RequestMapping(value = URLConstants.ADMIN_VIEW_USERS_OF_GROUP, method = RequestMethod.GET) 
-	public ModelAndView viewUsersOfGroup() throws ResourceCreationException{
-		Group group = new Group();
+	public ModelAndView viewUsersOfGroup() {
+		final Group group = new Group();
         return new ModelAndView(PageConstants.ADMIN_PAGE_PATH, "group", group);
 	}
 	
@@ -229,14 +216,10 @@ public class ViewController {
 	 * @return page
 	 */
 	@RequestMapping(value = {URLConstants.ADMIN_VIEW_GROUPS_OF_USER, URLConstants.GENERIC_VIEW_GROUPS_OF_USER}, method = RequestMethod.POST) 
-	public String viewAdminGroupsOfUser(@ModelAttribute("statement") Statement statement, BindingResult result, Model model){
-        int userId=statement.getId();
+	public String viewAdminGroupsOfUser(@ModelAttribute("statement") final Statement statement, final BindingResult result, final Model model){
+        final Long userId=statement.getId();
         model.addAttribute(ParameterConstants.GROUP, new Group());        
-        try {
-        	adminLogic.showToAdminUserGroups(userId, model);
-        } catch (DAOSQLException | MyLogicalInvalidParameterException | ResourceCreationException ex) {
-        	return PageConstants.ERROR_PAGE_PATH;
-        }
+        adminLogic.showToAdminUserGroups(userId, model);
         log.info("Admin had been viewing groups of user № "+userId);       
         return PageConstants.ADMIN_ALL_USERS_PATH;
 	}
@@ -247,13 +230,9 @@ public class ViewController {
 	 */
 	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value = {URLConstants.USER_HOME, URLConstants.ADMIN_HOME}, method = RequestMethod.GET)  
-	public String showMainPage(ModelMap map, HttpServletRequest request){
-		try {
-			List<Discount> discounts =  discountDAO.getInformationDiscount();
-			request.getSession().setAttribute(ParameterConstants.ALL_DISCOUNTS, discounts);			
-		} catch (DAOSQLException | MyLogicalInvalidParameterException | ResourceCreationException ex){
-			throw new RuntimeException("Error occured during the retrieval of discounts", ex);
-		} 
+	public String showMainPage(final ModelMap map, final HttpServletRequest request){
+		final List<Discount> discounts =  discountDAO.findAll();
+		request.getSession().setAttribute(ParameterConstants.ALL_DISCOUNTS, discounts);			
 		return  PageConstants.MAIN_PAGE_PATH;
 	}
 	
@@ -269,8 +248,8 @@ public class ViewController {
 	}	
 	
 	@RequestMapping(value = URLConstants.LOGIN, method = RequestMethod.GET)  
-	public ModelAndView showLoginPage(@RequestParam(value = "error", required = false) String error){
-		User user = new User();
+	public ModelAndView showLoginPage(@RequestParam(value = "error", required = false) final String error){
+		final User user = new User();
         return new ModelAndView(PageConstants.LOGIN_PAGE_PATH, "user", user);
 	}
 

@@ -6,7 +6,7 @@ package com.fclub.constants;
  * 
  * @author Anastasiya Kisel
  */
-public class ErrorConstants {
+public final class ErrorConstants {
 	public static final String LOGGER_DAO_EXC = "Can't execute query!";
 	public static final String LOGGER_INCORRECT_INPUT = "Incorrect input!";
 	public static final String LOGGER_ENUM_EXC = "No such entity!";
@@ -18,9 +18,4 @@ public class ErrorConstants {
 	public static final String INCORRECT_FIELD_VALUE = "incorrect.value";
 	public static final String USER_ALREADY_EXISTS = "error.user.exists";
 
-	/**
-	 * Empty constructor.
-	 */
-	private ErrorConstants() {
-	}
 }

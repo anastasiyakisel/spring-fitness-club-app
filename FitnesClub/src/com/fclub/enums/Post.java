@@ -14,7 +14,7 @@ public enum Post {
      * Constructs user role object with the specified string value.
      * @param value - user role name
      */
-    private Post(String value) {
+    private Post(final String value) {
         this.value = value;
     }
 	/**

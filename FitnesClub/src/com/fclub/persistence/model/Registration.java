@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 /**
  * Business Object for Registration. 
@@ -18,19 +16,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="registration")
-@NamedQueries({
-	@NamedQuery (name="deleteFromGroupInRegistration",
-	        query="DELETE FROM Registration x WHERE x.user.id=(?1) AND x.group.id=(?2)"),
-	@NamedQuery (name="countClientsInGroup",
-	        query="SELECT COUNT(x.id) FROM Registration x WHERE x.group.id=(?1)"),
-	@NamedQuery (name="countNumberOfAbonementsForUser",
-	        query="SELECT COUNT(x.id) FROM Registration x WHERE x.user.id=(?1)"),
-	@NamedQuery (name="selectGroupsFromRegistrationByUserId",
-	        query="SELECT x.group FROM Registration x WHERE x.user.id=(?1)"),
-	@NamedQuery (name="selectGroupsFromRegistrationByGroup",
-	        query="SELECT x.group FROM Registration x WHERE x.group.id=(?1)"), 
-	@NamedQuery (name="selectUsersFromGroup", query="SELECT x.user FROM Registration x WHERE x.group.id=(?1)")
-})
 public class Registration  implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -38,7 +23,7 @@ public class Registration  implements Serializable{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "registration_id")
-    private int id;
+    private Long id;
 	
 	@ManyToOne
     @JoinColumn(name="user_id")
@@ -47,18 +32,26 @@ public class Registration  implements Serializable{
 	@ManyToOne
     @JoinColumn(name="group_id")
 	private Group group;
+	
+	public Registration(){}
+	
+	public Registration (User user, Group group){
+		this.user=user;
+		this.group=group;
+	}
+	
 	/**
 	 * Gets id.
 	 * @return id
 	 */
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	/**
 	 * Sets id.
 	 * @param id - id
 	 */
-	public void setId(int id) {
+	public void setId(final Long id) {
 		this.id = id;
 	}
 	/**
@@ -72,7 +65,7 @@ public class Registration  implements Serializable{
 	 * Sets the user.
 	 * @param user - user
 	 */
-	public void setUser(User user) {
+	public void setUser(final User user) {
 		this.user = user;
 	}
 	/**
@@ -86,7 +79,7 @@ public class Registration  implements Serializable{
 	 * Sets the group.
 	 * @param group - group
 	 */
-	public void setGroup(Group group) {
+	public void setGroup(final Group group) {
 		this.group = group;
 	}
 		

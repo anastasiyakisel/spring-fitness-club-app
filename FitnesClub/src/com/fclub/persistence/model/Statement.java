@@ -7,8 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
@@ -17,7 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.fclub.exception.MyLogicalInvalidParameterException;
+import com.fclub.exception.FClubInvalidParameterException;
 /**
  * Business Object for Statement. 
  * @author Anastasiya Kisel
@@ -25,34 +23,40 @@ import com.fclub.exception.MyLogicalInvalidParameterException;
 @Entity
 @Table(name="STATEMENT")
 @NamedQueries({
-	@NamedQuery (name="isUserExistsInStatement",
-			query="SELECT COUNT(x.id) FROM Statement x WHERE x.user.id=(?1)"),
-	@NamedQuery (name="selectInfoAboutStatement",
-	        query="SELECT st FROM Statement st WHERE st.user.id=(?1)"),
+
 	@NamedQuery (name="selectConcreteStatement",
 	        query="SELECT st FROM Statement st WHERE st.id=(?1)")       
 })
 public class Statement implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	
+	public Statement(){}
+	
+	public Statement(User user, int numberOfAbonements, Integer discountPercent, Integer generalCost) {
+		super();
+		this.user = user;
+		this.numberOfAbonements = numberOfAbonements;
+		this.discountPercent = discountPercent;
+		this.generalCost = generalCost;
+	}
 
 	@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "statement_id")
-    private int id;
+    private Long id;
 	
 	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
     @JoinColumn(name = "user_id") 
     private User user;
     
 	@Column(name = "number_of_abonements")
-    private int numberOfAbonements;
+    private Integer numberOfAbonements;
     
 	@Column(name = "discount_percent")
-    private int discountPercent;
+    private Integer discountPercent;
     
 	@Column(name = "general_cost")
-    private double generalCost;
+    private int generalCost;
 		
 	@Transient
 	private List<String> selectedIds;
@@ -60,14 +64,14 @@ public class Statement implements Serializable{
 	 * Gets the id.
 	 * @return id
 	 */
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	/**
 	 * Sets id.
 	 * @param id - id
 	 */
-	public void setId(int id) {
+	public void setId(final Long id) {
 		this.id = id;
 	}
 	/**
@@ -80,11 +84,11 @@ public class Statement implements Serializable{
     /**
      * Sets discount percent.
      * @param discountPercent - discount percent 
-     * @throws MyLogicalInvalidParameterException
+     * @throws FClubInvalidParameterException
      */
-    public void setDiscountPercent(int discountPercent) throws MyLogicalInvalidParameterException {
+    public void setDiscountPercent(final int discountPercent) throws FClubInvalidParameterException {
         if (discountPercent<0)
-            throw new MyLogicalInvalidParameterException("DiscontID can't be null !");
+            throw new FClubInvalidParameterException("DiscontID can't be null !");
         this.discountPercent = discountPercent;
     }
     /**
@@ -97,11 +101,11 @@ public class Statement implements Serializable{
     /**
      * Sets general cost.
      * @param generalCost - general cost
-     * @throws MyLogicalInvalidParameterException
+     * @throws FClubInvalidParameterException
      */
-    public void setGeneralCost(double generalCost) throws MyLogicalInvalidParameterException {
+    public void setGeneralCost(final int generalCost) throws FClubInvalidParameterException {
         if (generalCost<0)
-            throw new MyLogicalInvalidParameterException("General cost can't be null !");
+            throw new FClubInvalidParameterException("General cost can't be null !");
         this.generalCost = generalCost;
     }
     /**
@@ -114,11 +118,11 @@ public class Statement implements Serializable{
     /**
      * Sets the number of abonements.
      * @param numberOfAbonements - the number of abonements
-     * @throws MyLogicalInvalidParameterException
+     * @throws FClubInvalidParameterException
      */
-    public void setNumberOfAbonements(int numberOfAbonements) throws MyLogicalInvalidParameterException {
+    public void setNumberOfAbonements(final int numberOfAbonements) throws FClubInvalidParameterException {
         if (numberOfAbonements<0)
-            throw new MyLogicalInvalidParameterException("Number of abonements can't be null !");
+            throw new FClubInvalidParameterException("Number of abonements can't be null !");
         this.numberOfAbonements = numberOfAbonements;
     }
     /**
@@ -132,7 +136,7 @@ public class Statement implements Serializable{
 	 * Sets the user.
 	 * @param user - user
 	 */
-	public void setUser(User user) {
+	public void setUser(final User user) {
 		this.user = user;
 	}  
 	/**
@@ -146,7 +150,7 @@ public class Statement implements Serializable{
 	 * Sets selected ids.
 	 * @param selectedIds - selected ids
 	 */
-	public void setSelectedIds(List<String> selectedIds) {
+	public void setSelectedIds(final List<String> selectedIds) {
 		this.selectedIds = selectedIds;
 	}
     
