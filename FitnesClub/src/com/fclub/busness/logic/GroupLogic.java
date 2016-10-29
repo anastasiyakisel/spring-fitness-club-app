@@ -8,13 +8,12 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.fclub.exception.FClubInvalidParameterException;
-import com.fclub.persistence.dao.GroupJpaRepository;
-import com.fclub.persistence.dao.RegistrationJpaRepository;
 import com.fclub.persistence.model.Group;
+import com.fclub.persistence.repository.GroupJpaRepository;
+import com.fclub.persistence.repository.RegistrationJpaRepository;
 /**
  * This class implements the logic related to group actions.
  * @author Anastasiya Kisel
@@ -25,12 +24,10 @@ public class GroupLogic {
 	private static final Logger LOGGER = Logger.getLogger(GroupLogic.class);
     
     @Autowired
-    @Qualifier("DAOJpaGroup")
-    private GroupJpaRepository groupDAO ;
+    private GroupJpaRepository groupRepository ;
     
     @Autowired
-    @Qualifier("DAOJpaRegistration")
-    private RegistrationJpaRepository registrationDAO ;
+    private RegistrationJpaRepository registrationRepository ;
 	
 	/**
 	 * Updates number of registered attendees in the specified groups.
@@ -42,9 +39,9 @@ public class GroupLogic {
 		groups.forEach(group -> {
 			try {
 				int clientsOfGroup;
-				clientsOfGroup = registrationDAO.countPeopleRegisteredInGroup(group.getId());
+				clientsOfGroup = registrationRepository.countPeopleRegisteredInGroup(group.getId());
 				group.setPeopleRegistered(clientsOfGroup);
-				groupDAO.save(group);
+				groupRepository.save(group);
 			} catch (FClubInvalidParameterException e) {
 				LOGGER.error("Error updating people registered in group"+e.getMessage());
 			}

@@ -2,6 +2,7 @@ package com.fclub.persistence.model;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PostLoad;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -50,7 +52,7 @@ public class Group  implements Serializable{
     private int peopleRegistered;
 	
 	@Transient
-	private List<String> selectedIds;
+	private List<String> selectedIds ;
     /**
      * Gets id.
      * @return id
@@ -189,18 +191,10 @@ public class Group  implements Serializable{
 	public void setSelectedIds(final List<String> selectedIds) {
 		this.selectedIds = selectedIds;
 	}
-    /**
-     * Overriden toString() method.
-     */
-    /*@Override
-    public String toString (){
-    	
-        return super.toString()+" [capacity"+capacity+", "+
-                               daysOfWeek.toString()+
-                                ", Time: "+timeStart+
-                                ", Duration  "+duration+
-                                ", Cost of abonement  "+costAbonement                                               
-                + "] ";
-    }*/
+	
+	@PostLoad
+	public void calculateSelectedIds(){
+		this.selectedIds = new ArrayList<String>();
+	}
 
 }

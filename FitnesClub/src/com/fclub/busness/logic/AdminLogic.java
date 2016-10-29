@@ -8,15 +8,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.fclub.constants.ParameterConstants;
-import com.fclub.persistence.dao.GroupJpaRepository;
-import com.fclub.persistence.dao.RegistrationJpaRepository;
 import com.fclub.persistence.model.Group;
+import com.fclub.persistence.repository.RegistrationJpaRepository;
 /**
  * This class implements the logic related to admin actions.
  * @author Anastasiya Kisel
@@ -26,12 +24,7 @@ import com.fclub.persistence.model.Group;
 public class AdminLogic { // NOPMD - Bean is managed by Spring so no evident constructor is required
 	
     @Autowired
-    @Qualifier("DAOJpaRegistration")
-    private RegistrationJpaRepository registrationDAO ;
-    
-    @Autowired
-    @Qualifier("DAOJpaGroup")
-    private GroupJpaRepository groupDAO ; 
+    private RegistrationJpaRepository registrationRepository ;
     
 	/**
 	 * Shows to admin groups of the specified user.
@@ -52,6 +45,6 @@ public class AdminLogic { // NOPMD - Bean is managed by Spring so no evident con
 	 * @return the list of user's groups
 	 */
     private List<Group> showUserGroups(final Long userId) {
-    	return registrationDAO.findByUserId(userId).stream().map(reg -> reg.getGroup()).collect(Collectors.toList());
+    	return registrationRepository.findByUserId(userId).stream().map(reg -> reg.getGroup()).collect(Collectors.toList());
    }
 }

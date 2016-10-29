@@ -8,18 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 import com.fclub.constants.ParameterConstants;
-import com.fclub.persistence.dao.DiscountJpaRepository;
 import com.fclub.persistence.model.Discount;
+import com.fclub.persistence.repository.DiscountJpaRepository;
 
-public class FitnesClubSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+public class FitnesClubSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler  {
 	
 	@Autowired
-	@Qualifier("DAOJpaDiscount")
 	private DiscountJpaRepository discountDAO;
 	
 	@Override

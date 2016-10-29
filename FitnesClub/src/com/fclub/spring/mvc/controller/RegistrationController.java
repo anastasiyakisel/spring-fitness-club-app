@@ -3,7 +3,6 @@ package com.fclub.spring.mvc.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
@@ -18,14 +17,13 @@ import com.fclub.constants.ErrorConstants;
 import com.fclub.constants.PageConstants;
 import com.fclub.constants.URLConstants;
 import com.fclub.exception.InvalidInputDataException;
-import com.fclub.persistence.dao.UserJpaRepository;
 import com.fclub.persistence.model.User;
+import com.fclub.persistence.repository.UserJpaRepository;
 
 @Controller
 public class RegistrationController {
 	
 	@Autowired
-	@Qualifier("DAOJpaUser")
 	private UserJpaRepository userDAO;
 	
 	@RequestMapping(value = URLConstants.REGISTRATION, method = RequestMethod.GET)  

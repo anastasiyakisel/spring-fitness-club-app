@@ -30,6 +30,8 @@ public final class URLConstants {
 	public static final String GENERIC_DELETE_USERS_FROM_TRAININGS = "/deleteUserFromTrainings.html";
 	public static final String GENERIC_USER_DELETE_FROM_GROUP="/userWantsToDeleteFromGroup.html";
 	
+	public static final String ADMIN_USER_DELETE_FROM_GROUP="/admin/userWantsToDeleteFromGroup.html";
+	
 	/**
 	 * Empty constructor.
 	 */

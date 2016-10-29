@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -29,8 +28,7 @@ public class ViewLogic {
 	private static final Logger LOGGER = Logger.getLogger(ViewLogic.class);
 	
     @Autowired
-    @Qualifier("StatementLogic")
-    private StatementLogic statementLogic ;
+    private StatementLogic statementRepository ;
 
 	/**
 	 * Provides the statements for the specified users.
@@ -42,7 +40,7 @@ public class ViewLogic {
 		if (!users.isEmpty()) {
 			List<Statement> userStatements =users.stream().map(user -> {
 				try {
-					return statementLogic.getStatementOfUser(user.getId());
+					return statementRepository.getStatementOfUser(user.getId());
 				} catch (FClubInvalidParameterException e) {
 					LOGGER.error("Error retrieving user's statements"+e.getMessage());
 				}

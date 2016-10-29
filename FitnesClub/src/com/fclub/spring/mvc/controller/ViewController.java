@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -29,16 +28,16 @@ import com.fclub.constants.PageConstants;
 import com.fclub.constants.ParameterConstants;
 import com.fclub.constants.URLConstants;
 import com.fclub.exception.FClubInvalidParameterException;
-import com.fclub.persistence.dao.DiscountJpaRepository;
-import com.fclub.persistence.dao.GroupJpaRepository;
-import com.fclub.persistence.dao.RegistrationJpaRepository;
-import com.fclub.persistence.dao.StatementJpaRepository;
-import com.fclub.persistence.dao.UserJpaRepository;
 import com.fclub.persistence.model.Discount;
 import com.fclub.persistence.model.Group;
 import com.fclub.persistence.model.Sporttype;
 import com.fclub.persistence.model.Statement;
 import com.fclub.persistence.model.User;
+import com.fclub.persistence.repository.DiscountJpaRepository;
+import com.fclub.persistence.repository.GroupJpaRepository;
+import com.fclub.persistence.repository.RegistrationJpaRepository;
+import com.fclub.persistence.repository.StatementJpaRepository;
+import com.fclub.persistence.repository.UserJpaRepository;
 import com.fclub.util.SecurityUtil;
 /**
  * This class implements business logic of Spring MVC View Controller.
@@ -56,40 +55,31 @@ public class ViewController {
 	private final Logger log = Logger.getLogger(ViewController.class);	
 	
     @Autowired
-    @Qualifier("DAOJpaUser")
     private UserJpaRepository userDAO ;
     
     @Autowired
-    @Qualifier("DAOJpaGroup")
     private GroupJpaRepository groupDAO ;
     
     @Autowired
-    @Qualifier("DAOJpaStatement")
     private StatementJpaRepository statementDAO ;    
     
     @Autowired
-    @Qualifier("DAOJpaRegistration")
     private RegistrationJpaRepository registrationDAO ;
     
     //Autowiring Logic classes
     @Autowired
-    @Qualifier("GroupLogic")
     private GroupLogic groupLogic ;
     
     @Autowired
-    @Qualifier("StatementLogic")
     private StatementLogic statementLogic ; 
     
     @Autowired
-    @Qualifier("ViewLogic")
     private ViewLogic viewLogic ;
     
     @Autowired
-    @Qualifier("AdminLogic")
     private AdminLogic adminLogic ;
     
     @Autowired
-	@Qualifier("DAOJpaDiscount")
 	private DiscountJpaRepository discountDAO;
     /**
      * This method is used when admin wants to see all the training groups in the fitness clubs.
@@ -139,7 +129,7 @@ public class ViewController {
 			final BindingResult result, final Model model){
 		final Long sporttypeId = sporttype.getId();
 		List<Group> sportGroups = null;
-		sportGroups = groupDAO.findBySporttype(sporttypeId);
+		sportGroups = groupDAO.findBySporttypeId(sporttypeId);
 		sportGroups = groupLogic.updatePeopleRegistered(sportGroups);
 		model.addAttribute(ParameterConstants.SPORTGROUPS, sportGroups);
 

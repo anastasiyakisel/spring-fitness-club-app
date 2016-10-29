@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -23,13 +22,13 @@ import com.fclub.constants.PageConstants;
 import com.fclub.constants.ParameterConstants;
 import com.fclub.constants.URLConstants;
 import com.fclub.exception.FClubInvalidParameterException;
-import com.fclub.persistence.dao.GroupJpaRepository;
-import com.fclub.persistence.dao.RegistrationJpaRepository;
-import com.fclub.persistence.dao.UserJpaRepository;
 import com.fclub.persistence.model.Group;
 import com.fclub.persistence.model.Registration;
 import com.fclub.persistence.model.Sporttype;
 import com.fclub.persistence.model.User;
+import com.fclub.persistence.repository.GroupJpaRepository;
+import com.fclub.persistence.repository.RegistrationJpaRepository;
+import com.fclub.persistence.repository.UserJpaRepository;
 import com.fclub.util.SecurityUtil;
 /**
  * This class implements business logic of Spring MVC Sign up Controller.
@@ -44,28 +43,22 @@ public class SignUpController {
 	private static final Logger log = Logger.getLogger(SignUpController.class);
 
 	@Autowired
-	@Qualifier("DAOJpaUser")
 	private UserJpaRepository userDAO;
 
 	@Autowired
-	@Qualifier("DAOJpaGroup")
 	private GroupJpaRepository groupDAO;
 
 	@Autowired
-	@Qualifier("DAOJpaRegistration")
 	private RegistrationJpaRepository registrationDAO;
 	
 	// Autowiring Logic classes
 	@Autowired
-	@Qualifier("GroupLogic")
 	private GroupLogic groupLogic;
 
 	@Autowired
-	@Qualifier("SignUpLogic")
 	private SignUpLogic signUpLogic;
 
 	@Autowired
-	@Qualifier("StatementLogic")
 	private StatementLogic statementLogic;
 	/**
 	 * Shows order page.
@@ -98,7 +91,7 @@ public class SignUpController {
 			 try {
 				User user = userDAO.findByUsername(auth.getName());
 				if (selectedIds != null) {
-					List<Integer> initialOrderIds = selectedIds.stream().map(stringId -> Integer.parseInt(stringId.trim())).collect(Collectors.toList());
+					List<Long> initialOrderIds = selectedIds.stream().map(stringId -> Long.parseLong(stringId.trim())).collect(Collectors.toList());
 					List<Group> availableGroups  = signUpLogic.getAvailableGroups(initialOrderIds);
 					availableGroups.stream().forEach(gr -> {
 						Registration reg = new Registration(user, gr);
