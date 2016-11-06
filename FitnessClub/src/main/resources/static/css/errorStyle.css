@@ -1,0 +1,10 @@
+body {
+	background: url(../images/error.jpg);
+}
+
+div{
+	text-align: center;
+    line-height: 25px;	
+    color: red;
+    font-weight: bold;
+}

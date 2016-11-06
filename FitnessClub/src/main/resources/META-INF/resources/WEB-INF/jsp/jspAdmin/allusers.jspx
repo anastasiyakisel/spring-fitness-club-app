@@ -1,0 +1,162 @@
+<html xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sf="http://www.springframework.org/tags/form"
+	xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:sec="http://www.springframework.org/security/tags">
+<jsp:output omit-xml-declaration="yes" />
+<jsp:directive.page contentType="text/html;charset=UTF-8" />
+
+<head>
+	<title><spring:message code="tittle.allusers" /></title>
+	
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"><jsp:text/></script>
+	<script type="text/javascript" src="js/validation.js"><jsp:text/></script>
+	<link href="/css/pageStyle.css" rel="stylesheet" type="text/css" />
+	<link href="/css/logoStyle.css" rel="stylesheet" type="text/css" />
+	<link href="/css/menuStyle.css" rel="stylesheet" type="text/css" />
+	<link href="/css/mainStyle.css" rel="stylesheet" type="text/css" />
+</head>
+	<body>
+		<div id="pageOrder">
+			<div id="sticky-footer-wrap">
+				<header class="site-header">
+					<jsp:include page="../jspUtil/header.jsp" >
+						<jsp:param name="logotypeLink" value="home.html"/>	
+						<jsp:param name="pathToLocaleUSA" value="/images/usa.png"/>
+						<jsp:param name="pathToLocaleRUS" value="/images/ru.png"/>
+					</jsp:include>	
+				</header>
+				<div class="site-main">
+					<div id="primary">
+						<h5>.</h5>					
+					</div>
+					<div id="secondary">
+						
+						 <c:set var="allUserStatements" value="${allUserStatements}"/> 
+         				 <c:if test="${not empty allUserStatements}"> 
+
+         				 <sf:form id="ShowUserGroups" method="POST" action="viewAdminGroupsOfUser.html" commandName="statement"> 
+				             <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+				             <input type="hidden" id="entity" name="entity" value="abonement"/> 
+				             <div id="AllUsers" align="center"> 
+			                 <table class="main">                 
+			                 <caption><spring:message code="caption.allusers"/></caption> 
+			                  <tr> 
+			                     <th/> 
+			                     <th><spring:message code="table.user.id"/></th> 
+			                     <th><spring:message code="table.user.post"/></th> 
+			                     <th><spring:message code="table.user.fname"/></th> 
+			                     <th><spring:message code="table.user.lname"/></th> 
+			                     <th><spring:message code="table.user.address"/></th> 
+			                     <th><spring:message code="table.user.telephone" /></th> 
+			                     <th><spring:message code="table.user.description"/></th> 
+			                     <th><spring:message code="table.user.abonement"/></th> 
+			                     <th><spring:message code="table.user.discount"/></th> 
+			                     <th><spring:message code="table.user.generalcost"/></th> 
+			                 </tr> 
+
+		                 	<c:forEach var="statement" items="${allUserStatements}"> 
+			                     <tr align="center"> 
+		                         <td><sf:radiobutton path="id" name="user_id" value=" ${statement.user.id}"/></td> 
+		                        <td>${statement.user.id}</td>
+		                        <td>
+		                        	<c:if test="${statement.user.post eq 'ROLE_ADMIN'}"><spring:message code="user.role.admin"/></c:if>
+		                        	<c:if test="${statement.user.post eq 'ROLE_USER'}"><spring:message code="user.role.client"/></c:if>
+		                        </td>
+		                        <td>${statement.user.firstName}</td>
+		                        <td>${statement.user.lastName}</td>
+		                        <td>${statement.user.address}</td> 
+		                        <td>${statement.user.telephone}</td> 
+		                        <td>${statement.user.description}</td> 
+		                        <td>${statement.numberOfAbonements}</td> 
+		                        <td>${statement.discountPercent}</td> 
+		                        <td>${statement.generalCost}</td> 
+		                     </tr> 
+		                   </c:forEach> 
+             </table> 
+                  <spring:message code="label.show.user.groups" var="show_user_grooupsbtn"/> 
+                  <input type="submit" class="signupbtn" value="${show_user_grooupsbtn}" onclick="return check('ShowUserGroups')"/> 
+             </div> 
+         </sf:form>             
+         </c:if> 
+         <c:set var="adminUserGroupSporttypes" value="${adminUserGroupSporttypes}"/> 
+         <c:if test="${not empty adminUserGroupSporttypes}"> 
+	         <sf:form id="DeleteUserFromTrainings" method="POST" action="deleteUserFromTrainings.html"  commandName="group"> 
+	             <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+	             <div id="userGroups" align="center">             
+	                 <table class="main">
+	                     <caption><spring:message code="caption.usergroups"/> ${userId}</caption> 
+	                     <tr> 
+	                         <th/> 
+	                         <th><spring:message code="table.sporttype"/></th> 
+						   	 <th><spring:message code="table.group.id"/></th> 
+							 <th><spring:message code="table.calories_burned"/></th> 
+							 <th><spring:message code="table.group.days_of_week"/></th> 							
+						 	 <th><spring:message code="table.group.starttime"/></th> 						
+						 	 <th><spring:message code="table.group.duration" /></th> 
+                         	 <th><spring:message code="table.group.cost"/></th>
+                     </tr>
+             <c:forEach var="group" items="${adminUserGroupSporttypes}"> 
+                         <tr align="center">
+ 							<td><sf:checkbox path="selectedIds" id="${group.id}"  value=" ${group.id}"/></td> 
+                            <td> 
+					             <c:set var="sporttype" value="${group.sporttype.sportType}"/> 
+								 <c:if test="${sporttype eq 'FITBALL'}"><spring:message code="sport.fitball"/></c:if> 
+					             <c:if test="${sporttype eq 'EXERCISE_ROOM'}"><spring:message code="sport.exerciseroom"/></c:if> 
+					             <c:if test="${sporttype eq 'AEROBICS'}"><spring:message code="sport.aerobics"/></c:if> 
+					             <c:if test="${sporttype eq 'PILATES'}"><spring:message code="sport.pilates"/></c:if> 
+					             <c:if test="${sporttype eq 'BELLY_DANCE'}"><spring:message code="sport.bellydance"/></c:if> 
+					             <c:if test="${sporttype eq 'DANCE_MIX'}"><spring:message code="sport.dance_hiphop"/></c:if> 
+					             <c:if test="${sporttype eq 'STRATCHING'}"><spring:message code="sport.straching"/></c:if> 
+					             <c:if test="${sporttype eq 'YOGA'}"><spring:message code="sport.yoga"/></c:if> 
+                            </td> 
+ 	                        <td>${group.id}</td> 
+                            <td>${group.sporttype.caloriesburned}</td> 
+                			<td>${group.daysOfWeek}</td>
+                			<td>${group.timeStart}</td>
+                			<td>${group.duration}</td>
+                			<td>${group.costAbonement}</td>
+                		 </tr>
+             </c:forEach> 
+
+                 </table> 
+                 <spring:message code="label.delete.user.from.group" var="delete_user_from_groupsbtn"/> 
+                 <input type="submit" class="signupbtn" value="${delete_user_from_groupsbtn}" onclick="return check('DeleteUserFromTrainings')"/> 
+             </div>  
+         </sf:form> 
+         </c:if> 
+
+         <c:if test="${not empty passive_user}"> 
+             <p align="center" class="emptyGroup"> 
+                  <spring:message code="message.user"/> ${userId} <spring:message code="message.nogroups"/> 
+             </p> 
+         </c:if>
+					</div>
+					<div id="tertiary">
+							<nav>
+								<ul>
+									<li><a href="home.html"><span><spring:message code="menu.main"/></span></a></li>
+								    <li><a href="order.html"><span><spring:message code="menu.order"/></span></a></li>
+								    <sec:authorize access="hasRole('ROLE_ADMIN')"> 
+									    <li><a href="viewAllTrainings.html"><span><spring:message code="menu.alltrainings"/></span></a></li>             
+									    <li><a href="viewAllUserStatements.html"><span><spring:message code="menu.allusers"/></span></a></li>
+									</sec:authorize>     
+								    <li><a href="usercabinet.html"><span><spring:message code="menu.usercabinet"/></span></a></li>
+								    <li> 
+								    	<span>
+										<form id="logoutForm" action="${pageContext.request.contextPath}/logout" method="POST">
+										 	<spring:message var = "logout" code="menu.logout"/>
+										 	<a href="javascript:;" onclick="document.getElementById('logoutForm').submit();">${logout}</a>
+											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>		
+	      								</form>
+	      								</span>
+									</li>
+								</ul>
+							</nav>
+					</div>	
+				</div>		
+			</div>
+		</div>
+	</body> 
+</html>
