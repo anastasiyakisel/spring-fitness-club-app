@@ -21,7 +21,7 @@ import com.fclub.exception.FClubInvalidParameterException;
  * @author Anastasiya Kisel
  */
 @Entity
-@Table(name="STATEMENT")
+@Table(name="statement")
 @NamedQueries({
 
 	@NamedQuery (name="selectConcreteStatement",

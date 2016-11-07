@@ -30,7 +30,7 @@ import com.fclub.exception.FClubInvalidParameterException;
  * @author Anastasiya Kisel
  */
 @Entity
-@Table(name="USERS")
+@Table(name="users")
 @PasswordMatches
 public class User  implements Serializable, UserDetails{
 	

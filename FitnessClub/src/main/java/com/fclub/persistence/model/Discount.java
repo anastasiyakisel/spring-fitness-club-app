@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * @author Anastasiya Kisel
  */
 @Entity
-@Table(name="DISCOUNT")
+@Table(name="discount")
 public class Discount implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

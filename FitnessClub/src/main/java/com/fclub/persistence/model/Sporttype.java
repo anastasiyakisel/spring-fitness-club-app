@@ -17,7 +17,7 @@ import com.fclub.exception.FClubInvalidParameterException;
  * @author Anastasiya Kisel
  */
 @Entity
-@Table(name="SPORTTYPE")
+@Table(name="sporttype")
 @Embeddable
 public class Sporttype  implements Serializable{
 	

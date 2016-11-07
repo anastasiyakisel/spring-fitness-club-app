@@ -1,10 +1,13 @@
 package com.fclub.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
@@ -22,9 +25,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private FitnesClubSuccessHandler successHandler;
 	
+	@Autowired
+	private PersistenceConfiguration persistenceConfig;
+	
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
-		http.userDetailsService(userDetailsService)
+		http//.userDetailsService(userDetailsService)
 			.authorizeRequests()
 			.antMatchers("/user/**", "/generic/**").authenticated()
         	.antMatchers("/admin/**").hasRole("ADMIN")
@@ -39,8 +45,20 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
         .and()
         .logout().logoutUrl("/logout").logoutSuccessUrl("/login.html").deleteCookies("JSESSIONID")
             .permitAll()
-        .and().csrf().csrfTokenRepository(csrfTokenRepository());
+        .and()
+        .csrf().csrfTokenRepository(csrfTokenRepository())
+        .and()
+        .rememberMe().userDetailsService(userDetailsService).tokenRepository(persistentTokenRepository())
+		.tokenValiditySeconds(86400)
+		.rememberMeParameter("remember-me").rememberMeCookieName("remember-me")  ;
     }
+	
+	@Bean
+	public PersistentTokenRepository persistentTokenRepository() {
+		JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
+		db.setDataSource(persistenceConfig.dataSource());
+		return db;
+	}
 	
 	private CsrfTokenRepository csrfTokenRepository() 
 	{ 

@@ -50,10 +50,15 @@ public class StatementLogic {
     public final void updateOrAddUserStatement(final User user, final Model model) throws FClubInvalidParameterException {
         
         Statement statement = statementRepository.findByUserId(user.getId());
+        if (statement == null){
+        	statement = new Statement();
+        }
         final int numberAbonementsOfuser = registrationRepository.countNumberOfAbonementsForUser(user.getId());
         final List<Group> userGroups = getGroupsOfUser(user.getId());  
         statement.setNumberOfAbonements(numberAbonementsOfuser);
-        statement.setDiscountPercent(discountRepository.countDiscountPercentForUser(numberAbonementsOfuser));
+        if (numberAbonementsOfuser>0){
+        	statement.setDiscountPercent(discountRepository.countDiscountPercentForUser(numberAbonementsOfuser));
+        }
         statement.setGeneralCost(countCostOfAllUsersGroups(userGroups));
         statementRepository.save(statement);
         statement=statementRepository.findByUserId(statement.getUser().getId());

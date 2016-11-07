@@ -61,7 +61,7 @@
 							</div>
 							
 							<div id="checkbox_input"> 
-								<input type="checkbox" id="rememberme" name="remember-me"/> Remember Me
+								<input type="checkbox" id="rememberme" name="remember-me"/> <spring:message code="message.remember_me" />
 							</div>
 							
 							<spring:message code="label.login" var="submit" />

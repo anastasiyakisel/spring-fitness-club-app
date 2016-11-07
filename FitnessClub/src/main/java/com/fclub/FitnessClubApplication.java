@@ -14,7 +14,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @SpringBootApplication
 public class FitnessClubApplication extends WebMvcConfigurerAdapter{
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(FitnessClubApplication.class, args);
 	}
