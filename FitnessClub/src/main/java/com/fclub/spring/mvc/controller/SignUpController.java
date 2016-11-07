@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.fclub.busness.logic.GroupLogic;
-import com.fclub.busness.logic.SignUpLogic;
-import com.fclub.busness.logic.StatementLogic;
+import com.fclub.business.logic.GroupLogic;
+import com.fclub.business.logic.SignUpLogic;
+import com.fclub.business.logic.StatementLogic;
 import com.fclub.constants.PageConstants;
 import com.fclub.constants.ParameterConstants;
 import com.fclub.constants.URLConstants;

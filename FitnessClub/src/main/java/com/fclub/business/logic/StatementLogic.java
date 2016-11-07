@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.fclub.busness.logic;
+package com.fclub.business.logic;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,12 +52,15 @@ public class StatementLogic {
         Statement statement = statementRepository.findByUserId(user.getId());
         if (statement == null){
         	statement = new Statement();
+        	statement.setUser(user);
         }
         final int numberAbonementsOfuser = registrationRepository.countNumberOfAbonementsForUser(user.getId());
         final List<Group> userGroups = getGroupsOfUser(user.getId());  
         statement.setNumberOfAbonements(numberAbonementsOfuser);
         if (numberAbonementsOfuser>0){
         	statement.setDiscountPercent(discountRepository.countDiscountPercentForUser(numberAbonementsOfuser));
+        } else {
+        	statement.setDiscountPercent(0);
         }
         statement.setGeneralCost(countCostOfAllUsersGroups(userGroups));
         statementRepository.save(statement);
@@ -77,8 +80,12 @@ public class StatementLogic {
         Statement statement = statementRepository.findByUserId(userId);
         int numberAbonementsOfUser = registrationRepository.countNumberOfAbonementsForUser(userId);
         statement.setNumberOfAbonements(numberAbonementsOfUser);
-        statement.setGeneralCost(countCostOfAllUsersGroups(userGroups));        
-        statement.setDiscountPercent(discountRepository.countDiscountPercentForUser(numberAbonementsOfUser)); 
+        statement.setGeneralCost(countCostOfAllUsersGroups(userGroups)); 
+        if (numberAbonementsOfUser > 0){
+        	statement.setDiscountPercent(discountRepository.countDiscountPercentForUser(numberAbonementsOfUser)); 
+        } else {
+        	statement.setDiscountPercent(0);
+        }
         statementRepository.save(statement);
         statement = statementRepository.findByUserId(userId);
         return statement;
@@ -92,7 +99,6 @@ public class StatementLogic {
 	    return registrationRepository.findByUserId(userId).stream().map(reg -> reg.getGroup()).collect(Collectors.toList());
     }
 
-    
     public int countCostOfAllUsersGroups(List<Group> groups){
     	int cost = 0;
     	for (Group group : groups){

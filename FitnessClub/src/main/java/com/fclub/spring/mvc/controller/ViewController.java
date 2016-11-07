@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fclub.busness.logic.AdminLogic;
-import com.fclub.busness.logic.GroupLogic;
-import com.fclub.busness.logic.StatementLogic;
-import com.fclub.busness.logic.ViewLogic;
+import com.fclub.business.logic.AdminLogic;
+import com.fclub.business.logic.GroupLogic;
+import com.fclub.business.logic.StatementLogic;
+import com.fclub.business.logic.ViewLogic;
 import com.fclub.constants.PageConstants;
 import com.fclub.constants.ParameterConstants;
 import com.fclub.constants.URLConstants;

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.fclub.busness.logic;
+package com.fclub.business.logic;
 
 import java.util.List;
 import java.util.stream.Collectors;
